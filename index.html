@@ -375,6 +375,19 @@
                 min-height: 100svh;
             }
 
+            .navbar {
+                padding: 12px 10px;
+            }
+
+            .nav-logo {
+                font-size: 0.84rem;
+                letter-spacing: 0.04rem;
+                white-space: normal;
+                line-height: 1.45;
+                max-width: 94vw;
+                display: block;
+            }
+
             .title {
                 letter-spacing: 0.2rem;
                 font-size: clamp(2.8rem, 12vw, 4rem);
@@ -416,11 +429,12 @@
 
             .whatsapp-cta {
                 right: 12px;
-                bottom: 12px;
+                bottom: calc(12px + env(safe-area-inset-bottom));
                 min-height: 46px;
                 padding: 0 14px;
                 font-size: 0.84rem;
                 letter-spacing: 0.03rem;
+                max-width: calc(100vw - 24px);
             }
 
             .zodiac-orbit {
