@@ -93,6 +93,34 @@
             animation: navLogoPulse 3.6s ease-in-out infinite;
         }
 
+        .nav-links {
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-link {
+            color: var(--gold);
+            text-decoration: none;
+            border: 1px solid rgba(248, 230, 174, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-pill);
+            padding: 8px 14px;
+            font-size: 0.9rem;
+            letter-spacing: 0.05rem;
+            white-space: nowrap;
+            transition: var(--transition-base);
+        }
+
+        .nav-link:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-soft);
+            border-color: rgba(248, 230, 174, 0.34);
+        }
+
         .circle-bg {
             position: absolute;
             top: 50%;
@@ -306,6 +334,253 @@
             box-shadow: 0 14px 28px rgba(16, 114, 66, 0.38);
         }
 
+        .onepage-sections {
+            position: relative;
+            z-index: 12;
+            width: min(1120px, calc(100% - 40px));
+            margin: calc(100vh + 36px) auto 120px;
+            display: grid;
+            gap: 26px;
+        }
+
+        .onepage-block {
+            border-radius: 24px;
+            border: 1px solid rgba(248, 230, 174, 0.16);
+            background: rgba(34, 8, 8, 0.42);
+            box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.08);
+            padding: 24px;
+        }
+
+        .section-title {
+            margin: 0;
+            text-align: center;
+            font-size: clamp(2rem, 4.4vw, 3rem);
+            letter-spacing: 0.14rem;
+            color: var(--gold-bright);
+            text-shadow: 1px 1px 0 #fff, 0 0 16px rgba(216, 172, 79, 0.4);
+        }
+
+        .service-intro-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px 30px;
+            margin-top: 22px;
+        }
+
+        .service-intro-item {
+            padding: 4px 0;
+            text-align: center;
+        }
+
+        .service-intro-label {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+            letter-spacing: 0.06rem;
+            margin-bottom: 4px;
+        }
+
+        .service-intro-desc {
+            font-size: 0.96rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .services-layout {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .service-group {
+            border-radius: 20px;
+            border: 1px solid rgba(248, 230, 174, 0.16);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 16px;
+        }
+
+        .group-title {
+            margin: 0;
+            text-align: center;
+            font-size: 1.3rem;
+            letter-spacing: 0.12rem;
+            color: var(--gold-bright);
+        }
+
+        .service-cards {
+            margin-top: 12px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .service-card {
+            border-radius: 16px;
+            border: 1px solid rgba(248, 230, 174, 0.12);
+            background: rgba(0, 0, 0, 0.22);
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .service-name {
+            margin: 0;
+            font-size: 1.02rem;
+            color: var(--gold);
+        }
+
+        .service-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .service-price {
+            font-size: 1.06rem;
+            color: var(--gold-bright);
+            font-weight: 700;
+        }
+
+        .service-detail {
+            margin-top: 2px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .info-grid {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .info-panel {
+            border-radius: 18px;
+            border: 1px solid rgba(248, 230, 174, 0.16);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 16px;
+        }
+
+        .info-panel h3 {
+            margin: 0;
+            font-size: 1.08rem;
+            color: var(--gold-bright);
+            letter-spacing: 0.05rem;
+        }
+
+        .intro-note {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+
+        .steps {
+            margin: 14px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .step-item {
+            flex: 1;
+            min-height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 14px;
+            border: 1px solid rgba(248, 230, 174, 0.16);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            font-size: 0.92rem;
+        }
+
+        .step-arrow {
+            color: var(--gold-soft);
+            font-size: 1.2rem;
+        }
+
+        .faq-item {
+            margin-top: 10px;
+            border-top: 1px solid rgba(248, 230, 174, 0.12);
+            padding-top: 10px;
+        }
+
+        .faq-item:first-of-type {
+            border-top: none;
+            margin-top: 12px;
+            padding-top: 0;
+        }
+
+        .faq-q {
+            margin: 0;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .faq-a {
+            margin: 6px 0 0;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.9rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            column-gap: 0;
+        }
+
+        .faq-a-prefix {
+            display: block;
+        }
+
+        .faq-a-content {
+            display: block;
+            min-width: 0;
+        }
+
+        .faq-a-line {
+            display: block;
+        }
+
+        .feedback-panel {
+            grid-column: 1 / -1;
+        }
+
+        .feedback-list {
+            margin-top: 12px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .feedback-card {
+            margin: 0;
+            border-radius: 14px;
+            border: 1px solid rgba(248, 230, 174, 0.16);
+            background: rgba(0, 0, 0, 0.22);
+            padding: 12px;
+        }
+
+        .feedback-text {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-main);
+        }
+
+        .feedback-meta {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: rgba(248, 230, 174, 0.72);
+            letter-spacing: 0.04rem;
+        }
+
         @keyframes navLogoPulse {
             0%, 100% { text-shadow: 0 0 5px rgba(248, 230, 174, 0.45); }
             50%       { text-shadow: 0 0 15px rgba(248, 230, 174, 0.9), 0 0 28px rgba(248, 230, 174, 0.32); }
@@ -351,6 +626,16 @@
                 padding: 14px 18px;
             }
 
+            .nav-links {
+                left: 16px;
+                gap: 8px;
+            }
+
+            .nav-link {
+                padding: 7px 12px;
+                font-size: 0.84rem;
+            }
+
             .nav-logo {
                 font-size: 0.92rem;
                 letter-spacing: 0.05rem;
@@ -368,6 +653,14 @@
             .zodiac-item {
                 width: clamp(60px, 10vw, 90px);
             }
+
+            .onepage-sections {
+                width: min(calc(100% - 24px), 1120px);
+            }
+
+            .feedback-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         @media (max-width: 640px) {
@@ -376,7 +669,19 @@
             }
 
             .navbar {
+                justify-content: center;
+                flex-wrap: wrap;
+                row-gap: 10px;
                 padding: 12px 10px;
+            }
+
+            .nav-links {
+                position: static;
+                transform: none;
+                width: 100%;
+                margin: 0;
+                justify-content: center;
+                gap: 8px;
             }
 
             .nav-logo {
@@ -386,6 +691,7 @@
                 line-height: 1.45;
                 max-width: 94vw;
                 display: block;
+                text-align: center;
             }
 
             .title {
@@ -461,6 +767,33 @@
             .zodiac-10 { left: 118%; top: 56%; }
             .zodiac-11 { left: 112%; top: 70%; }
             .zodiac-12 { left: 98%; top: 84%; }
+
+            .onepage-sections {
+                margin-top: calc(100vh + 26px);
+                margin-bottom: 110px;
+                gap: 16px;
+            }
+
+            .onepage-block {
+                padding: 16px;
+                border-radius: 20px;
+            }
+
+            .service-intro-list,
+            .services-layout,
+            .info-grid,
+            .feedback-list {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .step-arrow {
+                display: none;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -479,9 +812,14 @@
         }
     </style>
 </head>
-<body>
+<body id="top">
     <nav class="navbar">
-        <a href="#" class="nav-logo">「權智匯」—— 權衡天命，智慧匯聚。&emsp;&emsp;&emsp;助您運籌當下，明辨天時，擇優而行。</a>
+        <div class="nav-links">
+            <a class="nav-link" href="#top">首頁</a>
+            <a class="nav-link" href="#services">服務及收費</a>
+            <a class="nav-link" href="#process">流程及說明</a>
+        </div>
+        <a href="#top" class="nav-logo">「權智匯」—— 權衡天命，智慧匯聚。&emsp;&emsp;&emsp;助您運籌當下，明辨天時，擇優而行。</a>
     </nav>
 
     <div class="circle-bg" aria-hidden="true"></div>
@@ -516,10 +854,128 @@
         </section>
 
         <div class="service-actions" aria-label="服務入口">
-            <a class="action-link" data-track="home_view_services" href="./services.html">服務及收費</a>
-            <a class="action-link" data-track="home_view_process" href="./contact.html">流程及<br>服務說明</a>
+            <a class="action-link" data-track="home_view_services" href="#services">服務及收費</a>
+            <a class="action-link" data-track="home_view_process" href="#process">流程及<br>服務說明</a>
         </div>
     </div>
+
+    <main class="onepage-sections">
+        <section id="services" class="onepage-block" aria-label="服務及收費">
+            <h2 class="section-title">服務及收費</h2>
+            <div class="service-intro-list">
+                <div class="service-intro-item">
+                    <div class="service-intro-label">八字批算</div>
+                    <p class="service-intro-desc">透過四柱八字的五行生剋、十神格局，剖析命主性格特質、事業走向、財運起伏、姻緣機遇，並提供流年運勢專業分析。</p>
+                </div>
+                <div class="service-intro-item">
+                    <div class="service-intro-label">紫微斗數</div>
+                    <p class="service-intro-desc">以星曜佈局與宮位解讀，洞察命主一生的重大轉折點，從宏觀與微觀層面呈現命運軌跡。</p>
+                </div>
+                <div class="service-intro-item">
+                    <div class="service-intro-label">占卜問事</div>
+                    <p class="service-intro-desc">運用尋龍尺，針對具體問題一事一問，為客戶釐清迷霧，指引方向。</p>
+                </div>
+                <div class="service-intro-item">
+                    <div class="service-intro-label">起名服務</div>
+                    <p class="service-intro-desc">結合八字五行喜忌與中文音義美學，為新生兒、企業品牌或個人改運，選取寓意吉祥、音韻優美、符合命格的佳名。</p>
+                </div>
+            </div>
+
+            <div class="services-layout">
+                <section class="service-group" aria-labelledby="bazi-group">
+                    <h3 class="group-title" id="bazi-group">八字類別</h3>
+                    <div class="service-cards">
+                        <article class="service-card"><p class="service-name">八字排盤</p><div class="service-meta"><div class="service-price">$88</div><div class="service-detail">性格批註</div></div></article>
+                        <article class="service-card"><p class="service-name">八字小批</p><div class="service-meta"><div class="service-price">$388</div><div class="service-detail">命格專業分析</div></div></article>
+                        <article class="service-card"><p class="service-name">八字大批</p><div class="service-meta"><div class="service-price">$2888</div><div class="service-detail">詳細命格專業分析 + 首六個大運</div></div></article>
+                    </div>
+                </section>
+
+                <section class="service-group" aria-labelledby="fortune-group">
+                    <h3 class="group-title" id="fortune-group">流年月批</h3>
+                    <div class="service-cards">
+                        <article class="service-card"><p class="service-name">流月簡算</p><div class="service-meta"><div class="service-price">$688</div><div class="service-detail">當月運程</div></div></article>
+                        <article class="service-card"><p class="service-name">流月詳算</p><div class="service-meta"><div class="service-price">$1288</div><div class="service-detail">當月運程詳批</div></div></article>
+                        <article class="service-card"><p class="service-name">流年簡批</p><div class="service-meta"><div class="service-price">$688</div><div class="service-detail">當年運程</div></div></article>
+                        <article class="service-card"><p class="service-name">流年詳批</p><div class="service-meta"><div class="service-price">$1288</div><div class="service-detail">當年運程詳批</div></div></article>
+                    </div>
+                </section>
+
+                <section class="service-group" aria-labelledby="divination-group">
+                    <h3 class="group-title" id="divination-group">占卜問事</h3>
+                    <div class="service-cards">
+                        <article class="service-card"><p class="service-name">尋龍尺問事</p><div class="service-meta"><div class="service-price">$88</div><div class="service-detail">單次收費</div></div></article>
+                        <article class="service-card"><p class="service-name">八字占卜</p><div class="service-meta"><div class="service-price">$238</div><div class="service-detail">單次收費</div></div></article>
+                    </div>
+                </section>
+
+                <section class="service-group" aria-labelledby="special-group">
+                    <h3 class="group-title" id="special-group">特別項目</h3>
+                    <div class="service-cards">
+                        <article class="service-card"><p class="service-name">合婚</p><div class="service-meta"><div class="service-price">$1338</div><div class="service-detail">單次收費</div></div></article>
+                        <article class="service-card"><p class="service-name">寶寶出生擇日</p><div class="service-meta"><div class="service-price">$1888</div><div class="service-detail">3個選擇</div></div></article>
+                        <article class="service-card"><p class="service-name">起名 / 改名</p><div class="service-meta"><div class="service-price">$688</div><div class="service-detail">3個選擇</div></div></article>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section id="process" class="onepage-block" aria-label="流程及服務說明">
+            <h2 class="section-title">流程及服務說明</h2>
+
+            <section class="info-grid" aria-label="流程 FAQ 與回饋">
+                <article class="info-panel" aria-labelledby="process-title">
+                    <h3 id="process-title">服務流程</h3>
+                    <p class="intro-note">流程清晰透明，方便你掌握每一步安排。</p>
+                    <ol class="steps" aria-label="三步驟流程">
+                        <li class="step-item">有緣人諮詢</li>
+                        <li class="step-arrow" aria-hidden="true">→</li>
+                        <li class="step-item">專業分析</li>
+                        <li class="step-arrow" aria-hidden="true">→</li>
+                        <li class="step-item">盡快回覆</li>
+                    </ol>
+                </article>
+
+                <article class="info-panel" aria-labelledby="faq-title">
+                    <h3 id="faq-title">常見問題 FAQ</h3>
+                    <div class="faq-item">
+                        <p class="faq-q">Q1：怎樣進行命理分析？</p>
+                        <p class="faq-a"><span class="faq-a-prefix">A：</span><span class="faq-a-content"><span class="faq-a-line">依據您提供的資料與命盤結構進行專業分析，</span><span class="faq-a-line">重點在提供可參考的決策方向與建議。</span></span></p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">Q2：須要提供哪些資料？</p>
+                        <p class="faq-a"><span class="faq-a-prefix">A：</span><span class="faq-a-content"><span class="faq-a-line">一般須要提供出生年月日、出生時辰，以及你的困擾。</span><span class="faq-a-line">敬請聯絡我們，以了解更多。</span></span></p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">Q3：通常多久會收到回覆？</p>
+                        <p class="faq-a"><span class="faq-a-prefix">A：</span><span class="faq-a-content"><span class="faq-a-line">一般於 24 小時內回覆，若遇高峰時段會先通知預計完成時間。</span></span></p>
+                    </div>
+                    <div class="faq-item">
+                        <p class="faq-q">Q4：個人資料與內容會保密嗎？</p>
+                        <p class="faq-a"><span class="faq-a-prefix">A：</span><span class="faq-a-content"><span class="faq-a-line">會，所有資料僅用於本次諮詢專業分析，不會公開或提供給第三方。</span></span></p>
+                    </div>
+                </article>
+
+                <article class="info-panel feedback-panel" aria-labelledby="feedback-title">
+                    <h3 id="feedback-title">客戶回饋（匿名）</h3>
+                    <div class="feedback-list">
+                        <figure class="feedback-card">
+                            <blockquote class="feedback-text">「解說清晰，對事業與感情方向都有實際幫助，建議很落地。」</blockquote>
+                            <figcaption class="feedback-meta">匿名客戶 A｜八字諮詢</figcaption>
+                        </figure>
+                        <figure class="feedback-card">
+                            <blockquote class="feedback-text">「流程安排很順，提問後回覆時間快，內容也很細緻。」</blockquote>
+                            <figcaption class="feedback-meta">匿名客戶 B｜流年專業分析</figcaption>
+                        </figure>
+                        <figure class="feedback-card">
+                            <blockquote class="feedback-text">「問事前先確認重點，再給出方向，整體感受專業而且尊重隱私。」</blockquote>
+                            <figcaption class="feedback-meta">匿名客戶 C｜占卜問事</figcaption>
+                        </figure>
+                    </div>
+                </article>
+            </section>
+        </section>
+    </main>
 
     <a class="whatsapp-cta" data-track="home_whatsapp_floating" href="https://wa.me/85267113958?text=%E6%88%91%E6%83%B3%E5%BF%AB%E9%80%9F%E8%AB%AE%E8%A9%A2%E5%91%BD%E7%90%86%E6%9C%8D%E5%8B%99" target="_blank" rel="noopener noreferrer">WhatsApp 快速諮詢</a>
 
