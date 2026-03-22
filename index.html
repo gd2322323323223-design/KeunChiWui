@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="權智匯提供八字、紫微斗數與占卜命理諮詢，助你明辨天時，為事業、感情與人生規劃作出更穩妥的選擇。">
+    <meta name="theme-color" content="#420000">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:title" content="權智匯｜命理諮詢">
+    <meta property="og:description" content="八字、紫微斗數與占卜命理諮詢一站整合，助你看清方向、擇優而行。">
+    <title>權智匯｜算命占卜命理</title>
+    <style>
+        :root {
+            --bg-red: #8b0000;
+            --bg-deep: #300000;
+            --gold: #f8e6ae;
+            --gold-bright: #fff1c7;
+            --gold-soft: #d8ac4f;
+            --text-main: rgba(248, 230, 174, 0.94);
+            --text-muted: rgba(248, 230, 174, 0.8);
+            --panel: rgba(34, 8, 8, 0.42);
+            --panel-border: rgba(248, 230, 174, 0.16);
+            --radius-panel: 24px;
+            --radius-card: 20px;
+            --radius-pill: 999px;
+            --space-1: 10px;
+            --space-2: 14px;
+            --space-3: 18px;
+            --space-4: 24px;
+            --space-5: 32px;
+            --shadow-panel: inset 0 0 26px rgba(0, 0, 0, 0.08);
+            --shadow-soft: 0 12px 24px rgba(56, 7, 0, 0.18);
+            --shadow-hover: 0 16px 30px rgba(56, 7, 0, 0.24);
+            --transition-base: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            background: radial-gradient(circle at center, var(--bg-red) 0%, var(--bg-deep) 100%);
+            color: var(--gold);
+            font-family: "Noto Serif TC", "Songti TC", serif;
+            overflow-x: hidden;
+        }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.9), transparent),
+                radial-gradient(1.5px 1.5px at 30% 50%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1px 1px at 70% 80%, rgba(255, 255, 255, 0.76), transparent),
+                radial-gradient(2px 2px at 90% 10%, rgba(255, 255, 255, 0.84), transparent),
+                radial-gradient(1px 1px at 50% 30%, rgba(255, 255, 255, 0.72), transparent);
+            background-size: 200px 200px;
+            opacity: 0.3;
+            animation: starsBlink 5s infinite alternate;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 32px;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--panel-border);
+            z-index: 100;
+        }
+
+        .nav-logo {
+            color: #f8e6ae;
+            font-size: 1.04rem;
+            letter-spacing: 0.08rem;
+            text-decoration: none;
+            text-align: center;
+            white-space: nowrap;
+            text-shadow: 0 0 10px rgba(248, 230, 174, 0.6);
+            animation: navLogoPulse 3.6s ease-in-out infinite;
+        }
+
+        .circle-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(74vw, 860px);
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at 38% 32%, rgba(255, 245, 200, 0.42) 0%, rgba(248, 230, 174, 0.2) 36%, rgba(248, 230, 174, 0.09) 58%, rgba(248, 230, 174, 0.03) 74%, transparent 100%);
+            border: 1px solid rgba(248, 230, 174, 0.3);
+            box-shadow: 0 0 30px rgba(248, 230, 174, 0.2), 0 0 90px rgba(248, 230, 174, 0.13), inset 0 0 50px rgba(248, 230, 174, 0.1);
+            filter: blur(0.6px);
+            opacity: 0.78;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .zodiac-orbit {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            width: min(74vw, 860px);
+            aspect-ratio: 1 / 1;
+            transform: translate(-50%, -50%);
+            z-index: 8;
+            pointer-events: none;
+            --orbit-radius: 49%;
+        }
+
+        .zodiac-item {
+            position: absolute;
+            width: clamp(74px, 8.4vw, 116px);
+            aspect-ratio: 1 / 1;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(248, 230, 174, 0.28));
+            transform: translate(-50%, -50%);
+        }
+
+        .zodiac-1 { left: -12%; top: 10%; }
+        .zodiac-2 { left: -18%; top: 24%; }
+        .zodiac-3 { left: -11%; top: 38%; }
+        .zodiac-4 { left: -20%; top: 52%; }
+        .zodiac-5 { left: -13%; top: 66%; }
+        .zodiac-6 { left: 0%; top: 80%; }
+
+        .zodiac-7  { left: 112%; top: 10%; }
+        .zodiac-8  { left: 118%; top: 24%; }
+        .zodiac-9  { left: 111%; top: 38%; }
+        .zodiac-10 { left: 120%; top: 52%; }
+        .zodiac-11 { left: 113%; top: 66%; }
+        .zodiac-12 { left: 100%; top: 80%; }
+
+        .layout-panel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(76vw, 820px);
+            min-height: min(74vh, 680px);
+            z-index: 10;
+        }
+
+        .content {
+            position: absolute;
+            top: -2%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            text-align: center;
+            width: 100%;
+        }
+
+        .title {
+            margin: 0;
+            font-size: clamp(3.5rem, 9vw, 5.4rem);
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: clamp(0.26rem, 1.4vw, 0.8rem);
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.94), 0 0 20px rgba(216, 172, 79, 0.58);
+            animation: titleGlow 5.4s infinite ease-in-out;
+            white-space: nowrap;
+        }
+
+        .title-divider {
+            width: clamp(80px, 16vw, 180px);
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 16px auto 0;
+            border: none;
+            opacity: 0.72;
+        }
+
+        .title-subtitle {
+            margin: 14px 0 0;
+            font-size: clamp(0.88rem, 2.2vw, 1.08rem);
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: clamp(0.22rem, 1vw, 0.55rem);
+            opacity: 0.82;
+            white-space: nowrap;
+        }
+
+        .intro-panel {
+            position: absolute;
+            top: 33%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(66vw, 640px);
+            min-height: 250px;
+            padding: var(--space-2) 12px;
+            box-sizing: border-box;
+            color: var(--text-main);
+            font-weight: 400;
+            line-height: 1.92;
+            font-size: clamp(1rem, 1.3vw, 1.08rem);
+            text-align: left;
+            z-index: 10;
+        }
+
+        .intro-panel p {
+            margin: 0;
+            text-indent: 2em;
+        }
+
+        .intro-panel p + p {
+            margin-top: var(--space-1);
+        }
+
+        .service-actions {
+            position: absolute;
+            left: 50%;
+            bottom: 6%;
+            transform: translateX(-50%);
+            width: min(58vw, 480px);
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            z-index: 10;
+        }
+
+        .action-link {
+            flex: 1;
+            min-height: 102px;
+            display: grid;
+            place-items: center;
+            padding: 0 14px;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(102, 32, 0, 0.45);
+            background: linear-gradient(180deg, rgba(255, 211, 92, 0.98), rgba(235, 175, 34, 0.94));
+            color: rgba(72, 30, 0, 0.92);
+            text-decoration: none;
+            font-size: clamp(1.16rem, 2vw, 1.46rem);
+            letter-spacing: 0.08rem;
+            line-height: 1.24;
+            text-align: center;
+            white-space: nowrap;
+            box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 248, 208, 0.46);
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+        }
+
+        .action-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -140%;
+            width: 68%;
+            height: 100%;
+            background: linear-gradient(115deg, transparent 0%, rgba(255, 246, 203, 0.62) 50%, transparent 100%);
+            transform: skewX(-20deg);
+            pointer-events: none;
+        }
+
+        .action-link:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover), 0 0 24px rgba(248, 206, 92, 0.42), inset 0 1px 0 rgba(255, 248, 208, 0.64);
+        }
+
+        .action-link:hover::before {
+              animation: buttonSheenSweep 0.58s cubic-bezier(0.22, 0.61, 0.36, 1) 1;
+        }
+
+        .whatsapp-cta {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 130;
+            min-height: 50px;
+            padding: 0 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(248, 230, 174, 0.42);
+            text-decoration: none;
+            color: var(--gold-bright);
+            background: linear-gradient(160deg, rgba(27, 47, 35, 0.95), rgba(18, 83, 52, 0.95));
+            font-size: 0.93rem;
+            letter-spacing: 0.06rem;
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+            transition: var(--transition-base);
+            white-space: nowrap;
+        }
+
+        .whatsapp-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(16, 114, 66, 0.38);
+        }
+
+        @keyframes navLogoPulse {
+            0%, 100% { text-shadow: 0 0 5px rgba(248, 230, 174, 0.45); }
+            50%       { text-shadow: 0 0 15px rgba(248, 230, 174, 0.9), 0 0 28px rgba(248, 230, 174, 0.32); }
+        }
+
+        @keyframes starsBlink {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.5; }
+        }
+
+        @keyframes titleGlow {
+            0%,
+            100% {
+                opacity: 0.94;
+                text-shadow:
+                    1px 1px 0 rgba(255, 255, 255, 0.9),
+                    0 0 16px rgba(216, 172, 79, 0.44),
+                    0 0 32px rgba(216, 172, 79, 0.18);
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                text-shadow:
+                    1px 1px 0 rgba(255, 255, 255, 0.98),
+                    0 0 22px rgba(240, 205, 122, 0.64),
+                    0 0 42px rgba(240, 205, 122, 0.3);
+                transform: scale(1.012);
+            }
+        }
+
+        @keyframes buttonSheenSweep {
+            from {
+                left: -140%;
+            }
+            to {
+                left: 160%;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 14px 18px;
+            }
+
+            .nav-logo {
+                font-size: 0.92rem;
+                letter-spacing: 0.05rem;
+            }
+
+            .layout-panel {
+                width: min(88vw, 820px);
+            }
+
+            .service-actions {
+                width: min(72vw, 480px);
+                gap: 16px;
+            }
+
+            .zodiac-item {
+                width: clamp(60px, 10vw, 90px);
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                min-height: 100svh;
+            }
+
+            .title {
+                letter-spacing: 0.2rem;
+                font-size: clamp(2.8rem, 12vw, 4rem);
+            }
+
+            .title-divider {
+                width: clamp(60px, 20vw, 120px);
+            }
+
+            .title-subtitle {
+                font-size: clamp(0.78rem, 3.2vw, 0.92rem);
+                letter-spacing: 0.18rem;
+            }
+
+            .layout-panel {
+                width: min(90vw, 820px);
+                min-height: 72vh;
+            }
+
+            .intro-panel {
+                top: 28%;
+                width: min(80vw, 640px);
+                min-height: 286px;
+                padding: var(--space-1) 6px;
+                font-size: 0.96rem;
+                line-height: 1.86;
+            }
+
+            .service-actions {
+                width: min(82vw, 480px);
+                gap: 12px;
+            }
+
+            .action-link {
+                min-height: 88px;
+                font-size: 1rem;
+                letter-spacing: 0.04rem;
+            }
+
+            .whatsapp-cta {
+                right: 12px;
+                bottom: 12px;
+                min-height: 46px;
+                padding: 0 14px;
+                font-size: 0.84rem;
+                letter-spacing: 0.03rem;
+            }
+
+            .zodiac-orbit {
+                width: min(86vw, 640px);
+                left: 46%;
+                top: 62%;
+                --orbit-radius: 47%;
+            }
+
+            .zodiac-item {
+                width: clamp(48px, 9.2vw, 72px);
+            }
+
+            .zodiac-1 { left: -10%; top: 14%; }
+            .zodiac-2 { left: -16%; top: 28%; }
+            .zodiac-3 { left: -11%; top: 42%; }
+            .zodiac-4 { left: -18%; top: 56%; }
+            .zodiac-5 { left: -12%; top: 70%; }
+            .zodiac-6 { left: 2%; top: 84%; }
+
+            .zodiac-7  { left: 110%; top: 14%; }
+            .zodiac-8  { left: 116%; top: 28%; }
+            .zodiac-9  { left: 111%; top: 42%; }
+            .zodiac-10 { left: 118%; top: 56%; }
+            .zodiac-11 { left: 112%; top: 70%; }
+            .zodiac-12 { left: 98%; top: 84%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .action-link::before {
+                left: -140% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="nav-logo">「權智匯」—— 權衡天命，智慧匯聚。&emsp;&emsp;&emsp;助您運籌當下，明辨天時，擇優而行。</a>
+    </nav>
+
+    <div class="circle-bg" aria-hidden="true"></div>
+
+    <div class="zodiac-orbit" aria-hidden="true">
+        <img class="zodiac-item zodiac-1" src="./assets/zodiac/01-rat.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-2" src="./assets/zodiac/02-ox.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-3" src="./assets/zodiac/03-tiger.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-4" src="./assets/zodiac/04-rabbit.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-5" src="./assets/zodiac/05-dragon.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-6" src="./assets/zodiac/06-snake.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-7"  src="./assets/zodiac/12-pig.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-8"  src="./assets/zodiac/11-dog.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-9"  src="./assets/zodiac/10-rooster.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-10" src="./assets/zodiac/09-monkey.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-11" src="./assets/zodiac/08-goat.png" alt="" onerror="this.style.display='none'">
+        <img class="zodiac-item zodiac-12" src="./assets/zodiac/07-horse.png" alt="" onerror="this.style.display='none'">
+    </div>
+
+    <div class="layout-panel">
+        <div class="content">
+            <h1 class="title">權智匯</h1>
+            <hr class="title-divider">
+            <p class="title-subtitle">專業算命占卜</p>
+            <hr class="title-divider">
+        </div>
+
+        <section class="intro-panel" aria-label="師傅簡介">
+            <p>「權智匯」——權衡天命，智慧匯聚。</p>
+            <p>本小組由兩位深研中華傳統文化的伙伴共同創立，結合各自所長，為有緣人提供專業、真誠的命理諮詢服務。</p>
+            <p>我們相信，真正的命理服務，不是宿命的斷言，而是幫助您看清天時、地利、人和，在人生的每個十字路口作出更明智的選擇。</p>
+        </section>
+
+        <div class="service-actions" aria-label="服務入口">
+            <a class="action-link" data-track="home_view_services" href="./services.html">服務及收費</a>
+            <a class="action-link" data-track="home_view_process" href="./contact.html">流程及<br>服務說明</a>
+        </div>
+    </div>
+
+    <a class="whatsapp-cta" data-track="home_whatsapp_floating" href="https://wa.me/85267113958?text=%E6%88%91%E6%83%B3%E5%BF%AB%E9%80%9F%E8%AB%AE%E8%A9%A2%E5%91%BD%E7%90%86%E6%9C%8D%E5%8B%99" target="_blank" rel="noopener noreferrer">WhatsApp 快速諮詢</a>
+
+    <script>
+        (function () {
+            const STORAGE_KEY = "cw_click_stats";
+
+            function trackClick(eventName) {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                const stats = raw ? JSON.parse(raw) : {};
+                stats[eventName] = (stats[eventName] || 0) + 1;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+                console.log("[tracking]", eventName, stats[eventName]);
+            }
+
+            document.querySelectorAll("[data-track]").forEach((node) => {
+                node.addEventListener("click", () => {
+                    const eventName = node.getAttribute("data-track");
+                    if (eventName) {
+                        trackClick(eventName);
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
