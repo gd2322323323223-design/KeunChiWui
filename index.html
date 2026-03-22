@@ -334,11 +334,17 @@
             box-shadow: 0 14px 28px rgba(16, 114, 66, 0.38);
         }
 
+        .hero-stage {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100svh;
+        }
+
         .onepage-sections {
             position: relative;
             z-index: 12;
             width: min(1120px, calc(100% - 40px));
-            margin: calc(100vh + 36px) auto 120px;
+            margin: 28px auto 120px;
             display: grid;
             gap: 26px;
         }
@@ -769,7 +775,7 @@
             .zodiac-12 { left: 98%; top: 84%; }
 
             .onepage-sections {
-                margin-top: calc(100vh + 26px);
+                margin-top: 20px;
                 margin-bottom: 110px;
                 gap: 16px;
             }
@@ -822,6 +828,7 @@
         <a href="#top" class="nav-logo">「權智匯」—— 權衡天命，智慧匯聚。&emsp;&emsp;&emsp;助您運籌當下，明辨天時，擇優而行。</a>
     </nav>
 
+    <section class="hero-stage" aria-label="首頁主視覺區">
     <div class="circle-bg" aria-hidden="true"></div>
 
     <div class="zodiac-orbit" aria-hidden="true">
@@ -858,6 +865,7 @@
             <a class="action-link" data-track="home_view_process" href="#process">流程及<br>服務說明</a>
         </div>
     </div>
+    </section>
 
     <main class="onepage-sections">
         <section id="services" class="onepage-block" aria-label="服務及收費">
