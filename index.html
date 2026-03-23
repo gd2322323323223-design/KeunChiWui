@@ -14,9 +14,13 @@
         :root {
             --bg-red: #8b0000;
             --bg-deep: #300000;
+            --bg-night: #160203;
             --gold: #f8e6ae;
             --gold-bright: #fff1c7;
             --gold-soft: #d8ac4f;
+            --ink-soft: rgba(16, 8, 8, 0.55);
+            --glow-amber: rgba(238, 188, 96, 0.28);
+            --glow-rose: rgba(142, 26, 26, 0.34);
             --text-main: rgba(248, 230, 174, 0.94);
             --text-muted: rgba(248, 230, 174, 0.8);
             --panel: rgba(34, 8, 8, 0.42);
@@ -38,7 +42,10 @@
         html, body {
             margin: 0;
             min-height: 100%;
-            background: radial-gradient(circle at center, var(--bg-red) 0%, var(--bg-deep) 100%);
+            background:
+                radial-gradient(circle at 16% 14%, rgba(212, 126, 37, 0.19), transparent 42%),
+                radial-gradient(circle at 84% 18%, rgba(168, 39, 39, 0.18), transparent 40%),
+                radial-gradient(circle at center, var(--bg-red) 0%, var(--bg-deep) 56%, var(--bg-night) 100%);
             color: var(--gold);
             font-family: "Noto Serif TC", "Songti TC", serif;
             overflow-x: hidden;
@@ -64,6 +71,18 @@
             animation: starsBlink 5s infinite alternate;
             pointer-events: none;
             z-index: 1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                radial-gradient(circle at 50% 24%, rgba(255, 236, 176, 0.08), transparent 34%),
+                linear-gradient(125deg, rgba(255, 248, 220, 0.03), rgba(80, 13, 13, 0.08) 44%, rgba(26, 4, 4, 0.02) 80%);
+            mix-blend-mode: screen;
         }
 
         .navbar {
@@ -101,13 +120,40 @@
             width: min(74vw, 860px);
             aspect-ratio: 1 / 1;
             border-radius: 50%;
-            background: radial-gradient(circle at 38% 32%, rgba(255, 245, 200, 0.42) 0%, rgba(248, 230, 174, 0.2) 36%, rgba(248, 230, 174, 0.09) 58%, rgba(248, 230, 174, 0.03) 74%, transparent 100%);
-            border: 1px solid rgba(248, 230, 174, 0.3);
-            box-shadow: 0 0 30px rgba(248, 230, 174, 0.2), 0 0 90px rgba(248, 230, 174, 0.13), inset 0 0 50px rgba(248, 230, 174, 0.1);
-            filter: blur(0.6px);
-            opacity: 0.78;
+            background:
+                radial-gradient(circle at 32% 28%, rgba(255, 245, 200, 0.46) 0%, rgba(248, 230, 174, 0.24) 28%, rgba(248, 230, 174, 0.09) 56%, rgba(248, 230, 174, 0.02) 74%, transparent 100%),
+                radial-gradient(circle at center, rgba(26, 4, 4, 0.24) 0%, rgba(12, 2, 2, 0.08) 62%, transparent 100%);
+            border: 1px solid rgba(248, 230, 174, 0.34);
+            box-shadow:
+                0 0 34px rgba(248, 230, 174, 0.24),
+                0 0 120px rgba(248, 230, 174, 0.16),
+                inset 0 0 64px rgba(248, 230, 174, 0.14);
+            filter: blur(0.3px);
+            opacity: 0.86;
             z-index: 2;
             pointer-events: none;
+            animation: orbitGlow 7s ease-in-out infinite;
+        }
+
+        .circle-bg::before,
+        .circle-bg::after {
+            content: "";
+            position: absolute;
+            inset: 8%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .circle-bg::before {
+            border: 1px solid rgba(248, 230, 174, 0.2);
+            box-shadow: inset 0 0 26px rgba(248, 230, 174, 0.07);
+            opacity: 0.66;
+        }
+
+        .circle-bg::after {
+            inset: 14%;
+            border: 1px dashed rgba(248, 230, 174, 0.16);
+            opacity: 0.48;
         }
 
         .zodiac-orbit {
@@ -120,6 +166,7 @@
             z-index: 8;
             pointer-events: none;
             --orbit-radius: 49%;
+            animation: orbitDrift 10s ease-in-out infinite;
         }
 
         .zodiac-item {
@@ -128,8 +175,9 @@
             aspect-ratio: 1 / 1;
             display: block;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(248, 230, 174, 0.28));
+            filter: drop-shadow(0 0 14px rgba(248, 230, 174, 0.32));
             transform: translate(-50%, -50%);
+            opacity: 0.94;
         }
 
         .zodiac-1 { left: -12%; top: 10%; }
@@ -164,6 +212,7 @@
             color: var(--gold);
             text-align: center;
             width: 100%;
+            animation: revealUp 0.85s ease both;
         }
 
         .title {
@@ -172,7 +221,10 @@
             font-weight: 700;
             color: var(--gold);
             letter-spacing: clamp(0.26rem, 1.4vw, 0.8rem);
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.94), 0 0 20px rgba(216, 172, 79, 0.58);
+            text-shadow:
+                1px 1px 0 rgba(255, 255, 255, 0.95),
+                0 0 20px rgba(216, 172, 79, 0.62),
+                0 0 42px rgba(176, 59, 31, 0.32);
             animation: titleGlow 5.4s infinite ease-in-out;
             white-space: nowrap;
         }
@@ -203,7 +255,7 @@
             transform: translateX(-50%);
             width: min(66vw, 640px);
             min-height: 250px;
-            padding: var(--space-2) 12px;
+            padding: var(--space-2) 18px;
             box-sizing: border-box;
             color: var(--text-main);
             font-weight: 400;
@@ -211,6 +263,11 @@
             font-size: clamp(1rem, 1.3vw, 1.08rem);
             text-align: left;
             z-index: 10;
+            border: 1px solid rgba(248, 230, 174, 0.12);
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(32, 8, 8, 0.34), rgba(18, 5, 5, 0.2));
+            backdrop-filter: blur(3px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
         }
 
         .intro-panel p {
@@ -271,6 +328,13 @@
             background: rgba(34, 8, 8, 0.42);
             box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.08);
             padding: 24px;
+            transition: var(--transition-base);
+        }
+
+        .onepage-block:hover {
+            border-color: rgba(248, 230, 174, 0.28);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.08), 0 12px 28px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
         }
 
         .section-title {
@@ -346,6 +410,13 @@
             justify-content: space-between;
             align-items: baseline;
             gap: 10px;
+            transition: var(--transition-base);
+        }
+
+        .service-card:hover {
+            border-color: rgba(248, 230, 174, 0.26);
+            background: rgba(0, 0, 0, 0.28);
+            transform: translateY(-2px);
         }
 
         .service-name {
@@ -384,6 +455,12 @@
             border: 1px solid rgba(248, 230, 174, 0.16);
             background: rgba(0, 0, 0, 0.2);
             padding: 16px;
+            transition: var(--transition-base);
+        }
+
+        .info-panel:hover {
+            border-color: rgba(248, 230, 174, 0.26);
+            transform: translateY(-2px);
         }
 
         .info-panel h3 {
@@ -487,6 +564,12 @@
             border: 1px solid rgba(248, 230, 174, 0.16);
             background: rgba(0, 0, 0, 0.22);
             padding: 12px;
+            transition: var(--transition-base);
+        }
+
+        .feedback-card:hover {
+            border-color: rgba(248, 230, 174, 0.26);
+            transform: translateY(-2px);
         }
 
         .feedback-text {
@@ -511,6 +594,40 @@
         @keyframes starsBlink {
             0% { opacity: 0.2; }
             100% { opacity: 0.5; }
+        }
+
+        @keyframes orbitGlow {
+            0%, 100% {
+                box-shadow:
+                    0 0 34px rgba(248, 230, 174, 0.24),
+                    0 0 120px rgba(248, 230, 174, 0.16),
+                    inset 0 0 64px rgba(248, 230, 174, 0.14);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 42px rgba(248, 230, 174, 0.3),
+                    0 0 144px rgba(248, 230, 174, 0.2),
+                    inset 0 0 72px rgba(248, 230, 174, 0.18);
+            }
+        }
+
+        @keyframes orbitDrift {
+            0%,
+            100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.015); }
+        }
+
+        @keyframes revealUp {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 18px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
         }
 
         @keyframes titleGlow {
@@ -629,6 +746,8 @@
                 line-height: 1.78;
                 text-align: center;
                 box-sizing: border-box;
+                border-radius: 16px;
+                backdrop-filter: blur(1.8px);
             }
 
             .intro-panel p {
