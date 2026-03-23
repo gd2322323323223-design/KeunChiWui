@@ -51,6 +51,10 @@
             overflow-x: hidden;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             position: relative;
             min-height: 100vh;
@@ -158,9 +162,9 @@
 
         .zodiac-orbit {
             position: absolute;
-            top: 60%;
+            top: 35%;
             left: 50%;
-            width: min(74vw, 860px);
+            width: min(56vw, 520px);
             aspect-ratio: 1 / 1;
             transform: translate(-50%, -50%);
             z-index: 8;
@@ -171,28 +175,27 @@
 
         .zodiac-item {
             position: absolute;
-            width: clamp(82px, 9.4vw, 126px);
+            width: clamp(64px, 7vw, 92px);
             aspect-ratio: 1 / 1;
             display: block;
             object-fit: contain;
-            filter: drop-shadow(0 0 14px rgba(248, 230, 174, 0.32));
+            filter: sepia(0.88) saturate(1.7) hue-rotate(344deg) brightness(1.08) drop-shadow(0 0 12px rgba(248, 230, 174, 0.42));
             transform: translate(-50%, -50%);
-            opacity: 0.94;
+            opacity: 1;
         }
 
-        .zodiac-1 { left: -12%; top: 10%; }
-        .zodiac-2 { left: -18%; top: 24%; }
-        .zodiac-3 { left: -11%; top: 38%; }
-        .zodiac-4 { left: -20%; top: 52%; }
-        .zodiac-5 { left: -13%; top: 66%; }
-        .zodiac-6 { left: 0%; top: 80%; }
-
-        .zodiac-7  { left: 112%; top: 10%; }
-        .zodiac-8  { left: 118%; top: 24%; }
-        .zodiac-9  { left: 111%; top: 38%; }
-        .zodiac-10 { left: 120%; top: 52%; }
-        .zodiac-11 { left: 113%; top: 66%; }
-        .zodiac-12 { left: 100%; top: 80%; }
+        .zodiac-1  { left: 50%; top: -6%; }
+        .zodiac-2  { left: 72%; top: 0%; }
+        .zodiac-3  { left: 88%; top: 16%; }
+        .zodiac-4  { left: 96%; top: 38%; }
+        .zodiac-5  { left: 92%; top: 62%; }
+        .zodiac-6  { left: 78%; top: 82%; }
+        .zodiac-7  { left: 50%; top: 92%; }
+        .zodiac-8  { left: 22%; top: 82%; }
+        .zodiac-9  { left: 8%; top: 62%; }
+        .zodiac-10 { left: 4%; top: 38%; }
+        .zodiac-11 { left: 12%; top: 16%; }
+        .zodiac-12 { left: 28%; top: 0%; }
 
         .layout-panel {
             position: absolute;
@@ -291,20 +294,21 @@
             justify-content: center;
             text-align: center;
             border-radius: var(--radius-pill);
-            border: 1px solid rgba(248, 230, 174, 0.42);
+            border: 1px solid rgba(255, 242, 197, 0.82);
             text-decoration: none;
-            color: var(--gold-bright);
-            background: linear-gradient(160deg, rgba(27, 47, 35, 0.95), rgba(18, 83, 52, 0.95));
+            color: #4a1407;
+            background: linear-gradient(150deg, rgba(255, 247, 219, 0.98), rgba(245, 214, 133, 0.98) 58%, rgba(224, 175, 64, 0.98));
             font-size: 0.93rem;
             letter-spacing: 0.06rem;
-            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28), 0 0 22px rgba(255, 220, 125, 0.38);
             transition: var(--transition-base);
             white-space: nowrap;
+            font-weight: 700;
         }
 
         .whatsapp-cta:hover {
             transform: translateY(-3px);
-            box-shadow: 0 14px 28px rgba(16, 114, 66, 0.38);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.24), 0 0 28px rgba(255, 225, 136, 0.48);
         }
 
         .hero-stage {
@@ -586,6 +590,81 @@
             letter-spacing: 0.04rem;
         }
 
+        .contact-form-wrap {
+            margin-top: 12px;
+            border-radius: 18px;
+            border: 1px solid rgba(248, 230, 174, 0.16);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 18px;
+        }
+
+        .contact-form-note {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+
+        .contact-form-grid {
+            margin-top: 14px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .contact-form-grid label {
+            font-size: 0.88rem;
+            color: var(--gold-bright);
+            letter-spacing: 0.04rem;
+        }
+
+        .contact-form-grid input,
+        .contact-form-grid textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(248, 230, 174, 0.2);
+            background: rgba(17, 6, 6, 0.58);
+            color: var(--gold);
+            font-family: inherit;
+            font-size: 0.94rem;
+            line-height: 1.55;
+        }
+
+        .contact-form-grid textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .contact-form-actions {
+            margin-top: 12px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .contact-form-wa {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 0 16px;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 242, 197, 0.8);
+            text-decoration: none;
+            color: #4a1407;
+            background: linear-gradient(150deg, rgba(255, 247, 219, 0.98), rgba(245, 214, 133, 0.98) 58%, rgba(224, 175, 64, 0.98));
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.04rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.26), 0 0 18px rgba(255, 220, 125, 0.34);
+            transition: var(--transition-base);
+        }
+
+        .contact-form-wa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.24), 0 0 24px rgba(255, 225, 136, 0.46);
+        }
+
         @keyframes navLogoPulse {
             0%, 100% { text-shadow: 0 0 5px rgba(248, 230, 174, 0.45); }
             50%       { text-shadow: 0 0 15px rgba(248, 230, 174, 0.9), 0 0 28px rgba(248, 230, 174, 0.32); }
@@ -732,7 +811,7 @@
             }
 
             .content {
-                top: 24%;
+                top: 18%;
             }
 
             .intro-panel {
@@ -741,9 +820,9 @@
                 transform: translate(-50%, -50%);
                 width: min(86vw, 360px);
                 min-height: auto;
-                padding: 0 12px;
-                font-size: clamp(1rem, 4.2vw, 1.08rem);
-                line-height: 1.78;
+                padding: 0 15px;
+                font-size: clamp(1.08rem, 4.5vw, 1.16rem);
+                line-height: 1.6;
                 text-align: center;
                 box-sizing: border-box;
                 border-radius: 16px;
@@ -769,30 +848,28 @@
             }
 
             .zodiac-orbit {
-                top: auto;
-                bottom: 96px;
+                top: 34%;
                 left: 50%;
-                width: min(94vw, 460px);
-                aspect-ratio: auto;
-                transform: translateX(-50%);
-                display: grid;
-                grid-template-columns: repeat(4, minmax(0, 1fr));
-                gap: 14px 10px;
+                width: min(84vw, 360px);
+                aspect-ratio: 1 / 1;
+                transform: translate(-50%, -50%);
+                display: block;
             }
 
             .zodiac-item {
-                position: relative;
-                left: auto !important;
-                top: auto !important;
-                transform: none;
-                width: clamp(62px, 15.6vw, 82px);
-                justify-self: center;
+                position: absolute;
+                transform: translate(-50%, -50%);
+                width: clamp(52px, 13.8vw, 70px);
             }
 
             .onepage-sections {
                 margin-top: 20px;
                 margin-bottom: 110px;
                 gap: 16px;
+            }
+
+            .contact-form-wrap {
+                padding: 14px;
             }
 
             .onepage-block {
