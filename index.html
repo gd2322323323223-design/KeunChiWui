@@ -192,6 +192,8 @@
             transform: translate(-50%, -50%);
             z-index: 9;
             pointer-events: none;
+            animation: orbitSpin 48s linear infinite;
+            transition: transform 0.45s ease;
         }
 
         .zodiac-item {
@@ -203,99 +205,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            border: 1px solid rgba(248, 230, 174, 0.45);
-            background:
-                radial-gradient(circle at 34% 28%, rgba(255, 241, 199, 0.28), rgba(71, 20, 10, 0.14) 52%, rgba(29, 8, 8, 0.05) 100%),
-                rgba(18, 5, 5, 0.2);
-            color: var(--gold-bright);
-            font-size: var(--zodiac-font);
-            font-weight: 700;
-            letter-spacing: 0.02rem;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-            box-shadow: inset 0 0 16px rgba(248, 230, 174, 0.12), 0 0 14px rgba(248, 230, 174, 0.28);
             transform:
                 translate(-50%, -50%)
                 rotate(calc((var(--i) - 1) * 30deg))
                 translate(var(--ring-radius))
                 rotate(calc((var(--i) - 1) * -30deg));
             opacity: 1;
+            transition: transform 0.45s ease, width 0.45s ease;
         }
 
-        .zodiac-item::before,
-        .zodiac-item::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
+        .zodiac-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter:
+                drop-shadow(0 0 8px rgba(212, 175, 55, 0.5))
+                drop-shadow(0 0 16px rgba(212, 175, 55, 0.28));
+            transition: filter 0.35s ease;
         }
 
-        .zodiac-item::before {
-            inset: -8%;
-            border: 1px solid rgba(248, 230, 174, 0.28);
-            background:
-                repeating-conic-gradient(
-                    from 0deg,
-                    rgba(248, 230, 174, 0.55) 0deg 2deg,
-                    transparent 2deg 15deg
-                );
-            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
-            mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
-            opacity: 0.72;
-        }
-
-        .zodiac-item::after {
-            inset: 10%;
-            border: 1px solid rgba(248, 230, 174, 0.24);
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.28);
-            opacity: 0.85;
-        }
-
-        .zodiac-1,
-        .zodiac-4,
-        .zodiac-7,
-        .zodiac-10 {
-            border-color: rgba(255, 241, 199, 0.72);
-            box-shadow: inset 0 0 20px rgba(248, 230, 174, 0.2), 0 0 20px rgba(248, 230, 174, 0.4);
-            text-shadow: 0 0 14px rgba(255, 241, 199, 0.86);
-        }
-
-        .zodiac-1::before,
-        .zodiac-4::before,
-        .zodiac-7::before,
-        .zodiac-10::before {
-            opacity: 0.92;
-        }
-
-        .zodiac-2,
-        .zodiac-5,
-        .zodiac-8,
-        .zodiac-11 {
-            border-color: rgba(248, 230, 174, 0.58);
-            box-shadow: inset 0 0 17px rgba(248, 230, 174, 0.16), 0 0 16px rgba(248, 230, 174, 0.34);
-        }
-
-        .zodiac-2::before,
-        .zodiac-5::before,
-        .zodiac-8::before,
-        .zodiac-11::before {
-            opacity: 0.8;
-        }
-
-        .zodiac-3,
-        .zodiac-6,
-        .zodiac-9,
-        .zodiac-12 {
-            border-color: rgba(248, 230, 174, 0.46);
-            box-shadow: inset 0 0 14px rgba(248, 230, 174, 0.12), 0 0 12px rgba(248, 230, 174, 0.26);
-            opacity: 0.96;
-        }
-
-        .zodiac-3::before,
-        .zodiac-6::before,
-        .zodiac-9::before,
-        .zodiac-12::before {
-            opacity: 0.68;
+        .zodiac-item:hover .zodiac-icon {
+            filter:
+                drop-shadow(0 0 10px rgba(255, 229, 145, 0.7))
+                drop-shadow(0 0 22px rgba(212, 175, 55, 0.4));
         }
 
         .zodiac-1  { --i: 1; }
@@ -830,6 +762,11 @@
             50% { transform: translate(-50%, -50%) scale(1.015); }
         }
 
+        @keyframes orbitSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
         @keyframes revealUp {
             0% {
                 opacity: 0;
@@ -1088,18 +1025,18 @@
         </div>
 
         <div class="zodiac-orbit" aria-hidden="true">
-            <span class="zodiac-item zodiac-1">鼠</span>
-            <span class="zodiac-item zodiac-2">牛</span>
-            <span class="zodiac-item zodiac-3">虎</span>
-            <span class="zodiac-item zodiac-4">兔</span>
-            <span class="zodiac-item zodiac-5">龍</span>
-            <span class="zodiac-item zodiac-6">蛇</span>
-            <span class="zodiac-item zodiac-7">馬</span>
-            <span class="zodiac-item zodiac-8">羊</span>
-            <span class="zodiac-item zodiac-9">猴</span>
-            <span class="zodiac-item zodiac-10">雞</span>
-            <span class="zodiac-item zodiac-11">狗</span>
-            <span class="zodiac-item zodiac-12">豬</span>
+            <span class="zodiac-item zodiac-1" aria-label="鼠"><img class="zodiac-icon" src="assets/zodiac/01-rat.png" alt=""></span>
+            <span class="zodiac-item zodiac-2" aria-label="牛"><img class="zodiac-icon" src="assets/zodiac/02-ox.png" alt=""></span>
+            <span class="zodiac-item zodiac-3" aria-label="虎"><img class="zodiac-icon" src="assets/zodiac/03-tiger.png" alt=""></span>
+            <span class="zodiac-item zodiac-4" aria-label="兔"><img class="zodiac-icon" src="assets/zodiac/04-rabbit.png" alt=""></span>
+            <span class="zodiac-item zodiac-5" aria-label="龍"><img class="zodiac-icon" src="assets/zodiac/05-dragon.png" alt=""></span>
+            <span class="zodiac-item zodiac-6" aria-label="蛇"><img class="zodiac-icon" src="assets/zodiac/06-snake.png" alt=""></span>
+            <span class="zodiac-item zodiac-7" aria-label="馬"><img class="zodiac-icon" src="assets/zodiac/07-horse.png" alt=""></span>
+            <span class="zodiac-item zodiac-8" aria-label="羊"><img class="zodiac-icon" src="assets/zodiac/08-goat.png" alt=""></span>
+            <span class="zodiac-item zodiac-9" aria-label="猴"><img class="zodiac-icon" src="assets/zodiac/09-monkey.png" alt=""></span>
+            <span class="zodiac-item zodiac-10" aria-label="雞"><img class="zodiac-icon" src="assets/zodiac/10-rooster.png" alt=""></span>
+            <span class="zodiac-item zodiac-11" aria-label="狗"><img class="zodiac-icon" src="assets/zodiac/11-dog.png" alt=""></span>
+            <span class="zodiac-item zodiac-12" aria-label="豬"><img class="zodiac-icon" src="assets/zodiac/12-pig.png" alt=""></span>
         </div>
     </div>
 
