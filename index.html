@@ -93,34 +93,6 @@
             animation: navLogoPulse 3.6s ease-in-out infinite;
         }
 
-        .nav-links {
-            position: absolute;
-            left: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-link {
-            color: var(--gold);
-            text-decoration: none;
-            border: 1px solid rgba(248, 230, 174, 0.2);
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: var(--radius-pill);
-            padding: 8px 14px;
-            font-size: 0.9rem;
-            letter-spacing: 0.05rem;
-            white-space: nowrap;
-            transition: var(--transition-base);
-        }
-
-        .nav-link:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-soft);
-            border-color: rgba(248, 230, 174, 0.34);
-        }
-
         .circle-bg {
             position: absolute;
             top: 50%;
@@ -186,7 +158,7 @@
 
         .content {
             position: absolute;
-            top: -2%;
+            top: 1%;
             left: 50%;
             transform: translateX(-50%);
             color: var(--gold);
@@ -226,7 +198,7 @@
 
         .intro-panel {
             position: absolute;
-            top: 33%;
+            top: 27%;
             left: 50%;
             transform: translateX(-50%);
             width: min(66vw, 640px);
@@ -248,62 +220,6 @@
 
         .intro-panel p + p {
             margin-top: var(--space-1);
-        }
-
-        .service-actions {
-            position: absolute;
-            left: 50%;
-            bottom: 6%;
-            transform: translateX(-50%);
-            width: min(58vw, 480px);
-            display: flex;
-            justify-content: space-between;
-            gap: 24px;
-            z-index: 10;
-        }
-
-        .action-link {
-            flex: 1;
-            min-height: 102px;
-            display: grid;
-            place-items: center;
-            padding: 0 14px;
-            border-radius: var(--radius-pill);
-            border: 1px solid rgba(102, 32, 0, 0.45);
-            background: linear-gradient(180deg, rgba(255, 211, 92, 0.98), rgba(235, 175, 34, 0.94));
-            color: rgba(72, 30, 0, 0.92);
-            text-decoration: none;
-            font-size: clamp(1.16rem, 2vw, 1.46rem);
-            letter-spacing: 0.08rem;
-            line-height: 1.24;
-            text-align: center;
-            white-space: nowrap;
-            box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 248, 208, 0.46);
-            transition: var(--transition-base);
-            position: relative;
-            overflow: hidden;
-            font-weight: 600;
-        }
-
-        .action-link::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -140%;
-            width: 68%;
-            height: 100%;
-            background: linear-gradient(115deg, transparent 0%, rgba(255, 246, 203, 0.62) 50%, transparent 100%);
-            transform: skewX(-20deg);
-            pointer-events: none;
-        }
-
-        .action-link:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover), 0 0 24px rgba(248, 206, 92, 0.42), inset 0 1px 0 rgba(255, 248, 208, 0.64);
-        }
-
-        .action-link:hover::before {
-              animation: buttonSheenSweep 0.58s cubic-bezier(0.22, 0.61, 0.36, 1) 1;
         }
 
         .whatsapp-cta {
@@ -618,28 +534,9 @@
             }
         }
 
-        @keyframes buttonSheenSweep {
-            from {
-                left: -140%;
-            }
-            to {
-                left: 160%;
-            }
-        }
-
         @media (max-width: 900px) {
             .navbar {
                 padding: 14px 18px;
-            }
-
-            .nav-links {
-                left: 16px;
-                gap: 8px;
-            }
-
-            .nav-link {
-                padding: 7px 12px;
-                font-size: 0.84rem;
             }
 
             .nav-logo {
@@ -649,11 +546,6 @@
 
             .layout-panel {
                 width: min(88vw, 820px);
-            }
-
-            .service-actions {
-                width: min(72vw, 480px);
-                gap: 16px;
             }
 
             .zodiac-item {
@@ -679,15 +571,6 @@
                 flex-wrap: wrap;
                 row-gap: 10px;
                 padding: 12px 10px;
-            }
-
-            .nav-links {
-                position: static;
-                transform: none;
-                width: 100%;
-                margin: 0;
-                justify-content: center;
-                gap: 8px;
             }
 
             .nav-logo {
@@ -720,23 +603,12 @@
             }
 
             .intro-panel {
-                top: 28%;
+                top: 24%;
                 width: min(80vw, 640px);
                 min-height: 286px;
                 padding: var(--space-1) 6px;
                 font-size: 0.96rem;
                 line-height: 1.86;
-            }
-
-            .service-actions {
-                width: min(82vw, 480px);
-                gap: 12px;
-            }
-
-            .action-link {
-                min-height: 88px;
-                font-size: 1rem;
-                letter-spacing: 0.04rem;
             }
 
             .whatsapp-cta {
@@ -811,21 +683,12 @@
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
             }
-
-            .action-link::before {
-                left: -140% !important;
-            }
         }
     </style>
 </head>
 <body id="top">
     <nav class="navbar">
-        <div class="nav-links">
-            <a class="nav-link" href="#top">首頁</a>
-            <a class="nav-link" href="#services">服務及收費</a>
-            <a class="nav-link" href="#process">流程及說明</a>
-        </div>
-        <a href="#top" class="nav-logo">「權智匯」—— 權衡天命，智慧匯聚。&emsp;&emsp;&emsp;助您運籌當下，明辨天時，擇優而行。</a>
+        <a href="#top" class="nav-logo">「權智匯」祝您運籌當下，明辨天時，擇優二行。</a>
     </nav>
 
     <section class="hero-stage" aria-label="首頁主視覺區">
@@ -859,11 +722,6 @@
             <p>本小組由兩位深研中華傳統文化的伙伴共同創立，結合各自所長，為有緣人提供專業、真誠的命理諮詢服務。</p>
             <p>我們相信，真正的命理服務，不是宿命的斷言，而是幫助您看清天時、地利、人和，在人生的每個十字路口作出更明智的選擇。</p>
         </section>
-
-        <div class="service-actions" aria-label="服務入口">
-            <a class="action-link" data-track="home_view_services" href="#services">服務及收費</a>
-            <a class="action-link" data-track="home_view_process" href="#process">流程及<br>服務說明</a>
-        </div>
     </div>
     </section>
 
