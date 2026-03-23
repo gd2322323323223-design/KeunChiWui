@@ -194,6 +194,8 @@
             pointer-events: none;
             animation: orbitSpin 48s linear infinite;
             transition: transform 0.45s ease;
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
         .zodiac-item {
@@ -341,7 +343,6 @@
             transition: var(--transition-base);
             white-space: nowrap;
             font-weight: 700;
-            animation: whatsappPulse 4s ease-in-out 3s infinite;
         }
 
         .whatsapp-cta:hover {
