@@ -873,11 +873,16 @@
         /* ── Mobile portrait ── */
         @media (max-width: 640px) {
             :root {
-                --circle-sz:   min(96vw, 450px);
-                --panel-w:     min(68vw, 286px);   /* ≈ 64% of circle → safe inner area */
-                --intro-w:     100%;
-                --intro-font:  clamp(0.9rem, 3.7vw, 1.02rem);
-                --intro-lh:    1.68;
+                /* Hero height = circle + navbar clearance */
+                --hero-min-h:  calc(var(--circle-sz) + 130px);
+                /* Circle fills most of viewport width */
+                --circle-sz:   min(96vw, 460px);
+                /* Panel = circle: allows % positions to map directly onto circle geometry */
+                --panel-w:     var(--circle-sz);
+                /* Intro occupies ~64% of circle width (safe inner chord) */
+                --intro-w:     64%;
+                --intro-font:  clamp(0.82rem, 3.2vw, 0.94rem);
+                --intro-lh:    1.55;
                 --intro-pad:   0;
             }
 
@@ -901,71 +906,58 @@
             }
 
             .title {
-                letter-spacing: 0.16rem;
-                font-size: clamp(3.2rem, 15vw, 4.8rem);
+                letter-spacing: 0.14rem;
+                font-size: clamp(2.8rem, 12vw, 3.6rem);
             }
 
             .title-divider {
-                width: clamp(80px, 24vw, 140px);
+                width: clamp(72px, 22vw, 130px);
                 margin-top: 10px;
             }
 
             .title-subtitle {
-                font-size: clamp(0.96rem, 4.4vw, 1.16rem);
-                letter-spacing: 0.2rem;
+                font-size: clamp(0.9rem, 4vw, 1.1rem);
+                letter-spacing: 0.18rem;
                 margin-top: 8px;
-            }
-
-            /* ── Hero: flex column so content drives height ── */
-            .hero-stage {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                min-height: 100dvh;
-                padding: 72px 0 44px;
             }
 
             /* Zodiac hidden on mobile */
             .zodiac-orbit { display: none; }
 
-            /* Layout panel: normal flow inside flex hero */
+            /* Panel = same square as circle, absolutely centred in hero */
             .layout-panel {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 width: var(--panel-w);
-                min-height: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 22px;
-                padding: 32px 0 26px;
-                box-sizing: border-box;
+                min-height: var(--panel-w);   /* square → matches circle */
             }
 
+            /* Title: absolute, upper arc of circle, horizontally centred */
             .content {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                width: 100%;
+                position: absolute;
+                top: 6%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 84%;
+                text-align: center;
             }
 
+            /* Intro: absolute, centred in the lower portion of circle */
             .intro-panel {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                width: 100%;
+                position: absolute;
+                top: 46%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: var(--intro-w);
                 min-height: auto;
                 text-align: center;
                 box-sizing: border-box;
             }
 
             .intro-panel p { text-indent: 0; }
-            .intro-panel p + p { margin-top: 12px; }
+            .intro-panel p + p { margin-top: 9px; }
 
             .whatsapp-cta {
                 right: 12px;
@@ -1008,78 +1000,68 @@
         /* ── Mobile landscape ── */
         @media (orientation: landscape) and (max-height: 520px) {
             :root {
-                --circle-sz:   min(88vh, 340px);   /* Size from viewport height in landscape */
-                --panel-w:     min(44vw, 272px);   /* Narrower than circle diameter */
-                --intro-w:     100%;
-                --intro-font:  clamp(0.84rem, 2.2vh, 0.96rem);
-                --intro-lh:    1.58;
+                /* Circle sized from viewport height so it fits on screen */
+                --hero-min-h:  calc(var(--circle-sz) + 100px);
+                --circle-sz:   min(82vh, 340px);
+                --panel-w:     var(--circle-sz);
+                --intro-w:     62%;
+                --intro-font:  clamp(0.78rem, 1.9vh, 0.88rem);
+                --intro-lh:    1.5;
                 --intro-pad:   0;
             }
 
             /* Zodiac hidden on mobile landscape */
             .zodiac-orbit { display: none; }
 
-            /* Same flex hero layout as portrait */
-            .hero-stage {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                min-height: 100dvh;
-                padding: 62px 0 32px;
-            }
-
+            /* Panel = circle, absolutely centred */
             .layout-panel {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 width: var(--panel-w);
-                min-height: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 14px;
-                padding: 22px 0 18px;
-                box-sizing: border-box;
+                min-height: var(--panel-w);
             }
 
+            /* Title: upper arc, centred */
             .content {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                width: 100%;
+                position: absolute;
+                top: 7%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 84%;
+                text-align: center;
             }
 
+            /* Intro: centred in lower portion */
             .intro-panel {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                width: 100%;
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: var(--intro-w);
                 min-height: auto;
                 text-align: center;
                 box-sizing: border-box;
             }
 
             .intro-panel p { text-indent: 0; }
-            .intro-panel p + p { margin-top: 9px; }
+            .intro-panel p + p { margin-top: 7px; }
 
             .title {
-                font-size: clamp(2.6rem, 8vh, 3.8rem);
-                letter-spacing: 0.14rem;
+                font-size: clamp(2.2rem, 8vh, 2.8rem);
+                letter-spacing: 0.12rem;
             }
 
             .title-divider {
-                width: clamp(70px, 18vw, 120px);
-                margin-top: 8px;
+                width: clamp(58px, 14vw, 100px);
+                margin-top: 7px;
             }
 
             .title-subtitle {
-                font-size: clamp(0.82rem, 2.4vh, 1rem);
-                letter-spacing: 0.16rem;
-                margin-top: 7px;
+                font-size: clamp(0.78rem, 2vh, 0.94rem);
+                letter-spacing: 0.14rem;
+                margin-top: 6px;
             }
         }
 
