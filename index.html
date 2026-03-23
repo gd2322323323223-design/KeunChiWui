@@ -870,19 +870,15 @@
         }
 
         /* ── Mobile ── */
+        /* ── Mobile portrait ── */
         @media (max-width: 640px) {
             :root {
-                --hero-min-h:  1180px;
-                --circle-sz:   min(92vw, 520px);
-                --orbit-sz:    min(84vw, 360px);
-                --orbit-top:   34%;
-                --panel-w:     min(100vw, 620px);
-                --zodiac-sz:   clamp(52px, 13.8vw, 70px);
-                --zodiac-font: clamp(1.02rem, 4vw, 1.22rem);
-                --intro-w:     min(86vw, 360px);
-                --intro-font:  clamp(1.08rem, 4.5vw, 1.16rem);
-                --intro-lh:    1.6;
-                --intro-pad:   0 15px;
+                --circle-sz:   min(96vw, 450px);
+                --panel-w:     min(68vw, 286px);   /* ≈ 64% of circle → safe inner area */
+                --intro-w:     100%;
+                --intro-font:  clamp(0.9rem, 3.7vw, 1.02rem);
+                --intro-lh:    1.68;
+                --intro-pad:   0;
             }
 
             body { min-height: 100svh; }
@@ -906,32 +902,70 @@
 
             .title {
                 letter-spacing: 0.16rem;
-                font-size: clamp(3.4rem, 16vw, 5rem);
+                font-size: clamp(3.2rem, 15vw, 4.8rem);
             }
 
             .title-divider {
-                width: clamp(90px, 26vw, 150px);
-                margin-top: 12px;
-            }
-
-            .title-subtitle {
-                font-size: clamp(1.02rem, 4.8vw, 1.24rem);
-                letter-spacing: 0.22rem;
+                width: clamp(80px, 24vw, 140px);
                 margin-top: 10px;
             }
 
-            /* Mobile uses vertical centering inside the circle */
-            .layout-panel { min-height: 980px; }
-            .content { top: 18%; }
+            .title-subtitle {
+                font-size: clamp(0.96rem, 4.4vw, 1.16rem);
+                letter-spacing: 0.2rem;
+                margin-top: 8px;
+            }
+
+            /* ── Hero: flex column so content drives height ── */
+            .hero-stage {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100dvh;
+                padding: 72px 0 44px;
+            }
+
+            /* Zodiac hidden on mobile */
+            .zodiac-orbit { display: none; }
+
+            /* Layout panel: normal flow inside flex hero */
+            .layout-panel {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: var(--panel-w);
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 22px;
+                padding: 32px 0 26px;
+                box-sizing: border-box;
+            }
+
+            .content {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
+            }
+
             .intro-panel {
-                top: 50%;
-                transform: translate(-50%, -50%);
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
                 min-height: auto;
                 text-align: center;
                 box-sizing: border-box;
             }
+
             .intro-panel p { text-indent: 0; }
-            .intro-panel p + p { margin-top: 14px; }
+            .intro-panel p + p { margin-top: 12px; }
 
             .whatsapp-cta {
                 right: 12px;
@@ -942,10 +976,6 @@
                 letter-spacing: 0.03rem;
                 max-width: calc(100vw - 24px);
             }
-
-            /* Zodiac orbit stays as compass ring (absolute child positions) */
-            .zodiac-orbit { display: block; }
-            .zodiac-item  { position: absolute; transform: translate(-50%, -50%); }
 
             .onepage-sections {
                 margin-top: 20px;
@@ -973,6 +1003,84 @@
             }
 
             .step-arrow { display: none; }
+        }
+
+        /* ── Mobile landscape ── */
+        @media (orientation: landscape) and (max-height: 520px) {
+            :root {
+                --circle-sz:   min(88vh, 340px);   /* Size from viewport height in landscape */
+                --panel-w:     min(44vw, 272px);   /* Narrower than circle diameter */
+                --intro-w:     100%;
+                --intro-font:  clamp(0.84rem, 2.2vh, 0.96rem);
+                --intro-lh:    1.58;
+                --intro-pad:   0;
+            }
+
+            /* Zodiac hidden on mobile landscape */
+            .zodiac-orbit { display: none; }
+
+            /* Same flex hero layout as portrait */
+            .hero-stage {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100dvh;
+                padding: 62px 0 32px;
+            }
+
+            .layout-panel {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: var(--panel-w);
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 14px;
+                padding: 22px 0 18px;
+                box-sizing: border-box;
+            }
+
+            .content {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
+            }
+
+            .intro-panel {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
+                min-height: auto;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .intro-panel p { text-indent: 0; }
+            .intro-panel p + p { margin-top: 9px; }
+
+            .title {
+                font-size: clamp(2.6rem, 8vh, 3.8rem);
+                letter-spacing: 0.14rem;
+            }
+
+            .title-divider {
+                width: clamp(70px, 18vw, 120px);
+                margin-top: 8px;
+            }
+
+            .title-subtitle {
+                font-size: clamp(0.82rem, 2.4vh, 1rem);
+                letter-spacing: 0.16rem;
+                margin-top: 7px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
