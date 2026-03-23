@@ -566,6 +566,10 @@
                 min-height: 100svh;
             }
 
+            .hero-stage {
+                min-height: 1180px;
+            }
+
             .navbar {
                 justify-content: center;
                 flex-wrap: wrap;
@@ -584,31 +588,52 @@
             }
 
             .title {
-                letter-spacing: 0.2rem;
-                font-size: clamp(2.8rem, 12vw, 4rem);
+                letter-spacing: 0.16rem;
+                font-size: clamp(3.4rem, 16vw, 5rem);
             }
 
             .title-divider {
-                width: clamp(60px, 20vw, 120px);
+                width: clamp(90px, 26vw, 150px);
+                margin-top: 12px;
             }
 
             .title-subtitle {
-                font-size: clamp(0.78rem, 3.2vw, 0.92rem);
-                letter-spacing: 0.18rem;
+                font-size: clamp(1.02rem, 4.8vw, 1.24rem);
+                letter-spacing: 0.22rem;
+                margin-top: 10px;
+            }
+
+            .circle-bg {
+                top: 49%;
+                width: min(96vw, 520px);
             }
 
             .layout-panel {
-                width: min(90vw, 820px);
-                min-height: 72vh;
+                top: 47%;
+                width: min(94vw, 560px);
+                min-height: 980px;
+            }
+
+            .content {
+                top: 6%;
             }
 
             .intro-panel {
-                top: 24%;
-                width: min(80vw, 640px);
-                min-height: 286px;
-                padding: var(--space-1) 6px;
-                font-size: 0.96rem;
-                line-height: 1.86;
+                top: 34%;
+                width: min(78vw, 430px);
+                min-height: auto;
+                padding: 0 8px;
+                font-size: 0.98rem;
+                line-height: 1.92;
+                text-align: center;
+            }
+
+            .intro-panel p {
+                text-indent: 0;
+            }
+
+            .intro-panel p + p {
+                margin-top: 14px;
             }
 
             .whatsapp-cta {
@@ -622,29 +647,25 @@
             }
 
             .zodiac-orbit {
-                width: min(86vw, 640px);
-                left: 46%;
-                top: 62%;
-                --orbit-radius: 47%;
+                top: auto;
+                bottom: 96px;
+                left: 50%;
+                width: min(88vw, 420px);
+                aspect-ratio: auto;
+                transform: translateX(-50%);
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 12px 8px;
             }
 
             .zodiac-item {
-                width: clamp(48px, 9.2vw, 72px);
+                position: relative;
+                left: auto !important;
+                top: auto !important;
+                transform: none;
+                width: clamp(42px, 12vw, 56px);
+                justify-self: center;
             }
-
-            .zodiac-1 { left: -10%; top: 14%; }
-            .zodiac-2 { left: -16%; top: 28%; }
-            .zodiac-3 { left: -11%; top: 42%; }
-            .zodiac-4 { left: -18%; top: 56%; }
-            .zodiac-5 { left: -12%; top: 70%; }
-            .zodiac-6 { left: 2%; top: 84%; }
-
-            .zodiac-7  { left: 110%; top: 14%; }
-            .zodiac-8  { left: 116%; top: 28%; }
-            .zodiac-9  { left: 111%; top: 42%; }
-            .zodiac-10 { left: 118%; top: 56%; }
-            .zodiac-11 { left: 112%; top: 70%; }
-            .zodiac-12 { left: 98%; top: 84%; }
 
             .onepage-sections {
                 margin-top: 20px;
