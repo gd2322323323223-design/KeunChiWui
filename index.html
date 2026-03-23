@@ -46,9 +46,10 @@
             --panel-w:     min(76vw, 820px);
             --zodiac-sz:   clamp(64px, 7vw, 92px);
             --zodiac-font: clamp(1.15rem, 1.4vw, 1.5rem);
+            --ring-radius: min(35vw, 35vh);
             --intro-w:     min(60vw, 580px);
             --intro-font:  clamp(1rem, 1.3vw, 1.08rem);
-            --intro-lh:    1.92;
+            --intro-lh:    1.8;
             --intro-pad:   14px 18px;
         }
 
@@ -61,7 +62,6 @@
                 radial-gradient(circle at center, var(--bg-red) 0%, var(--bg-deep) 56%, var(--bg-night) 100%);
             color: var(--gold);
             font-family: "Noto Serif TC", "Songti TC", serif;
-            overflow-x: hidden;
         }
 
         html {
@@ -173,21 +173,31 @@
             opacity: 0.48;
         }
 
+        .hero-container {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
         .zodiac-orbit {
             position: absolute;
-            top: var(--orbit-top);
+            top: 50%;
             left: 50%;
-            width: var(--orbit-sz);
-            aspect-ratio: 1 / 1;
+            width: 0;
+            height: 0;
             transform: translate(-50%, -50%);
-            z-index: 8;
+            z-index: 9;
             pointer-events: none;
-            --orbit-radius: 49%;
-            animation: orbitDrift 10s ease-in-out infinite;
         }
 
         .zodiac-item {
             position: absolute;
+            top: 50%;
+            left: 50%;
             width: var(--zodiac-sz);
             aspect-ratio: 1 / 1;
             display: flex;
@@ -202,11 +212,14 @@
             font-size: var(--zodiac-font);
             font-weight: 700;
             letter-spacing: 0.02rem;
-            text-shadow: 0 0 10px rgba(248, 230, 174, 0.6);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
             box-shadow: inset 0 0 16px rgba(248, 230, 174, 0.12), 0 0 14px rgba(248, 230, 174, 0.28);
-            transform: translate(-50%, -50%);
+            transform:
+                translate(-50%, -50%)
+                rotate(calc((var(--i) - 1) * 30deg))
+                translate(var(--ring-radius))
+                rotate(calc((var(--i) - 1) * -30deg));
             opacity: 1;
-            overflow: visible;
         }
 
         .zodiac-item::before,
@@ -285,38 +298,29 @@
             opacity: 0.68;
         }
 
-        .zodiac-1  { left: 50%; top: -6%; }
-        .zodiac-2  { left: 72%; top: 0%; }
-        .zodiac-3  { left: 88%; top: 16%; }
-        .zodiac-4  { left: 96%; top: 38%; }
-        .zodiac-5  { left: 92%; top: 62%; }
-        .zodiac-6  { left: 78%; top: 82%; }
-        .zodiac-7  { left: 50%; top: 92%; }
-        .zodiac-8  { left: 22%; top: 82%; }
-        .zodiac-9  { left: 8%; top: 62%; }
-        .zodiac-10 { left: 4%; top: 38%; }
-        .zodiac-11 { left: 12%; top: 16%; }
-        .zodiac-12 { left: 28%; top: 0%; }
+        .zodiac-1  { --i: 1; }
+        .zodiac-2  { --i: 2; }
+        .zodiac-3  { --i: 3; }
+        .zodiac-4  { --i: 4; }
+        .zodiac-5  { --i: 5; }
+        .zodiac-6  { --i: 6; }
+        .zodiac-7  { --i: 7; }
+        .zodiac-8  { --i: 8; }
+        .zodiac-9  { --i: 9; }
+        .zodiac-10 { --i: 10; }
+        .zodiac-11 { --i: 11; }
+        .zodiac-12 { --i: 12; }
 
-        .layout-panel {
+        .content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: var(--panel-w);
-            min-height: min(74vh, 680px);
-            z-index: 10;
-        }
-
-        .content {
-            position: absolute;
-            top: 1%;
-            left: 50%;
-            transform: translateX(-50%);
             color: var(--gold);
             text-align: center;
-            width: 100%;
-            animation: revealUp 0.85s ease both;
+            width: min(90vw, 560px);
+            animation: fadeInOnly 0.85s ease both;
+            z-index: 11;
         }
 
         .title {
@@ -326,11 +330,11 @@
             color: var(--gold);
             letter-spacing: clamp(0.26rem, 1.4vw, 0.8rem);
             text-shadow:
+                0 0 10px rgba(212, 175, 55, 0.5),
                 1px 1px 0 rgba(255, 255, 255, 0.95),
                 0 0 20px rgba(216, 172, 79, 0.62),
                 0 0 42px rgba(176, 59, 31, 0.32);
             animation: titleGlow 5.4s infinite ease-in-out;
-            white-space: nowrap;
         }
 
         .title-divider {
@@ -353,31 +357,30 @@
         }
 
         .intro-panel {
-            position: absolute;
-            top: 27%;
-            left: 50%;
-            transform: translateX(-50%);
             width: var(--intro-w);
-            min-height: 250px;
+            max-width: 920px;
+            margin: 0 auto 18px;
+            min-height: auto;
             padding: var(--intro-pad);
             box-sizing: border-box;
             color: var(--text-main);
             font-weight: 400;
             line-height: var(--intro-lh);
             font-size: var(--intro-font);
-            text-align: left;
-            z-index: 10;
+            text-align: center;
+            position: relative;
+            z-index: 12;
             border: none;
             border-radius: 0;
             background: transparent;
             backdrop-filter: none;
             box-shadow: none;
-            animation: revealUp 0.7s ease both 0.5s;
+            animation: fadeInOnly 0.7s ease both 0.5s;
         }
 
         .intro-panel p {
             margin: 0;
-            text-indent: 2em;
+            text-indent: 0;
         }
 
         .intro-panel p + p {
@@ -418,6 +421,7 @@
             position: relative;
             min-height: 100vh;
             min-height: var(--hero-min-h, 100svh);
+            padding-top: 36px;
         }
 
         .onepage-sections {
@@ -838,6 +842,11 @@
             }
         }
 
+        @keyframes fadeInOnly {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         @keyframes titleGlow {
             0%,
             100% {
@@ -922,39 +931,35 @@
         @media (max-width: 768px) {
             :root {
                 --circle-sz:   min(92vw, 580px);
-                --orbit-sz:    min(82vw, 450px);
-                --orbit-top:   34%;
-                --panel-w:     min(96vw, 580px);
                 --zodiac-sz:   clamp(56px, 13vw, 74px);
                 --zodiac-font: clamp(1.04rem, 3.8vw, 1.26rem);
-                --intro-w:     min(78vw, 440px);
+                --ring-radius: min(35vw, 35vh);
+                --intro-w:     min(92vw, 680px);
                 --intro-font:  clamp(1rem, 3.6vw, 1.1rem);
-                --intro-lh:    1.78;
-                --intro-pad:   10px 15px;
+                --intro-lh:    1.8;
+                --intro-pad:   0 20px;
             }
 
             .service-intro-list { grid-template-columns: 1fr; }
             .services-layout    { grid-template-columns: 1fr; }
             .info-grid          { grid-template-columns: 1fr; }
             .feedback-list      { grid-template-columns: 1fr; }
+
+            .title-subtitle { white-space: normal; }
         }
 
-        /* ── Mobile ── */
         /* ── Mobile portrait ── */
         @media (max-width: 640px) {
             :root {
-                /* Hero height = circle + navbar clearance */
-                --hero-min-h:  calc(var(--circle-sz) + 130px);
-                /* Circle fills most of viewport width */
-                --circle-sz:   min(96vw, 460px);
-                /* Panel = circle: allows % positions to map directly onto circle geometry */
-                --panel-w:     var(--circle-sz);
-                /* Intro occupies ~64% of circle width (safe inner chord) */
-                --intro-w:     64%;
-                --intro-font:  clamp(0.82rem, 3.2vw, 0.94rem);
-                                --intro-font:  clamp(0.96rem, 3.8vw, 1.06rem);
-                --intro-lh:    1.55;
-                --intro-pad:   0;
+                --hero-min-h:  100vh;
+                --circle-sz:   min(94vw, 420px);
+                --zodiac-sz:   clamp(46px, 11vw, 62px);
+                --zodiac-font: clamp(0.98rem, 4vw, 1.12rem);
+                --ring-radius: min(35vw, 35vh);
+                --intro-w:     min(96vw, 640px);
+                --intro-font:  clamp(0.96rem, 3.8vw, 1.06rem);
+                --intro-lh:    1.8;
+                --intro-pad:   0 20px;
             }
 
             body { min-height: 100svh; }
@@ -992,43 +997,10 @@
                 margin-top: 8px;
             }
 
-            /* Zodiac hidden on mobile */
-            .zodiac-orbit { display: none; }
+            .title { font-size: clamp(2.3rem, 12vw, 3rem); }
+            .title-subtitle { white-space: normal; }
 
-            /* Panel = same square as circle, absolutely centred in hero */
-            .layout-panel {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: var(--panel-w);
-                min-height: var(--panel-w);   /* square → matches circle */
-            }
-
-            /* Title: absolute, upper arc of circle, horizontally centred */
-            .content {
-                position: absolute;
-                top: 6%;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 84%;
-                text-align: center;
-            }
-
-            /* Intro: absolute, centred in the lower portion of circle */
-            .intro-panel {
-                position: absolute;
-                top: 46%;
-                left: 50%;
-                transform: translateX(-50%);
-                width: var(--intro-w);
-                min-height: auto;
-                text-align: center;
-                box-sizing: border-box;
-            }
-
-            .intro-panel p { text-indent: 0; }
-            .intro-panel p + p { margin-top: 9px; }
+            .intro-panel p + p { margin-top: 10px; }
 
             .whatsapp-cta {
                 right: 12px;
@@ -1069,71 +1041,22 @@
         }
 
         /* ── Mobile landscape ── */
-        @media (orientation: landscape) and (max-height: 520px) {
+        @media (orientation: landscape) and (max-width: 900px) {
             :root {
-                /* Circle sized from viewport height so it fits on screen */
-                --hero-min-h:  calc(var(--circle-sz) + 100px);
-                --circle-sz:   min(82vh, 340px);
-                --panel-w:     var(--circle-sz);
-                --intro-w:     62%;
-                --intro-font:  clamp(0.78rem, 1.9vh, 0.88rem);
-                --intro-lh:    1.5;
-                --intro-pad:   0;
+                --hero-min-h:  100vh;
+                --circle-sz:   min(72vh, 430px);
+                --zodiac-sz:   clamp(42px, 7vh, 58px);
+                --zodiac-font: clamp(0.88rem, 2.8vh, 1.06rem);
+                --ring-radius: min(35vw, 35vh);
+                --intro-w:     min(94vw, 820px);
+                --intro-font:  clamp(0.92rem, 2.3vh, 1.02rem);
+                --intro-lh:    1.8;
+                --intro-pad:   0 20px;
             }
 
-            /* Zodiac hidden on mobile landscape */
-            .zodiac-orbit { display: none; }
-
-            /* Panel = circle, absolutely centred */
-            .layout-panel {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: var(--panel-w);
-                min-height: var(--panel-w);
-            }
-
-            /* Title: upper arc, centred */
-            .content {
-                position: absolute;
-                top: 7%;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 84%;
-                text-align: center;
-            }
-
-            /* Intro: centred in lower portion */
-            .intro-panel {
-                position: absolute;
-                top: 45%;
-                left: 50%;
-                transform: translateX(-50%);
-                width: var(--intro-w);
-                min-height: auto;
-                text-align: center;
-                box-sizing: border-box;
-            }
-
-            .intro-panel p { text-indent: 0; }
-            .intro-panel p + p { margin-top: 7px; }
-
-            .title {
-                font-size: clamp(2.2rem, 8vh, 2.8rem);
-                letter-spacing: 0.12rem;
-            }
-
-            .title-divider {
-                width: clamp(58px, 14vw, 100px);
-                margin-top: 7px;
-            }
-
-            .title-subtitle {
-                font-size: clamp(0.78rem, 2vh, 0.94rem);
-                letter-spacing: 0.14rem;
-                margin-top: 6px;
-            }
+            .hero-container { min-height: 100vh; }
+            .title { font-size: clamp(2rem, 7.2vh, 2.7rem); }
+            .title-subtitle { white-space: normal; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1156,22 +1079,7 @@
     <section class="hero-stage" aria-label="首頁主視覺區">
     <div class="circle-bg" aria-hidden="true"></div>
 
-    <div class="zodiac-orbit" aria-hidden="true">
-        <span class="zodiac-item zodiac-1">鼠</span>
-        <span class="zodiac-item zodiac-2">牛</span>
-        <span class="zodiac-item zodiac-3">虎</span>
-        <span class="zodiac-item zodiac-4">兔</span>
-        <span class="zodiac-item zodiac-5">龍</span>
-        <span class="zodiac-item zodiac-6">蛇</span>
-        <span class="zodiac-item zodiac-7">馬</span>
-        <span class="zodiac-item zodiac-8">羊</span>
-        <span class="zodiac-item zodiac-9">猴</span>
-        <span class="zodiac-item zodiac-10">雞</span>
-        <span class="zodiac-item zodiac-11">狗</span>
-        <span class="zodiac-item zodiac-12">豬</span>
-    </div>
-
-    <div class="layout-panel">
+    <div class="hero-container">
         <div class="content">
             <h1 class="title">權智匯</h1>
             <hr class="title-divider">
@@ -1179,12 +1087,27 @@
             <hr class="title-divider">
         </div>
 
-        <section class="intro-panel" aria-label="師傅簡介">
-            <p>「權智匯」—— 權衡天命，智慧匯聚。</p>
-            <p>本小組由兩位深研中華傳統文化的伙伴共同創立，結合各自所長，為有緣人提供專業、真誠的命理諮詢服務。</p>
-            <p>我們相信，真正的命理服務，不是宿命的斷言，而是幫助您看清天時、地利、人和，在人生的每個十字路口作出更明智的選擇。</p>
-        </section>
+        <div class="zodiac-orbit" aria-hidden="true">
+            <span class="zodiac-item zodiac-1">鼠</span>
+            <span class="zodiac-item zodiac-2">牛</span>
+            <span class="zodiac-item zodiac-3">虎</span>
+            <span class="zodiac-item zodiac-4">兔</span>
+            <span class="zodiac-item zodiac-5">龍</span>
+            <span class="zodiac-item zodiac-6">蛇</span>
+            <span class="zodiac-item zodiac-7">馬</span>
+            <span class="zodiac-item zodiac-8">羊</span>
+            <span class="zodiac-item zodiac-9">猴</span>
+            <span class="zodiac-item zodiac-10">雞</span>
+            <span class="zodiac-item zodiac-11">狗</span>
+            <span class="zodiac-item zodiac-12">豬</span>
+        </div>
     </div>
+
+    <section class="intro-panel" aria-label="師傅簡介">
+        <p>「權智匯」—— 權衡天命，智慧匯聚。</p>
+        <p>本小組由兩位深研中華傳統文化的伙伴共同創立，結合各自所長，為有緣人提供專業、真誠的命理諮詢服務。</p>
+        <p>我們相信，真正的命理服務，不是宿命的斷言，而是幫助您看清天時、地利、人和，在人生的每個十字路口作出更明智的選擇。</p>
+    </section>
     <a class="scroll-hint" href="#services" aria-label="向下探索">↓</a>
     </section>
 
