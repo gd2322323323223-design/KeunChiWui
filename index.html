@@ -1066,11 +1066,11 @@
                 justify-content: center;
             }
 
-            .service-intro-list,
-            .services-layout,
-            .info-grid,
-            .feedback-list {
-                grid-template-columns: 1fr;
+            .service-intro-list {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 14px;
+                margin-bottom: 22px;
             }
 
             .steps {
