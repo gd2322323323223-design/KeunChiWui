@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&display=swap');
+
+:root {
+  --midnight: #1a2a44;
+  --void: #050a16;
+  --gold: #cba24b;
+  --white: #e0e0e0;
+  --nav-line: rgba(203, 162, 75, 0.28);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  color: var(--white);
+  overflow-x: hidden;
+  background: radial-gradient(circle at center, #900605 0%, #900605 100%);
+}
+
+.hero-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, #900605 0%, #900605 100%);
+}
+
+.starfield {
+  position: absolute;
+  inset: 0;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.page-wrap {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell {
+  width: min(1240px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.navbar {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  border: 1px solid var(--nav-line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(6, 14, 29, 0.38);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  color: var(--gold);
+  text-decoration: none;
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  margin-left: auto;
+  display: flex;
+  gap: 22px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+}
+
+.nav-links a {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.hero-content {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.hero-stack {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* 容器：確保絕對置中且不隨背景轉動 */
+.brand-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 100;
+  pointer-events: none;
+  text-shadow: 0 0 20px rgba(9, 17, 33, 0.9);
+}
+
+/* 「杜師傅」主標題樣式 */
+.master-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 80px;
+  font-weight: 900;
+  letter-spacing: 15px;
+  margin: 0;
+}
+
+.enhanced-text {
+  font-family: 'Noto Serif TC', serif;
+  font-weight: bold;
+  color: #f8e6ae;
+  text-shadow:
+    1px 1px 0 #ffffff,
+    0 0 10px #d8ac4f,
+    0 0 20px #e1b655,
+    -2px -2px 3px rgba(101, 71, 33, 0.8),
+    0.5px 0.5px 0 rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+}
+
+/* 「專業八字算命」副標題樣式 */
+.service-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 10px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+.subtitle {
+  font-family: 'Noto Serif TC', serif;
+  font-size: smaller;
+  color: #d8ac4f;
+  text-shadow: 1px 1px 2px rgba(101, 71, 33, 0.5);
+}
+
+.input-panel {
+  width: min(560px, 100%);
+  border: 1px solid rgba(203, 162, 75, 0.36);
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(7, 15, 28, 0.54);
+  backdrop-filter: blur(10px);
+}
+
+.input-panel h3 {
+  margin: 0 0 12px;
+  color: #e3c980;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.16rem;
+}
+
+.glass-form {
+  display: grid;
+  gap: 10px;
+}
+
+.glass-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.glass-form span {
+  font-size: 0.9rem;
+  color: rgba(236, 239, 245, 0.85);
+}
+
+.glass-form input,
+.glass-form select {
+  min-height: 42px;
+  border-radius: 10px;
+  border: 1px solid rgba(203, 162, 75, 0.24);
+  background: rgba(8, 16, 31, 0.8);
+  color: #edf2fa;
+  padding: 0 12px;
+  font: inherit;
+}
+
+.submit-btn {
+  margin-top: 4px;
+  min-height: 46px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  color: #2f2100;
+  cursor: pointer;
+  background: linear-gradient(120deg, #cba24b, #ecd082 48%, #fff2bd);
+  box-shadow:
+    0 0 0 1px rgba(255, 236, 176, 0.5) inset,
+    0 0 18px rgba(203, 162, 75, 0.28);
+}
+
+.footnote {
+  padding: 0 0 12px;
+  font-size: 12px;
+  color: rgba(180, 187, 199, 0.88);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 880px) {
+  .navbar {
+    gap: 10px;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+
+  .hero-stack {
+    width: min(92vw, 620px);
+  }
+
+  .input-panel {
+    width: min(620px, 100%);
+  }
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: calc(100% - 20px);
+  }
+
+  .navbar {
+    border-radius: 14px;
+    padding: 12px;
+  }
+
+  .nav-links a {
+    font-size: 0.88rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .master-name {
+    font-size: 48px;
+    letter-spacing: 6px;
+  }
+
+  .service-title {
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+}

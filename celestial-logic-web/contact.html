@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="聯絡權智匯，了解命理諮詢方式、預約流程與準備資料。">
+    <meta name="theme-color" content="#2d0907">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:title" content="權智匯｜聯絡我們">
+    <meta property="og:description" content="以極簡而清晰的方式開始諮詢，整理你的問題，直接聯絡權智匯。">
+    <title>權智匯｜聯絡我們</title>
+    <style>
+        :root {
+            --bg: #1f0606;
+            --line: rgba(248, 230, 174, 0.18);
+            --line-strong: rgba(248, 230, 174, 0.34);
+            --gold: #f8e6ae;
+            --gold-soft: rgba(248, 230, 174, 0.74);
+            --text: rgba(248, 230, 174, 0.92);
+            --text-muted: rgba(248, 230, 174, 0.72);
+            --pill: 999px;
+            --panel: rgba(255, 255, 255, 0.03);
+            --shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+            --transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 24%),
+                radial-gradient(circle at top, rgba(255, 232, 184, 0.05), transparent 28%),
+                var(--bg);
+            color: var(--text);
+            font-family: "Noto Serif TC", "Songti TC", serif;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(12px);
+            background: rgba(31, 6, 6, 0.72);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .header-inner,
+        .page-shell {
+            width: min(1040px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .header-inner {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand,
+        .nav-link,
+        .wa-link,
+        .submit-link {
+            text-decoration: none;
+        }
+
+        .brand {
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 0.08rem;
+            white-space: nowrap;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-link,
+        .wa-link,
+        .submit-link {
+            min-height: 40px;
+            padding: 0 14px;
+            border-radius: var(--pill);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.88rem;
+            letter-spacing: 0.05rem;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .nav-link {
+            color: var(--gold);
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .wa-link,
+        .submit-link {
+            color: #4a1407;
+            font-weight: 700;
+            border: 1px solid rgba(255, 242, 197, 0.84);
+            background: linear-gradient(150deg, rgba(255, 247, 219, 0.98), rgba(245, 214, 133, 0.98) 58%, rgba(224, 175, 64, 0.98));
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-link:hover,
+        .wa-link:hover,
+        .submit-link:hover,
+        .nav-link:focus-visible,
+        .wa-link:focus-visible,
+        .submit-link:focus-visible {
+            transform: translateY(-2px);
+            border-color: var(--line-strong);
+        }
+
+        .page-shell {
+            padding: 54px 0 88px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 28px 0 22px;
+        }
+
+        .eyebrow {
+            margin: 0;
+            color: var(--gold-soft);
+            font-size: 0.86rem;
+            letter-spacing: 0.16rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            margin: 18px 0 0;
+            font-size: clamp(2.4rem, 7vw, 4.4rem);
+            letter-spacing: clamp(0.12rem, 0.8vw, 0.34rem);
+            font-weight: 700;
+        }
+
+        .hero-copy {
+            margin: 18px auto 0;
+            max-width: 32rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+            font-size: 1rem;
+        }
+
+        .hero-actions {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .contact-layout {
+            margin-top: 34px;
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 18px;
+        }
+
+        .panel {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .panel h2 {
+            margin: 0;
+            font-size: 1.18rem;
+            letter-spacing: 0.08rem;
+            color: var(--gold);
+        }
+
+        .panel p {
+            margin: 12px 0 0;
+            color: var(--text-muted);
+            line-height: 1.85;
+            font-size: 0.96rem;
+        }
+
+        .info-list {
+            margin: 18px 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 12px;
+        }
+
+        .info-item {
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .info-label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--gold);
+            font-size: 0.88rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .contact-form {
+            margin-top: 18px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-form label {
+            display: grid;
+            gap: 6px;
+            color: var(--gold);
+            font-size: 0.88rem;
+            letter-spacing: 0.04rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.16);
+            color: var(--text);
+            padding: 12px 14px;
+            font: inherit;
+            line-height: 1.6;
+        }
+
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            margin-top: 6px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .form-status {
+            margin: 10px 0 0;
+            min-height: 22px;
+            color: var(--gold-soft);
+            font-size: 0.84rem;
+            letter-spacing: 0.03rem;
+        }
+
+        .footer-note {
+            margin-top: 22px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.86rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 860px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-inner {
+                padding: 12px 0;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .brand {
+                white-space: normal;
+                text-align: center;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .page-shell {
+                width: calc(100% - 24px);
+                padding: 34px 0 68px;
+            }
+
+            .panel {
+                padding: 18px;
+                border-radius: 20px;
+            }
+
+            .hero-actions,
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .nav-link,
+            .wa-link,
+            .submit-link {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="./index.html">權智匯</a>
+            <nav class="header-nav" aria-label="頁面導覽">
+                <a class="nav-link" href="./index.html">返回首頁</a>
+                <a class="nav-link" href="./services.html">服務收費</a>
+                <a class="wa-link" href="https://wa.me/85267113958?text=%E6%88%91%E6%83%B3%E8%AB%AE%E8%A9%A2%E6%AC%8A%E6%99%BA%E5%8C%AF%E7%9A%84%E5%91%BD%E7%90%86%E6%9C%8D%E5%8B%99" target="_blank" rel="noopener noreferrer">WhatsApp 聯絡</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="hero" aria-label="聯絡頁主視覺">
+            <p class="eyebrow">Contact</p>
+            <h1>開始你的諮詢</h1>
+            <p class="hero-copy">把問題整理清楚，再開始對話。這一頁只保留必要資訊，讓你用最直接的方式聯絡權智匯。</p>
+            <div class="hero-actions">
+                <a class="wa-link" href="https://wa.me/85267113958?text=%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%E6%AC%8A%E6%99%BA%E5%8C%AF%E7%9A%84%E5%91%BD%E7%90%86%E8%AB%AE%E8%A9%A2" target="_blank" rel="noopener noreferrer">立即 WhatsApp 預約</a>
+                <a class="nav-link" href="./index.html#contact">返回首頁表單</a>
+            </div>
+        </section>
+
+        <section class="contact-layout" aria-label="聯絡資訊與表單">
+            <article class="panel">
+                <h2>聯絡方式</h2>
+                <p>如果你已經知道想問的方向，可以直接透過 WhatsApp 預約；如果還未確定適合哪一種服務，也可以先簡述現況。</p>
+                <ul class="info-list">
+                    <li class="info-item"><span class="info-label">建議先準備</span>出生年月日、出生時辰、性別，以及最想釐清的問題。</li>
+                    <li class="info-item"><span class="info-label">回覆節奏</span>一般於 24 小時內回覆，若遇繁忙時段會先說明排程。</li>
+                    <li class="info-item"><span class="info-label">資料原則</span>所有內容僅用於本次諮詢，不作公開或轉交第三方。</li>
+                </ul>
+                <div class="hero-actions">
+                    <a class="wa-link" href="https://wa.me/85267113958?text=%E6%88%91%E6%83%B3%E4%BA%86%E8%A7%A3%E6%AC%8A%E6%99%BA%E5%8C%AF%E7%9A%84%E5%91%BD%E7%90%86%E6%9C%8D%E5%8B%99" target="_blank" rel="noopener noreferrer">直接開始對話</a>
+                </div>
+            </article>
+
+            <article class="panel">
+                <h2>整理訊息</h2>
+                <p>填好以下內容後，系統會自動整理成 WhatsApp 訊息草稿，方便你直接送出。</p>
+                <form class="contact-form" id="contact-form">
+                    <label>
+                        稱呼
+                        <input type="text" name="name" placeholder="例如：陳小姐">
+                    </label>
+                    <label>
+                        聯絡方式
+                        <input type="text" name="contact" placeholder="例如：WhatsApp / 電話 / Email">
+                    </label>
+                    <label>
+                        出生資料
+                        <input type="text" name="birth" placeholder="例如：1993/08/15 申時，女">
+                    </label>
+                    <label>
+                        想了解的服務
+                        <input type="text" name="service" placeholder="例如：八字大批、流年詳批、占卜問事">
+                    </label>
+                    <label>
+                        問題摘要
+                        <textarea name="message" placeholder="例如：想了解今年轉工時機、感情發展，以及是否適合近期做重大決定"></textarea>
+                    </label>
+                </form>
+                <div class="form-actions">
+                    <a class="submit-link" id="contact-submit" href="https://wa.me/85267113958" target="_blank" rel="noopener noreferrer">整理內容並送到 WhatsApp</a>
+                    <a class="nav-link" href="./index.html#services">先看服務項目</a>
+                </div>
+                <p class="form-status" id="form-status" aria-live="polite"></p>
+            </article>
+        </section>
+
+        <p class="footer-note">如果你只想先了解流程與收費，也可以返回首頁或服務頁，之後再決定是否正式預約。</p>
+    </main>
+
+    <script>
+        (function () {
+            const form = document.getElementById("contact-form");
+            const submit = document.getElementById("contact-submit");
+            const status = document.getElementById("form-status");
+
+            function buildMessage() {
+                if (!form) {
+                    return "您好，我想預約權智匯的命理諮詢。";
+                }
+
+                const formData = new FormData(form);
+                const name = String(formData.get("name") || "").trim();
+                const contact = String(formData.get("contact") || "").trim();
+                const birth = String(formData.get("birth") || "").trim();
+                const service = String(formData.get("service") || "").trim();
+                const message = String(formData.get("message") || "").trim();
+                const lines = ["您好，我想預約權智匯的命理諮詢。"];
+
+                if (name) lines.push(`稱呼：${name}`);
+                if (contact) lines.push(`聯絡方式：${contact}`);
+                if (birth) lines.push(`出生資料：${birth}`);
+                if (service) lines.push(`想了解的服務：${service}`);
+                if (message) lines.push(`問題摘要：${message}`);
+
+                if (lines.length === 1) {
+                    lines.push("想先了解適合我的服務與預約方式。");
+                }
+
+                return lines.join("\n");
+            }
+
+            if (submit) {
+                submit.addEventListener("click", function () {
+                    const text = buildMessage();
+                    submit.href = `https://wa.me/85267113958?text=${encodeURIComponent(text)}`;
+                    if (status) {
+                        status.textContent = "已整理為 WhatsApp 訊息草稿，點擊後會在新分頁開啟。";
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
