@@ -1074,6 +1074,23 @@
                 margin-bottom: 22px;
             }
 
+            /* 手機下單欄排列 */
+            @media (max-width: 600px) {
+                .service-intro-list {
+                    grid-template-columns: 1fr;
+                }
+                .service-intro-label {
+                    font-size: 1.18rem;
+                }
+                .service-intro-desc li {
+                    padding-left: 2px;
+                    padding-right: 2px;
+                    line-height: 1.95;
+                    font-size: 1.01rem;
+                }
+            }
+            }
+
             .steps {
                 flex-direction: column;
                 align-items: stretch;
