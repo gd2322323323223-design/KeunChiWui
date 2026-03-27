@@ -1,218 +1,2159 @@
 <!DOCTYPE html>
+
+<!-- deploy-test -->
+
 <html lang="zh-TW">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="權智匯提供八字、紫微斗數與占卜命理諮詢，助你明辨天時。">
-    <meta name="theme-color" content="#160203">
+
+    <meta name="description" content="權智匯提供八字、紫微斗數與占卜命理諮詢，助你明辨天時，為事業、感情與人生規劃作出更穩妥的選擇。">
+
+    <meta name="theme-color" content="#420000">
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:locale" content="zh_TW">
+
+    <meta property="og:title" content="權智匯｜命理諮詢">
+
+    <meta property="og:description" content="八字、紫微斗數與占卜命理諮詢一站整合，助你看清方向、擇優而行。">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+
     <title>權智匯｜算命占卜命理</title>
+
     <style>
+
         :root {
+
+            --bg-red: #8b0000;
+
+            --bg-deep: #300000;
+
             --bg-night: #160203;
+
             --gold: #f8e6ae;
+
             --gold-bright: #fff1c7;
+
+            --gold-soft: #d8ac4f;
+
+            --ink-soft: rgba(16, 8, 8, 0.55);
+
+            --glow-amber: rgba(238, 188, 96, 0.28);
+
+            --glow-rose: rgba(142, 26, 26, 0.34);
+
             --text-main: rgba(248, 230, 174, 0.94);
-            --panel: rgba(34, 8, 8, 0.6);
+
+            --text-muted: rgba(248, 230, 174, 0.8);
+
+            --panel: rgba(34, 8, 8, 0.42);
+
             --panel-border: rgba(248, 230, 174, 0.16);
+
+            --radius-panel: 24px;
+
+            --radius-card: 20px;
+
+            --radius-pill: 999px;
+
+            --space-1: 10px;
+
+            --space-2: 14px;
+
+            --space-3: 18px;
+
+            --space-4: 24px;
+
+            --space-5: 32px;
+
+            --shadow-panel: inset 0 0 26px rgba(0, 0, 0, 0.08);
+
+            --shadow-soft: 0 12px 24px rgba(56, 7, 0, 0.18);
+
+            --shadow-hover: 0 16px 30px rgba(56, 7, 0, 0.24);
+
+            --transition-base: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+
+
+
+            /* ── Responsive hero layout tokens ── */
+
+            --hero-min-h:  100svh;
+
+            --hero-top-pad: clamp(108px, 14vw, 136px);
+
+            --hero-bottom-pad: clamp(36px, 7vw, 68px);
+
+            --hero-gap: clamp(18px, 3vw, 28px);
+
+            --panel-w:     min(76vw, 820px);
+
+            --intro-w:     min(60vw, 580px);
+
+            --intro-font:  clamp(1rem, 1.3vw, 1.08rem);
+
+            --intro-lh:    1.8;
+
+            --intro-pad:   14px 18px;
+
         }
 
-        /* 基礎樣式重置 */
+
+
         html, body {
+
             margin: 0;
-            padding: 0;
-            background-color: var(--bg-night);
+
+            min-height: 100%;
+
+            background:
+
+                radial-gradient(circle at 16% 14%, rgba(212, 126, 37, 0.19), transparent 42%),
+
+                radial-gradient(circle at 84% 18%, rgba(168, 39, 39, 0.18), transparent 40%),
+
+                radial-gradient(circle at center, var(--bg-red) 0%, var(--bg-deep) 56%, var(--bg-night) 100%);
+
             color: var(--gold);
-            font-family: "Noto Serif TC", serif;
-            overflow-x: hidden;
+
+            font-family: "Noto Serif TC", "Songti TC", serif;
+
         }
 
-        /* 導航列 */
-        .navbar {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 15px 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--panel-border);
-            text-align: center;
-        }
-        .nav-logo {
-            color: var(--gold);
-            text-decoration: none;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            font-weight: 700;
+
+
+        html {
+
+            scroll-behavior: smooth;
+
         }
 
-        /* HERO 區塊：背景圖與標題定位 */
-        .hero-stage {
+
+
+        body {
+
             position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            /* 背景圖：圓環 image_5.png */
-            background-image: url('image_5.png'); 
-            background-size: contain;
-            background-position: center 20%; /* 圓環高度位置 */
-            background-repeat: no-repeat;
+
+            min-height: 100vh;
+
         }
 
-        .hero-content {
-            position: absolute;
-            top: 25%; /* 這裡調整標題在圓環中的高度 (對應 Figma Y:100) */
-            text-align: center;
-            width: 100%;
+
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background-image:
+
+                radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.9), transparent),
+
+                radial-gradient(1.5px 1.5px at 30% 50%, rgba(255, 255, 255, 0.8), transparent),
+
+                radial-gradient(1px 1px at 70% 80%, rgba(255, 255, 255, 0.76), transparent),
+
+                radial-gradient(2px 2px at 90% 10%, rgba(255, 255, 255, 0.84), transparent),
+
+                radial-gradient(1px 1px at 50% 30%, rgba(255, 255, 255, 0.72), transparent);
+
+            background-size: 200px 200px;
+
+            opacity: 0.3;
+
+            pointer-events: none;
+
+            z-index: 1;
+
         }
+
+
+
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 1;
+
+            background:
+
+                radial-gradient(circle at 50% 24%, rgba(255, 236, 176, 0.08), transparent 34%),
+
+                linear-gradient(125deg, rgba(255, 248, 220, 0.03), rgba(80, 13, 13, 0.08) 44%, rgba(26, 4, 4, 0.02) 80%);
+
+            mix-blend-mode: screen;
+
+        }
+
+
+
+        .navbar {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px 32px;
+
+            box-sizing: border-box;
+
+            background: rgba(0, 0, 0, 0.28);
+
+            backdrop-filter: blur(8px);
+
+            border-bottom: 1px solid var(--panel-border);
+
+            z-index: 100;
+
+        }
+
+
+
+        .nav-inner {
+
+            width: min(1180px, 100%);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 18px;
+
+        }
+
+
+
+        .nav-logo {
+
+            color: #f8e6ae;
+
+            font-size: 1.04rem;
+
+            letter-spacing: 0.08rem;
+
+            text-decoration: none;
+
+            text-align: center;
+
+            white-space: nowrap;
+
+            text-shadow: 0 0 10px rgba(248, 230, 174, 0.6);
+
+        }
+
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            justify-content: flex-end;
+
+        }
+
+
+
+        .nav-link,
+
+        .nav-cta {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 38px;
+
+            padding: 0 14px;
+
+            border-radius: var(--radius-pill);
+
+            text-decoration: none;
+
+            font-size: 0.88rem;
+
+            letter-spacing: 0.05rem;
+
+            transition: var(--transition-base);
+
+            white-space: nowrap;
+
+        }
+
+
+
+        .nav-link {
+
+            color: var(--gold);
+
+            border: 1px solid rgba(248, 230, 174, 0.16);
+
+            background: rgba(255, 255, 255, 0.03);
+
+        }
+
+
+
+        .nav-link:hover,
+
+        .nav-link:focus-visible {
+
+            border-color: rgba(248, 230, 174, 0.3);
+
+            transform: translateY(-2px);
+
+        }
+
+
+
+        .nav-cta {
+
+            color: #4a1407;
+
+            font-weight: 700;
+
+            border: 1px solid rgba(255, 242, 197, 0.82);
+
+            background: linear-gradient(150deg, rgba(255, 247, 219, 0.98), rgba(245, 214, 133, 0.98) 58%, rgba(224, 175, 64, 0.98));
+
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18), 0 0 16px rgba(255, 220, 125, 0.24);
+
+        }
+
+
+
+        .nav-cta:hover,
+
+        .nav-cta:focus-visible {
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22), 0 0 22px rgba(255, 225, 136, 0.34);
+
+        }
+
+
+
+        .hero-container {
+
+            position: relative;
+
+            min-height: var(--hero-min-h, 100svh);
+
+            padding: var(--hero-top-pad) 0 var(--hero-bottom-pad);
+
+            display: grid;
+
+            justify-items: center;
+
+            align-content: start;
+
+            gap: var(--hero-gap);
+
+            z-index: 10;
+
+            overflow: clip;
+
+        }
+
+
+
+        .hero-visual {
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: min(100%, 760px);
+
+            min-height: clamp(220px, 34vw, 360px);
+
+            padding: 32px 20px;
+
+            border-top: 1px solid rgba(248, 230, 174, 0.16);
+
+            border-bottom: 1px solid rgba(248, 230, 174, 0.16);
+
+            z-index: 9;
+
+        }
+
+
+
+        .content {
+
+            position: relative;
+
+            inset: auto;
+
+            transform: none;
+
+            color: var(--gold);
+
+            text-align: center;
+
+            width: min(96vw, 920px);
+
+            z-index: 11;
+
+        }
+
+
 
         .title {
+
             margin: 0;
-            font-size: clamp(3.5rem, 15vw, 6rem); /* 手機與電腦自動縮放 */
-            font-weight: 900;
-            letter-spacing: 0.5rem;
-            color: var(--gold-bright);
-            text-shadow: 0 0 20px rgba(248, 230, 174, 0.5), 1px 1px 2px rgba(0,0,0,0.8);
+
+            font-size: clamp(5.2rem, 14.8vw, 9.6rem);
+
+            font-weight: 700;
+
+            font-family: "Noto Serif TC", "Songti TC", serif;
+
+            color: var(--gold);
+
+            letter-spacing: clamp(0.12rem, 0.72vw, 0.44rem);
+
+            text-shadow:
+
+                0 0 10px rgba(212, 175, 55, 0.5),
+
+                1px 1px 0 rgba(255, 255, 255, 0.95),
+
+                0 0 20px rgba(216, 172, 79, 0.62),
+
+                0 0 42px rgba(176, 59, 31, 0.32);
+
         }
+
+
+
+        .title-divider {
+
+            width: clamp(110px, 22vw, 320px);
+
+            height: 1px;
+
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+
+            margin: 16px auto 0;
+
+            border: none;
+
+            opacity: 0.72;
+
+        }
+
+
 
         .title-subtitle {
-            margin-top: 10px;
-            font-size: 1.2rem;
-            letter-spacing: 0.3rem;
-            opacity: 0.8;
+
+            margin: 14px 0 0;
+
+            font-size: clamp(1.02rem, 3.1vw, 2.1rem);
+
+            font-weight: 400;
+
+            color: var(--gold);
+
+            letter-spacing: clamp(0.1rem, 0.7vw, 0.36rem);
+
+            opacity: 0.82;
+
+            white-space: nowrap;
+
         }
 
-        /* 介紹文字區 */
+
+
         .intro-panel {
-            margin-top: 55vh; /* 讓文字避開上方的背景圖 */
-            padding: 0 30px;
+
+            width: var(--intro-w);
+
+            max-width: 920px;
+
+            margin: 0 auto 18px;
+
+            min-height: auto;
+
+            padding: var(--intro-pad);
+
+            box-sizing: border-box;
+
+            color: var(--text-main);
+
+            font-weight: 400;
+
+            line-height: var(--intro-lh);
+
+            font-size: var(--intro-font);
+
             text-align: center;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+
+            position: relative;
+
+            z-index: 12;
+
+            border: none;
+
+            border-radius: 0;
+
+            background: transparent;
+
+            backdrop-filter: none;
+
+            box-shadow: none;
+
         }
+
+
+
+        .hero-intro-copy {
+
+            margin: 0 auto;
+
+            max-width: 34ch;
+
+        }
+
+
 
         .intro-panel p {
-            line-height: 2;
-            font-size: 1.05rem;
-            color: var(--text-main);
+
+            margin: 0;
+
+            text-indent: 0;
+
         }
 
-        /* 內容區塊設定（消除左右空位） */
-        .onepage-sections {
-            width: 92%;
-            max-width: 1000px;
-            margin: 40px auto 100px;
-            display: grid;
-            gap: 20px;
+
+
+        .intro-panel p + p {
+
+            margin-top: var(--space-1);
+
         }
+
+
+
+        .hero-actions {
+
+            margin-top: 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        .primary-action,
+
+        .secondary-action {
+
+            min-height: 48px;
+
+            padding: 0 18px;
+
+            border-radius: var(--radius-pill);
+
+            text-decoration: none;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 0.92rem;
+
+            letter-spacing: 0.05rem;
+
+            transition: var(--transition-base);
+
+        }
+
+
+
+        .primary-action {
+
+            color: #4a1407;
+
+            font-weight: 700;
+
+            border: 1px solid rgba(255, 242, 197, 0.82);
+
+            background: linear-gradient(150deg, rgba(255, 247, 219, 0.98), rgba(245, 214, 133, 0.98) 58%, rgba(224, 175, 64, 0.98));
+
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22), 0 0 22px rgba(255, 220, 125, 0.24);
+
+        }
+
+
+
+        .secondary-action {
+
+            color: var(--gold-bright);
+
+            border: 1px solid rgba(248, 230, 174, 0.24);
+
+            background: rgba(255, 255, 255, 0.04);
+
+            backdrop-filter: blur(6px);
+
+        }
+
+
+
+        .primary-action:hover,
+
+        .primary-action:focus-visible,
+
+        .secondary-action:hover,
+
+        .secondary-action:focus-visible {
+
+            transform: translateY(-2px);
+
+        }
+
+
+
+        .hero-highlights {
+
+            margin-top: 18px;
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+        }
+
+
+
+        .hero-highlight {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            min-height: 34px;
+
+            padding: 0 12px;
+
+            border-radius: var(--radius-pill);
+
+            border: 1px solid rgba(248, 230, 174, 0.18);
+
+            background: rgba(0, 0, 0, 0.18);
+
+            color: var(--text-main);
+
+            font-size: 1.08rem;
+
+            letter-spacing: 0.04rem;
+
+        }
+
+
+
+        .hero-highlight::before {
+
+            content: "✦";
+
+            color: var(--gold-soft);
+
+            opacity: 0.82;
+
+        }
+
+
+
+        .whatsapp-cta {
+
+            position: fixed;
+
+            right: 22px;
+
+            bottom: 22px;
+
+            z-index: 130;
+
+            min-height: 50px;
+
+            padding: 0 18px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            border-radius: var(--radius-pill);
+
+            border: 1px solid rgba(255, 242, 197, 0.82);
+
+            text-decoration: none;
+
+            color: #4a1407;
+
+            background: linear-gradient(150deg, rgba(255, 247, 219, 0.98), rgba(245, 214, 133, 0.98) 58%, rgba(224, 175, 64, 0.98));
+
+            font-size: 0.93rem;
+
+            letter-spacing: 0.06rem;
+
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28), 0 0 22px rgba(255, 220, 125, 0.38);
+
+            transition: var(--transition-base);
+
+            white-space: nowrap;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .whatsapp-cta:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.24), 0 0 28px rgba(255, 225, 136, 0.48);
+
+        }
+
+
+
+        .hero-stage {
+
+            position: relative;
+
+            min-height: 100vh;
+
+            min-height: var(--hero-min-h, 100svh);
+
+            padding-top: 0;
+
+        }
+
+
+
+        .onepage-sections {
+
+            position: relative;
+
+            z-index: 12;
+
+            width: min(1120px, calc(100% - 40px));
+
+            margin: 28px auto 120px;
+
+            display: grid;
+
+            gap: 26px;
+
+        }
+
+
 
         .onepage-block {
-            background: var(--panel);
-            border: 1px solid var(--panel-border);
-            border-radius: 20px;
-            padding: 25px;
+
+            border-radius: 24px;
+
+            border: 1px solid rgba(248, 230, 174, 0.16);
+
+            background: rgba(34, 8, 8, 0.42);
+
+            box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.08);
+
+            padding: 24px;
+
+            transition: var(--transition-base);
+
         }
+
+
+
+        .onepage-block:hover {
+
+            border-color: rgba(248, 230, 174, 0.28);
+
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.08), 0 12px 28px rgba(0, 0, 0, 0.2);
+
+            transform: translateY(-2px);
+
+        }
+
+
 
         .section-title {
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 20px;
+
+            margin: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+
+            font-size: clamp(2rem, 4.4vw, 3rem);
+
+            letter-spacing: 0.14rem;
+
             color: var(--gold-bright);
-            border-bottom: 1px solid var(--panel-border);
-            padding-bottom: 10px;
+
+            text-shadow: 1px 1px 0 #fff, 0 0 16px rgba(216, 172, 79, 0.4);
+
         }
 
-        /* 服務清單 */
-        .services-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
+
+
+        .section-title::before,
+
+        .section-title::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+
+            opacity: 0.55;
+
         }
+
+
+
+        .section-lead {
+
+            margin: 16px auto 0;
+
+            max-width: 760px;
+
+            text-align: center;
+
+            color: var(--text-muted);
+
+            font-size: 0.96rem;
+
+            line-height: 1.85;
+
+        }
+
+
+
+        .brand-story {
+
+            display: grid;
+
+            gap: 14px;
+
+            margin-top: 22px;
+
+        }
+
+
+
+        .brand-story p {
+
+            margin: 0;
+
+            color: var(--text-main);
+
+            line-height: 1.9;
+
+            text-align: center;
+
+            font-size: 0.98rem;
+
+        }
+
+
+
+        .service-intro-list {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            gap: 14px 30px;
+
+            margin-top: 22px;
+
+        }
+
+
+
+        .service-intro-item {
+
+            padding: 4px 0;
+
+            text-align: center;
+
+        }
+
+
+
+        .service-intro-label {
+
+            font-size: 1.08rem;
+
+            font-weight: 700;
+
+            color: var(--gold-bright);
+
+            letter-spacing: 0.06rem;
+
+            margin-bottom: 4px;
+
+        }
+
+
+
+        .service-intro-desc {
+
+            font-size: 0.96rem;
+
+            color: var(--text-muted);
+
+            line-height: 1.8;
+
+            margin: 0;
+
+        }
+
+
+
+        .services-layout {
+
+            margin-top: 24px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            gap: 16px;
+
+        }
+
+
+
+        .service-group {
+
+            border-radius: 20px;
+
+            border: 1px solid rgba(248, 230, 174, 0.16);
+
+            background: rgba(0, 0, 0, 0.2);
+
+            padding: 16px;
+
+        }
+
+
+
+        .group-title {
+
+            margin: 0;
+
+            text-align: center;
+
+            font-size: 1.3rem;
+
+            letter-spacing: 0.12rem;
+
+            color: var(--gold-bright);
+
+        }
+
+
+
+        .service-cards {
+
+            margin-top: 12px;
+
+            display: grid;
+
+            gap: 10px;
+
+        }
+
+
 
         .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 12px;
+
+            border-radius: 16px;
+
+            border: 1px solid rgba(248, 230, 174, 0.12);
+
+            background: rgba(0, 0, 0, 0.22);
+
+            padding: 14px;
+
             display: flex;
+
             justify-content: space-between;
-            align-items: center;
-            border: 1px solid rgba(248, 230, 174, 0.1);
+
+            align-items: baseline;
+
+            gap: 10px;
+
+            transition: var(--transition-base);
+
         }
 
-        /* 懸浮按鈕 */
-        .whatsapp-cta {
-            position: fixed;
-            right: 20px; bottom: 20px;
-            background: linear-gradient(135deg, #f8e6ae, #d8ac4f);
-            color: #160203;
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
+
+
+        .service-card:hover {
+
+            border-color: rgba(248, 230, 174, 0.26);
+
+            background: rgba(0, 0, 0, 0.28);
+
+            transform: translateY(-2px);
+
+        }
+
+
+
+        .service-name {
+
+            margin: 0;
+
+            font-size: 1.02rem;
+
+            color: var(--gold);
+
+        }
+
+
+
+        .service-meta {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-end;
+
+        }
+
+
+
+        .service-price {
+
+            font-size: 1.06rem;
+
+            color: var(--gold-bright);
+
             font-weight: 700;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            z-index: 9999;
+
+            background: linear-gradient(135deg, rgba(255, 241, 199, 0.1), rgba(216, 172, 79, 0.14));
+
+            border: 1px solid rgba(248, 230, 174, 0.22);
+
+            border-radius: 20px;
+
+            padding: 2px 10px;
+
         }
 
-        @media (max-width: 600px) {
-            .title { font-size: 3.2rem; }
-            .hero-stage { background-size: 120%; background-position: center 15%; }
-            .intro-panel { margin-top: 45vh; }
+
+
+        .service-detail {
+
+            margin-top: 2px;
+
+            font-size: 0.82rem;
+
+            color: var(--text-muted);
+
         }
-    </style>
-</head>
-<body>
 
-    <nav class="navbar">
-        <a href="#" class="nav-logo">權智匯｜命理諮詢</a>
-    </nav>
 
-    <section class="hero-stage">
-        <div class="hero-content">
-            <h1 class="title">權智匯</h1>
-            <div class="title-subtitle">天時．地利．人和</div>
-        </div>
 
-        <div class="intro-panel">
-            <p>
-                權衡天時，智啟人生，匯聚祥瑞。<br>
-                在人生的轉折點，為您提供最清晰的指引。
-            </p>
-        </div>
-    </section>
+        .info-grid {
 
-    <main class="onepage-sections">
-        <section class="onepage-block" id="services">
-            <h2 class="section-title">服務項目</h2>
-            <div class="services-layout">
-                <div class="service-card">
-                    <span>八字詳批</span>
-                    <strong>$1,288</strong>
-                </div>
-                <div class="service-card">
-                    <span>紫微斗數分析</span>
-                    <strong>$1,288</strong>
-                </div>
-                <div class="service-card">
-                    <span>占卜問事</span>
-                    <strong>$388</strong>
-                </div>
-            </div>
-        </section>
+            margin-top: 22px;
 
-        <section class="onepage-block">
-            <h2 class="section-title">聯絡我們</h2>
-            <p style="text-align: center; color: var(--text-main);">
-                如果您有任何疑問，歡迎隨時透過 WhatsApp 聯繫我們。<br>
-                我們將竭誠為您服務。
-            </p>
-        </section>
-    </main>
+            display: grid;
 
-    <a href="https://wa.me/85267113958" class="whatsapp-cta" target="_blank">WhatsApp 預約諮詢</a>
+            grid-template-columns: repeat(2, minmax(0, 1fr));
 
-</body>
-</html>
+            gap: 14px;
+
+        }
+
+
+
+        .info-panel {
+
+            border-radius: 18px;
+
+            border: 1px solid rgba(248, 230, 174, 0.16);
+
+            background: rgba(0, 0, 0, 0.2);
+
+            padding: 16px;
+
+            transition: var(--transition-base);
+
+        }
+
+
+
+        .info-panel:hover {
+
+            border-color: rgba(248, 230, 174, 0.26);
+
+            transform: translateY(-2px);
+
+        }
+
+
+
+        .info-panel h3 {
+
+            margin: 0;
+
+            font-size: 1.08rem;
+
+            color: var(--gold-bright);
+
+            letter-spacing: 0.05rem;
+
+        }
+
+
+
+        .intro-note {
+
+            margin: 10px 0 0;
+
+            color: var(--text-muted);
+
+            line-height: 1.7;
+
+            font-size: 0.92rem;
+
+        }
+
+
+
+        .steps {
+
+            margin: 14px 0 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 8px;
+
+            padding: 0;
+
+            list-style: none;
+
+        }
+
+
+
+        .step-item {
+
+            flex: 1;
+
+            min-height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            border-radius: 14px;
+
+            border: 1px solid rgba(248, 230, 174, 0.16);
+
+            background: rgba(255, 255, 255, 0.03);
+
+            color: var(--text-main);
+
+            font-size: 0.92rem;
+
+        }
+
+
+
+        .step-arrow {
+
+            color: var(--gold-soft);
+
+            font-size: 1.2rem;
+
+        }
+
+
+
+        .faq-item {
+
+            margin-top: 10px;
+
+            border-top: 1px solid rgba(248, 230, 174, 0.12);
+
+            padding-top: 10px;
+
+        }
+
+
+
+        .faq-item:first-of-type {
+
+            border-top: none;
+
+            margin-top: 12px;
+
+            padding-top: 0;
+
+        }
+
+
+
+        .faq-q {
+
+            margin: 0;
+
+            color: var(--text-main);
+
+            font-size: 0.95rem;
+
+        }
+
+
+
+        .faq-a {
+
+            margin: 6px 0 0;
+
+            color: var(--text-muted);
+
+            line-height: 1.7;
+
+            font-size: 0.9rem;
+
+            display: grid;
+
+            grid-template-columns: auto 1fr;
+
+            column-gap: 0;
+
+        }
+
+
+
+        .faq-a-prefix {
+
+            display: block;
+
+        }
+
+
+
+        .faq-a-content {
+
+            display: block;
+
+            min-width: 0;
+
+        }
+
+
+
+        .faq-a-line {
+
+            display: block;
+
+        }
+
+
+
+        .feedback-panel {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+
+        .feedback-list {
+
+            margin-top: 12px;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            gap: 12px;
+
+        }
+
+
+
+        .feedback-card {
+
+            margin: 0;
+
+            border-radius: 14px;
+
+            border: 1px solid rgba(248, 230, 174, 0.16);
+
+            background: rgba(0, 0, 0, 0.22);
+
+            padding: 16px 12px 12px;
+
+            transition: var(--transition-base);
+
+        }
+
+
+
+        .feedback-card::before {
+
+            content: "✦";
+
+            display: block;
+
+            text-align: center;
+
+            font-size: 0.7rem;
+
+            color: var(--gold-soft);
+
+            opacity: 0.62;
+
+            margin-bottom: 8px;
+
+            letter-spacing: 0.3rem;
+
+        }
+
+
+
+        .feedback-card:hover {
+
+            border-color: rgba(248, 230, 174, 0.26);
+
+            transform: translateY(-2px);
+
+        }
+
+
+
+        .feedback-text {
+
+            margin: 0;
+
+            font-size: 0.9rem;
+
+            line-height: 1.7;
+
+            color: var(--text-main);
+
+        }
+
+
+
+        .feedback-meta {
+
+            margin-top: 10px;
+
+            font-size: 0.8rem;
+
+            color: rgba(248, 230, 174, 0.72);
+
+            letter-spacing: 0.04rem;
+
+        }
+
+
+
+        .contact-form-wrap {
+
+            margin-top: 12px;
+
+            border-radius: 18px;
+
+            border: 1px solid rgba(248, 230, 174, 0.16);
+
+            background: rgba(0, 0, 0, 0.2);
+
+            padding: 18px;
+
+        }
+
+
+
+        .contact-form-note {
+
+            margin: 0;
+
+            color: var(--text-muted);
+
+            line-height: 1.7;
+
+            font-size: 0.92rem;
+
+        }
+
+
+
+        .contact-form-grid {
+
+            margin-top: 14px;
+
+            display: grid;
+
+            gap: 10px;
+
+        }
+
+
+
+        .contact-form-grid label {
+
+            font-size: 0.88rem;
+
+            color: var(--gold-bright);
+
+            letter-spacing: 0.04rem;
+
+        }
+
+
+
+        .contact-form-grid input,
+
+        .contact-form-grid textarea {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 10px 12px;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(248, 230, 174, 0.2);
+
+            background: rgba(17, 6, 6, 0.58);
+
+            color: var(--gold);
+
+            font-family: inherit;
+
+            font-size: 0.94rem;
+
+            line-height: 1.55;
+
+        }
+
+
+
+        .contact-form-grid textarea {
+
+            min-height: 110px;
+
+            resize: vertical;
+
+        }
+
+
+
+        .contact-form-actions {
+
+            margin-top: 12px;
+
+            display: flex;
+
+            justify-content: flex-start;
+
+        }
+
+
+
+        .contact-grid {
+
+            margin-top: 22px;
+
+            display: grid;
+
+            grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+
+            gap: 16px;
+
+        }
+
+
+
+        .contact-card,
+
+        .contact-aside {
+
+            border-radius: 20px;
+
+            border: 1px solid rgba(248, 230, 174, 0.16);
+
+            background: rgba(0, 0, 0, 0.2);
+
+            padding: 18px;
+
+        }
+
+
+
+        .contact-card h3,
+
+        .contact-aside h3 {
+
+            margin: 0;
+
+            font-size: 1.08rem;
+
+            color: var(--gold-bright);
+
+            letter-spacing: 0.05rem;
+
+        }
+
+
+
+        .contact-card p,
+
+        .contact-aside p {
+
+            margin: 10px 0 0;
+
+            color: var(--text-muted);
+
+            line-height: 1.75;
+
+            font-size: 0.92rem;
+
+        }
+
+
+
+        .contact-list {
+
+            margin: 14px 0 0;
+
+            padding: 0;
+
+            list-style: none;
+
+            display: grid;
+
+            gap: 10px;
+
+        }
+
+
+
+        .contact-list li {
+
+            padding: 12px 14px;
+
+            border-radius: 14px;
+
+            border: 1px solid rgba(248, 230, 174, 0.14);
+
+            background: rgba(255, 255, 255, 0.03);
+
+            color: var(--text-main);
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .contact-label {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--gold-bright);
+
+            font-weight: 700;
+
+            letter-spacing: 0.04rem;
+
+        }
+
+
+
+        .contact-mini-actions {
+
+            margin-top: 14px;
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        .contact-mini-link {
+
+            min-height: 40px;
+
+            padding: 0 14px;
+
+            border-radius: var(--radius-pill);
+
+            border: 1px solid rgba(248, 230, 174, 0.2);
+
+            background: rgba(255, 255, 255, 0.04);
+
+            color: var(--gold);
+
+            text-decoration: none;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 0.88rem;
+
+            transition: var(--transition-base);
+
+        }
+
+
+
+        .contact-mini-link:hover,
+
+        .contact-mini-link:focus-visible {
+
+            transform: translateY(-2px);
+
+            border-color: rgba(248, 230, 174, 0.34);
+
+        }
+
+
+
+        .contact-form-status {
+
+            margin-top: 10px;
+
+            min-height: 22px;
+
+            color: var(--gold-bright);
+
+            font-size: 0.84rem;
+
+            letter-spacing: 0.03rem;
+
+        }
+
+
+
+        .contact-form-wa {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 42px;
+
+            padding: 0 16px;
+
+            border-radius: var(--radius-pill);
+
+            border: 1px solid rgba(255, 242, 197, 0.8);
+
+            text-decoration: none;
+
+            color: #4a1407;
+
+            background: linear-gradient(150deg, rgba(255, 247, 219, 0.98), rgba(245, 214, 133, 0.98) 58%, rgba(224, 175, 64, 0.98));
+
+            font-size: 0.9rem;
+
+            font-weight: 700;
+
+            letter-spacing: 0.04rem;
+
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.26), 0 0 18px rgba(255, 220, 125, 0.34);
+
+            transition: var(--transition-base);
+
+        }
+
+
+
+        .contact-form-wa:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.24), 0 0 24px rgba(255, 225, 136, 0.46);
+
+        }
+
+
+
+        /* ── Small desktop / large tablet landscape ──
+
+
+
+        /* ── Scrollbar ── */
+
+        ::-webkit-scrollbar { width: 6px; }
+
+        ::-webkit-scrollbar-track { background: rgba(22, 2, 3, 0.85); }
+
+        ::-webkit-scrollbar-thumb {
+
+            background: rgba(216, 172, 79, 0.38);
+
+            border-radius: 3px;
+
+        }
+
+        ::-webkit-scrollbar-thumb:hover { background: rgba(216, 172, 79, 0.62); }
+
+
+
+
+
+
+
+        @media (max-width: 960px) {
+
+            :root {
+
+                --panel-w:     min(88vw, 820px);
+
+                --intro-w:     min(64vw, 540px);
+
+            }
+
+
+
+            .navbar { padding: 14px 18px; }
+
+            .nav-logo { font-size: 0.92rem; letter-spacing: 0.05rem; }
+
+            .nav-inner { justify-content: center; }
+
+            .nav-links { display: none; }
+
+            .onepage-sections { width: min(calc(100% - 24px), 1120px); }
+
+            .feedback-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+            .contact-grid { grid-template-columns: 1fr; }
+
+        }
+
+
+
+        /* ── Tablet portrait ── */
+
+        @media (max-width: 768px) {
+
+            :root {
+
+                --hero-top-pad: 96px;
+
+                --hero-bottom-pad: 28px;
+
+                --hero-gap: 16px;
+
+                --intro-w:     min(92vw, 680px);
+
+                --intro-font:  clamp(1rem, 3.6vw, 1.1rem);
+
+                --intro-lh:    1.8;
+
+                --intro-pad:   0 20px;
+
+            }
+
+
+
+            .hero-container {
+
+                grid-template-areas:
+
+                    "stage"
+
+                    "intro";
+
+                justify-items: center;
+
+            }
+
+
+
+            .hero-visual {
+
+                grid-area: stage;
+
+            }
+
+
+
+            .intro-panel {
+
+                grid-area: intro;
+
+            }
+
+
+
+            .service-intro-list { grid-template-columns: 1fr; }
+
+            .services-layout    { grid-template-columns: 1fr; }
+
+            .info-grid          { grid-template-columns: 1fr; }
+
+            .feedback-list      { grid-template-columns: 1fr; }
+
+            .hero-actions       { flex-direction: column; }
+
+            .primary-action,
+
+            .secondary-action   { width: min(320px, 100%); }
+
+
+
+            .title-subtitle { white-space: normal; }
+
+        }
+
+
+
+        /* ── Mobile portrait ── */
+
+        @media (max-width: 640px) {
+
+            :root {
+
+                --hero-min-h:  100vh;
+
+                --hero-top-pad: 92px;
+
+                --hero-bottom-pad: 24px;
+
+                --hero-gap: 14px;
+
+                --intro-w:     min(96vw, 640px);
+
+                --intro-font:  clamp(0.96rem, 3.8vw, 1.06rem);
+
+                --intro-lh:    1.8;
+
+                --intro-pad:   0 20px;
+
+            }
+
+
+
+            body { min-height: 100svh; }
+
+
+
+            .hero-stage {
+
+                padding-bottom: 8px;
+
+            }
+
+
+
+            .hero-container {
+
+                min-height: auto;
+
+                padding-top: 92px;
+
+                padding-bottom: 20px;
+
+                gap: 14px;
+
+            }
+
+
+
+            .hero-visual {
+
+                width: min(100%, 420px);
+
+                min-height: 220px;
+
+                padding: 24px 14px;
+
+            }
+
+
+
+            .content {
+
+                width: min(78vw, 300px);
+
+            }
+
+
+
+            .navbar {
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+
+                row-gap: 10px;
+
+                padding: 12px 10px;
+
+            }
+
+
+
+            .nav-inner {
+
+                justify-content: center;
+
+            }
+
+
+
+            .nav-logo {
+
+                font-size: 0.84rem;
+
+                letter-spacing: 0.04rem;
+
+                white-space: normal;
+
+                line-height: 1.45;
+
+                max-width: 94vw;
+
+                display: block;
+
+                text-align: center;
+
+            }
+
+
+
+            .title {
+
+                letter-spacing: 0.08rem;
+
+                font-size: clamp(3.6rem, 15.2vw, 5.4rem);
+
+            }
+
+
+
+            .title-divider {
+
+                width: clamp(90px, 26vw, 180px);
+
+                margin-top: 10px;
+
+            }
+
+
+
+            .title-subtitle {
+
+                font-size: clamp(1rem, 5.2vw, 1.36rem);
+
+                letter-spacing: 0.12rem;
+
+                margin-top: 8px;
+
+            }
+
+
+
+            .content {
+
+                width: min(96vw, 560px);
+
+            }
+
+
+
+            .title { font-size: clamp(3.3rem, 16vw, 4.8rem); }
+
+            .title-subtitle { white-space: normal; }
+
+
+
+            .intro-panel p + p { margin-top: 10px; }
+
+
+
+            .whatsapp-cta {
+
+                right: 12px;
+
+                bottom: calc(12px + env(safe-area-inset-bottom));
+
+                min-height: 46px;
+
+                padding: 0 14px;
+
+                font-size: 0.84rem;
+
+                letter-spacing: 0.03rem;
+
+                max-width: calc(100vw - 24px);
+
+            }
+
+
+
+            .onepage-sections {
+
+                margin-top: 20px;
+
+                margin-bottom: 110px;
+
+                gap: 16px;
+
+            }
+
+
+
+            .contact-form-wrap { padding: 14px; }
+
+
+
+            .onepage-block {
+
+                padding: 16px;
+
+                border-radius: 20px;
+
+            }
+
+
+
+            .hero-highlights {
+
+                gap: 8px;
+
+            }
+
+
+
+            .hero-highlight {
+
+                width: 100%;
+
+                justify-content: center;
+
+            }
+
+
+
+            .service-intro-list {
+
+                display: grid;
+
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+
+                gap: 14px;
+
+                margin-bottom: 22px;
+
+            }
+
+
+
+            /* 手機下單欄排列 */
+
+            @media (max-width: 600px) {
+
+                .service-intro-list {
+
+                    grid-template-columns:
