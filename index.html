@@ -3,149 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="權智匯提供八字、紫微斗數與占卜命理諮詢，助你明辨天時，為事業、感情與人生規劃作出更穩妥的選擇。">
+    <meta name="theme-color" content="#420000">
     <title>權智匯｜專業命理諮詢</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-red: #8b0000; --bg-deep: #300000; --bg-night: #160203;
-            --gold: #f8e6ae; --gold-bright: #fff1c7; --gold-soft: #d8ac4f;
+            --bg-red: #420000;
+            --bg-deep: #1a0202;
+            --bg-night: #0a0000;
+            --gold: #f8e6ae;
+            --gold-bright: #fff1c7;
+            --gold-soft: #d8ac4f;
             --text-main: rgba(248, 230, 174, 0.94);
-            --panel: rgba(34, 8, 8, 0.45);
+            --text-muted: rgba(248, 230, 174, 0.75);
+            --panel: rgba(34, 8, 8, 0.55);
             --panel-border: rgba(248, 230, 174, 0.18);
+            --radius-panel: 24px;
+            --transition-base: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
+        /* --- 全域背景設計：解決「背景沒東西」的問題 --- */
         html, body {
-            margin: 0; padding: 0;
-            /* body 背景更新： radial-gradient 加上中式暗紋絲綢質感 */
-            background: 
-                radial-gradient(circle at center, rgba(139, 0, 0, 0.8) 0%, rgba(48, 0, 0, 0.95) 56%, rgba(22, 2, 3, 1) 100%),
-                url('https://www.transparenttextures.com/patterns/vintage-speckles.png'); /* 加入淡淡的質感暗紋 */
-            color: var(--gold); font-family: "Noto Serif TC", serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            /* 使用深邃的放射狀漸層，模擬命理的神祕感 */
+            background: radial-gradient(circle at center, var(--bg-red) 0%, var(--bg-deep) 60%, var(--bg-night) 100%);
+            color: var(--gold);
+            font-family: "Noto Serif TC", serif;
             scroll-behavior: smooth;
-            background-blend-mode: multiply; /* 讓質感與顏色融合 */
-        }
-
-        .navbar {
-            position: fixed; top: 0; width: 100%; padding: 18px 0;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--panel-border); z-index: 100; text-align: center;
-        }
-        .nav-logo { color: var(--gold); text-decoration: none; font-weight: 700; letter-spacing: 0.2rem; font-size: 1.05rem; }
-
-        /* --- 標題區背景視覺大增強 --- */
-        .hero-section { 
-            padding: clamp(140px, 20vh, 220px) 20px 80px; 
-            text-align: center; 
             position: relative;
-            overflow: hidden;
-            /* 讓背景在手機上也能滿版 */
-            background-size: cover;
-            background-position: center;
         }
 
-        /* 標題背景：巨幅山水潑墨與金色星塵 */
-        .hero-bg-visual {
+        /* 增加全域的星塵點綴，讓背景更有細節 */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 15% 25%, rgba(248, 230, 174, 0.4), transparent),
+                radial-gradient(1.5px 1.5px at 75% 15%, rgba(248, 230, 174, 0.3), transparent),
+                radial-gradient(1px 1px at 45% 85%, rgba(248, 230, 174, 0.2), transparent);
+            background-size: 250px 250px;
+            opacity: 0.5;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 導覽列 */
+        .navbar {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 18px 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--panel-border);
+            z-index: 100;
+            text-align: center;
+        }
+        .nav-logo {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            font-size: 1.05rem;
+            text-shadow: 0 0 10px rgba(248, 230, 174, 0.5);
+        }
+
+        /* --- 標題區塊：強化視覺重心 --- */
+        .hero-section {
+            position: relative;
+            padding: clamp(140px, 20vh, 200px) 20px 60px;
+            text-align: center;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        /* 標題背後的金色光暈，取代原本的菱格紋 */
+        .hero-glow {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 120%; height: 120%;
-            /* 這裡使用一個 SVG 向量圖騰 (替代極淡的圖案)，並加上背景融合模式 */
-            background-image: 
-                url('https://www.transparenttextures.com/patterns/diagmonds-light.png'), /* 淡淡的幾何暗紋，增加細節 */
-                radial-gradient(circle at center, rgba(248, 230, 174, 0.1) 0%, rgba(216, 172, 79, 0.05) 50%, transparent 70%),
-                /* 模擬潑墨山水的形狀 */
-                linear-gradient(45deg, rgba(0,0,0,0.5) 0%, transparent 40%, rgba(0,0,0,0.3) 100%);
-            background-size: repeat, auto, cover;
-            opacity: 0.4; /* 將透明度調高，讓背景更明顯 */
-            pointer-events: none;
-            z-index: 0;
-            background-blend-mode: overlay; /* 讓細節與漸層融合 */
+            width: min(90vw, 600px);
+            height: min(90vw, 600px);
+            background: radial-gradient(circle, rgba(216, 172, 79, 0.18) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(30px);
         }
 
-        /* 標題本身的金色霧氣底盤，確保標題跳脫 */
-        .hero-title-mist {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 250px; height: 120px;
-            background: radial-gradient(circle, rgba(216, 172, 79, 0.25) 0%, transparent 70%);
-            z-index: 1; pointer-events: none;
-            filter: blur(20px);
+        .hero-title {
+            font-size: clamp(3.8rem, 12vw, 7.5rem);
+            margin: 0;
+            color: var(--gold-bright);
+            font-weight: 900;
+            letter-spacing: 0.6rem;
+            text-shadow: 
+                0 0 25px rgba(216, 172, 79, 0.5),
+                2px 2px 10px rgba(0,0,0,0.7);
         }
 
-        .hero-title-wrap { position: relative; z-index: 2; display: inline-block; }
-        
-        .hero-title { 
-            font-size: clamp(3.8rem, 12vw, 7.5rem); 
-            margin: 0; color: var(--gold-bright); 
-            font-weight: 900; letter-spacing: 0.6rem;
-            text-shadow: 0 0 25px rgba(216, 172, 79, 0.5), 2px 2px 10px rgba(0,0,0,0.6);
+        .hero-divider {
+            width: 100px;
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+            margin: 30px auto;
         }
 
-        .hero-decoration {
-            display: flex; align-items: center; justify-content: center; margin: 25px auto;
-            position: relative; z-index: 2;
-        }
-        .line-gold { width: 70px; height: 1.5px; background: linear-gradient(to var(--dir, right), transparent, var(--gold-soft)); }
-        .star-gold { margin: 0 20px; color: var(--gold-soft); font-size: 1.1rem; opacity: 1; text-shadow: 0 0 10px var(--gold-soft); }
-
-        .hero-description { 
-            font-size: 1.3rem; line-height: 2; color: var(--text-main); font-weight: 400; 
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
-            position: relative; z-index: 2;
+        .hero-description {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            color: var(--text-main);
+            letter-spacing: 0.1rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* 主容器 */
-        .onepage-sections { width: min(1120px, calc(100% - 40px)); margin: 0 auto 100px; display: grid; gap: 30px; position: relative; z-index: 10; }
-        
+        /* 內容容器 */
+        .onepage-sections {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto 100px;
+            display: grid;
+            gap: 30px;
+            position: relative;
+            z-index: 20;
+        }
+
         .onepage-block {
-            border-radius: 24px; border: 1px solid var(--panel-border);
-            background: var(--panel); padding: 45px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            backdrop-filter: blur(5px); /* 大區塊方框背景也加上淡淡模糊，增加質感 */
+            border-radius: var(--radius-panel);
+            border: 1px solid var(--panel-border);
+            background: var(--panel);
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
         }
 
         .section-title {
-            text-align: center; font-size: 2.2rem; color: var(--gold-bright); margin-bottom: 35px;
-            display: flex; align-items: center; gap: 15px; justify-content: center;
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--gold-bright);
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
         }
-        .section-title::before, .section-title::after { content: ""; flex: 1; max-width: 60px; height: 1px; background: var(--gold-soft); opacity: 0.4; }
-
-        /* 服務項目方格排列 */
-        .services-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-        .service-group { 
-            border-radius: 20px; border: 1px solid rgba(248, 230, 174, 0.15);
-            background: rgba(0, 0, 0, 0.3); padding: 24px; 
+        .section-title::before, .section-title::after {
+            content: "";
+            flex: 1;
+            max-width: 60px;
+            height: 1px;
+            background: var(--gold-soft);
+            opacity: 0.5;
         }
-        .group-title { text-align: center; color: var(--gold-bright); margin-bottom: 20px; font-size: 1.4rem; letter-spacing: 0.1rem; }
 
-        /* 金色小方格 */
+        /* 服務項目佈局 */
+        .services-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .service-group {
+            border-radius: 20px;
+            border: 1px solid rgba(248, 230, 174, 0.15);
+            background: rgba(0, 0, 0, 0.25);
+            padding: 24px;
+        }
+        .group-title {
+            text-align: center;
+            color: var(--gold-bright);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        /* 服務項目卡片 */
         .service-card {
-            border-radius: 16px; border: 1.5px solid rgba(248, 230, 174, 0.3) !important;
-            background: rgba(0, 0, 0, 0.5) !important; padding: 18px;
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(248, 230, 174, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            transition: var(--transition-base);
+        }
+        .service-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--gold-soft);
         }
         .service-name { font-size: 1.1rem; color: var(--gold); margin: 0; font-weight: 700; }
         .service-price { font-weight: 900; color: var(--gold-bright); font-size: 1.15rem; }
-        .service-detail { font-size: 0.9rem; color: rgba(248, 230, 174, 0.6); display: block; margin-top: 3px; }
+        .service-detail { font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 4px; }
 
-        /* 表單設計 */
+        /* 表單樣式 */
         .contact-form-grid label { display: block; margin-top: 18px; color: var(--gold-soft); font-weight: 700; }
         .contact-form-grid input, .contact-form-grid textarea {
-            width: 100%; padding: 14px; margin-top: 8px; border-radius: 12px;
-            border: 1px solid rgba(248, 230, 174, 0.25); background: rgba(0, 0, 0, 0.6);
-            color: white; font-size: 1rem; box-sizing: border-box;
+            width: 100%; padding: 12px; margin-top: 8px; border-radius: 12px;
+            border: 1px solid rgba(248, 230, 174, 0.2); background: rgba(0, 0, 0, 0.5);
+            color: #fff; font-size: 1rem; box-sizing: border-box;
         }
         .contact-form-wa {
             display: block; width: 100%; padding: 18px; margin-top: 30px; text-align: center;
             border-radius: 50px; background: linear-gradient(150deg, #fff7db, #f5d685, #e0af40);
-            color: #4a1407; font-weight: 900; text-decoration: none; font-size: 1.15rem; box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            color: #4a1407; font-weight: 900; text-decoration: none; font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4); transition: var(--transition-base);
+        }
+        .contact-form-wa:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0,0,0,0.5); }
+
+        /* 懸浮按鈕 */
+        .whatsapp-cta {
+            position: fixed; right: 20px; bottom: 20px; z-index: 100;
+            padding: 12px 24px; border-radius: 50px; background: linear-gradient(150deg, #fff7db, #f5d685, #e0af40);
+            color: #4a1407; font-weight: 900; text-decoration: none; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
 
         @media (max-width: 768px) {
-            .hero-section { padding-top: 150px; }
             .onepage-block { padding: 30px 20px; }
-            .section-title { font-size: 1.9rem; }
-            /* 手機版背景山水調小一點 */
-            .hero-bg-visual { width: 140%; height: 140%; opacity: 0.5; } 
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -154,18 +229,8 @@
     <nav class="navbar"><a href="#" class="nav-logo">運籌當下，明辨天時，擇優而行</a></nav>
 
     <header class="hero-section">
-        <div class="hero-bg-visual"></div>
-        
-        <div class="hero-title-mist"></div>
-
-        <div class="hero-title-wrap">
-            <h1 class="hero-title">權智匯</h1>
-            <div class="hero-decoration">
-                <div class="line-gold" style="--dir: right"></div>
-                <div class="star-gold">✦</div>
-                <div class="line-gold" style="--dir: left"></div>
-            </div>
-        </div>
+        <div class="hero-glow"></div> <h1 class="hero-title">權智匯</h1>
+        <div class="hero-divider"></div>
         <p class="hero-description">專業命理諮詢：八字、紫微、占卜</p>
     </header>
 
@@ -173,7 +238,7 @@
         
         <section class="onepage-block">
             <h2 class="section-title">品牌理念</h2>
-            <div style="text-align: center; line-height: 2.2; max-width: 800px; margin: 0 auto;">
+            <div style="text-align: center; line-height: 2.1; max-width: 800px; margin: 0 auto;">
                 <p>本小組由兩位深研中華傳統文化的伙伴共同創立，結合所長，為有緣人提供專業諮詢。</p>
                 <p>真正的命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。</p>
             </div>
@@ -185,15 +250,15 @@
                 <div class="service-group">
                     <h3 class="group-title">八字類別</h3>
                     <div class="service-card">
-                        <p class="service-name">八字排盤<span class="service-detail">性格批註</span></p>
+                        <div><p class="service-name">八字排盤</p><span class="service-detail">性格批註</span></div>
                         <span class="service-price">$88</span>
                     </div>
                     <div class="service-card">
-                        <p class="service-name">八字小批<span class="service-detail">命格專業分析</span></p>
+                        <div><p class="service-name">八字小批</p><span class="service-detail">命格專業分析</span></div>
                         <span class="service-price">$388</span>
                     </div>
                     <div class="service-card">
-                        <p class="service-name">八字大批<span class="service-detail">詳細命格+半年大運</span></p>
+                        <div><p class="service-name">八字大批</p><span class="service-detail">詳細命格+半年大運</span></div>
                         <span class="service-price">$2888</span>
                     </div>
                 </div>
@@ -201,47 +266,23 @@
                 <div class="service-group">
                     <h3 class="group-title">流年月批</h3>
                     <div class="service-card">
-                        <p class="service-name">流月簡算<span class="service-detail">當月運程</span></p>
+                        <div><p class="service-name">流月簡算</p><span class="service-detail">當月運程</span></div>
                         <span class="service-price">$688</span>
                     </div>
                     <div class="service-card">
-                        <p class="service-name">流月詳算<span class="service-detail">當月運程詳批</span></p>
-                        <span class="service-price">$1288</span>
-                    </div>
-                    <div class="service-card">
-                        <p class="service-name">流年簡批<span class="service-detail">當年運程</span></p>
-                        <span class="service-price">$688</span>
-                    </div>
-                    <div class="service-card">
-                        <p class="service-name">流年詳批<span class="service-detail">當年運程詳批</span></p>
+                        <div><p class="service-name">流年詳批</p><span class="service-detail">當年運程詳批</span></div>
                         <span class="service-price">$1288</span>
                     </div>
                 </div>
 
                 <div class="service-group">
-                    <h3 class="group-title">占卜問事</h3>
+                    <h3 class="group-title">占卜與其他</h3>
                     <div class="service-card">
-                        <p class="service-name">尋龍尺問事<span class="service-detail">單次收費</span></p>
-                        <span class="service-price">$88</span>
-                    </div>
-                    <div class="service-card">
-                        <p class="service-name">八字占卜<span class="service-detail">單次收費</span></p>
+                        <div><p class="service-name">八字占卜</p><span class="service-detail">單次問事</span></div>
                         <span class="service-price">$238</span>
                     </div>
-                </div>
-
-                <div class="service-group">
-                    <h3 class="group-title">特別項目</h3>
                     <div class="service-card">
-                        <p class="service-name">合婚<span class="service-detail">雙方命盤契合度</span></p>
-                        <span class="service-price">$1338</span>
-                    </div>
-                    <div class="service-card">
-                        <p class="service-name">寶寶出生擇日<span class="service-detail">3個優選時段</span></p>
-                        <span class="service-price">$1888</span>
-                    </div>
-                    <div class="service-card">
-                        <p class="service-name">起名 / 改名<span class="service-detail">提供3個建議</span></p>
+                        <div><p class="service-name">起名 / 改名</p><span class="service-detail">提供3個建議</span></div>
                         <span class="service-price">$688</span>
                     </div>
                 </div>
@@ -253,19 +294,21 @@
             <form id="contactForm" class="contact-form-grid">
                 <label>稱呼<input type="text" name="name" placeholder="例如：陳小姐"></label>
                 <label>聯絡方式<input type="text" name="contact" placeholder="例如：WhatsApp"></label>
-                <label>想了解的服務<input type="text" name="service" placeholder="例如：八字大批"></label>
-                <label>問題摘要<textarea name="message" rows="4" placeholder="請描述您的問題..."></textarea></label>
+                <label>出生資料<input type="text" name="birth" placeholder="例如：1993/08/15 申時"></label>
+                <label>問題摘要<textarea name="message" rows="4" placeholder="請簡述您的現況或想問的方向..."></textarea></label>
                 <a href="#" id="submitBtn" class="contact-form-wa">整理內容並送到 WhatsApp</a>
             </form>
         </section>
 
     </main>
 
+    <a href="https://wa.me/85267113958" class="whatsapp-cta" target="_blank">WhatsApp 快速諮詢</a>
+
     <script>
         document.getElementById("submitBtn").addEventListener("click", function(e) {
             e.preventDefault();
             const f = new FormData(document.getElementById("contactForm"));
-            const text = `您好，我想諮詢預約。\n稱呼：${f.get('name')}\n服務：${f.get('service')}\n摘要：${f.get('message')}`;
+            const text = `您好，我想預約諮詢：\n稱呼：${f.get('name')}\n資料：${f.get('birth')}\n摘要：${f.get('message')}`;
             window.open(`https://wa.me/85267113958?text=${encodeURIComponent(text)}`, '_blank');
         });
     </script>
