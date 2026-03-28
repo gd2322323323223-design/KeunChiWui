@@ -3,253 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="權智匯提供八字、紫微斗數與占卜命理諮詢，助你明辨天時，為事業、感情與人生規劃作出更穩妥的選擇。">
-    <meta name="theme-color" content="#420000">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="zh_TW">
-    <meta property="og:title" content="權智匯｜命理諮詢">
-    <meta property="og:description" content="八字、紫微斗數與占卜命理諮詢一站整合，助你看清方向、擇優而行。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
     <title>權智匯｜運籌當下，明辨天時</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-red: #8b0000;
-            --bg-deep: #300000;
-            --bg-night: #160203;
-            --gold: #f8e6ae;
-            --gold-bright: #fff1c7;
-            --gold-soft: #d8ac4f;
+            --bg-red: #8b0000; --bg-deep: #300000; --bg-night: #160203;
+            --gold: #f8e6ae; --gold-bright: #fff1c7; --gold-soft: #d8ac4f;
             --text-main: rgba(248, 230, 174, 0.94);
-            --text-muted: rgba(248, 230, 174, 0.8);
-            --panel: rgba(34, 8, 8, 0.42);
-            --panel-border: rgba(248, 230, 174, 0.16);
-            --radius-pill: 999px;
-            --transition-base: transform 0.22s ease, box-shadow 0.22s ease;
+            --panel: rgba(34, 8, 8, 0.6);
+            --panel-border: rgba(248, 230, 174, 0.2);
         }
 
         html, body {
-            margin: 0;
+            margin: 0; padding: 0;
             background: radial-gradient(circle at center, var(--bg-red) 0%, var(--bg-deep) 56%, var(--bg-night) 100%);
             color: var(--gold);
-            font-family: "Noto Serif TC", "Songti TC", serif;
+            font-family: "Noto Serif TC", serif;
             scroll-behavior: smooth;
-            min-height: 100vh;
         }
 
-        /* 導覽列 */
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--panel-border);
-            z-index: 100;
-            text-align: center;
+            position: fixed; top: 0; width: 100%; padding: 20px 0;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--panel-border); z-index: 100; text-align: center;
         }
 
-        .nav-logo {
-            color: var(--gold);
-            font-size: clamp(0.9rem, 4.5vw, 1.25rem);
-            letter-spacing: 0.2rem;
-            text-decoration: none;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(248, 230, 174, 0.5);
-        }
+        .nav-logo { color: var(--gold); text-decoration: none; font-weight: 700; letter-spacing: 0.1rem; }
 
-        /* 頂部大標題區塊 */
-        .hero-section {
-            padding: clamp(160px, 25vh, 220px) 20px 80px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+        .hero-section { padding: 160px 20px 60px; text-align: center; }
+        .hero-title { font-size: clamp(3.5rem, 12vw, 7rem); margin: 0; color: var(--gold-bright); letter-spacing: 0.5rem; }
+        .hero-divider { width: 80px; height: 2px; background: var(--gold-soft); margin: 30px auto; }
+        .hero-description { font-size: 1.2rem; line-height: 2; max-width: 800px; margin: 0 auto; color: var(--text-main); }
 
-        .hero-title {
-            font-size: clamp(3.8rem, 15vw, 8rem);
-            margin: 0;
-            letter-spacing: 0.8rem;
-            color: var(--gold-bright);
-            text-shadow: 0 0 25px rgba(216, 172, 79, 0.5), 2px 2px 5px rgba(0,0,0,0.8);
-            font-weight: 900;
-        }
-
-        .hero-divider {
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
-            margin: 35px auto;
-        }
-
-        .hero-description {
-            font-size: clamp(1.15rem, 3vw, 1.55rem);
-            line-height: 2.2;
-            max-width: 850px;
-            color: var(--text-main);
-            font-weight: 400;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
-
-        /* 主內容容器 */
-        .onepage-sections {
-            width: min(1120px, calc(100% - 40px));
-            margin: 20px auto 120px;
-            display: grid;
-            gap: 28px;
-        }
-
-        /* 大方格區塊 */
+        .onepage-sections { width: min(1120px, calc(100% - 40px)); margin: 40px auto 100px; display: grid; gap: 30px; }
+        
+        /* 大區塊方框 */
         .onepage-block {
             border-radius: 24px;
             border: 1px solid var(--panel-border);
             background: var(--panel);
-            padding: 45px;
-            transition: var(--transition-base);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 40px;
         }
 
         .section-title {
-            margin: 0 0 40px 0;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: clamp(2rem, 5vw, 3rem);
-            letter-spacing: 0.15rem;
-            color: var(--gold-bright);
-            justify-content: center;
-            text-shadow: 1px 1px 0 #fff, 0 0 15px rgba(216, 172, 79, 0.4);
+            text-align: center; font-size: 2.2rem; color: var(--gold-bright); margin-bottom: 30px;
+            display: flex; align-items: center; gap: 15px; justify-content: center;
         }
+        .section-title::before, .section-title::after { content: ""; flex: 1; max-width: 50px; height: 1px; background: var(--gold-soft); }
 
-        .section-title::before, .section-title::after {
-            content: "";
-            flex: 1;
-            max-width: 120px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
-        }
-
-        /* 服務項目排列與金色方格 */
+        /* --- 服務項目方格設定 (重點修復區) --- */
         .services-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
         .service-group {
             border-radius: 20px;
-            border: 1px solid rgba(248, 230, 174, 0.1);
+            border: 1px solid rgba(248, 230, 174, 0.15);
             background: rgba(0, 0, 0, 0.25);
-            padding: 24px;
+            padding: 25px;
         }
 
-        .group-title {
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--gold-bright);
-            margin-bottom: 25px;
-            letter-spacing: 0.1rem;
-        }
+        .group-title { text-align: center; color: var(--gold-bright); margin-bottom: 20px; font-size: 1.4rem; }
 
-        /* 修復：金色小方格視覺 */
+        /* 這是你要求的金色小方格 */
         .service-card {
-            border-radius: 16px;
-            border: 1px solid rgba(248, 230, 174, 0.25);
-            background: rgba(0, 0, 0, 0.4);
-            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(248, 230, 174, 0.3) !important; /* 強制顯示邊框 */
+            background: rgba(0, 0, 0, 0.4) !important; /* 強制背景深色 */
+            padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
-            transition: all 0.3s ease;
         }
 
-        .service-card:hover {
-            border-color: var(--gold-soft);
-            background: rgba(56, 7, 0, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .service-name { font-size: 1.1rem; color: var(--gold); }
-        .service-price { 
-            font-weight: 900; 
-            color: var(--gold-bright); 
-            border: 1px solid var(--gold-soft); 
-            padding: 4px 14px; 
-            border-radius: 20px;
-            background: rgba(216, 172, 79, 0.1);
-        }
-
-        /* 諮詢表單 */
-        .contact-form-wrap {
-            margin-top: 20px;
-        }
-
-        .contact-form-grid {
-            display: grid;
-            gap: 15px;
-            max-width: 650px;
-            margin: 0 auto;
-        }
-
-        .contact-form-grid label {
-            color: var(--gold-soft);
-            font-size: 1rem;
+        .service-price {
             font-weight: 700;
+            color: var(--gold-bright);
+            border: 1px solid var(--gold-soft);
+            padding: 2px 12px;
+            border-radius: 20px;
         }
 
+        /* 諮詢表單小方格 */
         .contact-form-grid input, .contact-form-grid textarea {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(248, 230, 174, 0.2);
-            background: rgba(0, 0, 0, 0.4);
-            color: #fff;
-            font-size: 1rem;
-            box-sizing: border-box;
+            width: 100%; padding: 12px; margin-top: 8px; margin-bottom: 15px;
+            border-radius: 12px; border: 1px solid rgba(248, 230, 174, 0.2);
+            background: rgba(0, 0, 0, 0.3); color: white; box-sizing: border-box;
         }
 
-        .contact-form-wa {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 54px;
-            background: linear-gradient(150deg, #fff7db, #f5d685, #e0af40);
-            color: #4a1407;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 900;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+        .submit-btn {
+            width: 100%; padding: 15px; border-radius: 50px; border: none;
+            background: linear-gradient(150deg, #fff7db, #f5d685);
+            color: #4a1407; font-weight: bold; cursor: pointer; font-size: 1.1rem;
         }
 
-        .contact-form-wa:hover { transform: translateY(-3px); }
-
-        /* 手機版優化 */
-        @media (max-width: 768px) {
-            .onepage-block { padding: 25px 20px; }
-            .hero-section { padding-top: 140px; }
-            .services-layout { grid-template-columns: 1fr; }
-            /* 強化手機版方格邊框 */
-            .service-card { 
-                border-width: 1.5px; 
-                border-color: rgba(248, 230, 174, 0.35); 
-                background: rgba(0, 0, 0, 0.5); 
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title { font-size: 3.5rem; letter-spacing: 0.4rem; }
-            .hero-description { font-size: 1.1rem; }
-            .nav-logo { font-size: 0.85rem; letter-spacing: 0.1rem; }
+        @media (max-width: 640px) {
+            .onepage-block { padding: 20px; }
+            .service-card { border-width: 1.5px; } /* 手機版加強邊框厚度 */
         }
     </style>
 </head>
@@ -262,55 +115,42 @@
     <header class="hero-section">
         <h1 class="hero-title">權智匯</h1>
         <div class="hero-divider"></div>
-        <p class="hero-description">
-            結合八字深度解析與精準占卜，<br>
-            在人生的十字路口，為您提供最理性的決策參考，<br>
-            助您看清局勢，掌握先機。
-        </p>
+        <p class="hero-description">結合八字深度解析與精準占卜，在人生的十字路口，助您掌握先機。</p>
     </header>
 
     <main class="onepage-sections">
         
         <section class="onepage-block">
             <h2 class="section-title">品牌理念</h2>
-            <div style="text-align: center; line-height: 2; font-size: clamp(1rem, 2.5vw, 1.15rem); color: var(--text-main);">
+            <div style="text-align: center; line-height: 1.8;">
                 <p>在複雜多變的時代中，我們致力於將傳統命理轉化為現代決策的工具。</p>
-                <p>權智匯不只提供「算命」，更提供「分析」。<br>我們主張透過八字看清個人格局與起伏，藉由占卜釐清當下局勢，幫助您在事業、感情與人生規劃中做出更有利的選擇。</p>
+                <p>權智匯不只提供「算命」，更提供「分析」。我們主張透過八字看清個人格局與起伏，幫助您做出更有利的選擇。</p>
             </div>
         </section>
 
         <section class="onepage-block">
-            <h2 class="section-title">服務與收費</h2>
+            <h2 class="section-title">服務項目</h2>
             <div class="services-layout">
                 <div class="service-group">
-                    <h3 class="group-title">✦ 命盤解析 ✦</h3>
+                    <h3 class="group-title">命盤解析</h3>
                     <div class="service-card">
-                        <span class="service-name">八字流年詳批</span>
+                        <span>八字流年詳批</span>
                         <span class="service-price">NT$ 2,600</span>
                     </div>
                     <div class="service-card">
-                        <span class="service-name">紫微斗數全盤</span>
+                        <span>紫微斗數全盤</span>
                         <span class="service-price">NT$ 3,200</span>
                     </div>
-                    <div class="service-card">
-                        <span class="service-name">姓名學諮詢</span>
-                        <span class="service-price">NT$ 1,800</span>
-                    </div>
                 </div>
-
                 <div class="service-group">
-                    <h3 class="group-title">✦ 即時占卜 ✦</h3>
+                    <h3 class="group-title">即時占卜</h3>
                     <div class="service-card">
-                        <span class="service-name">文王卦 / 梅花易數</span>
+                        <span>文王卦 / 梅花易數</span>
                         <span class="service-price">NT$ 800</span>
                     </div>
                     <div class="service-card">
-                        <span class="service-name">測字與心理諮商</span>
+                        <span>測字與擇日</span>
                         <span class="service-price">NT$ 1,200</span>
-                    </div>
-                    <div class="service-card">
-                        <span class="service-name">擇日 (婚嫁、搬遷)</span>
-                        <span class="service-price">NT$ 2,000</span>
                     </div>
                 </div>
             </div>
@@ -318,69 +158,18 @@
 
         <section class="onepage-block">
             <h2 class="section-title">諮詢表單</h2>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">填寫後將自動整理草稿，直接傳送到 WhatsApp 開始對話。</p>
-            
-            <div class="contact-form-wrap">
-                <form id="consultForm" class="contact-form-grid">
-                    <div>
-                        <label>稱呼</label>
-                        <input type="text" name="name" placeholder="例如：陳小姐">
-                    </div>
-                    <div>
-                        <label>聯絡方式</label>
-                        <input type="text" name="contact" placeholder="例如：WhatsApp / 電話">
-                    </div>
-                    <div>
-                        <label>出生資料 (如已知)</label>
-                        <input type="text" name="birth" placeholder="例如：1993/08/15 申時，女">
-                    </div>
-                    <div>
-                        <label>問題摘要</label>
-                        <textarea name="message" rows="4" placeholder="例如：想了解今年事業運勢..."></textarea>
-                    </div>
-                    
-                    <a href="#" id="contact-submit" class="contact-form-wa">整理內容並送到 WhatsApp</a>
-                    <p id="contact-status" style="text-align:center; font-size:0.85rem; color:var(--gold-soft); margin-top:10px;"></p>
-                </form>
+            <div class="contact-form-grid">
+                <label>稱呼</label>
+                <input type="text" placeholder="例如：陳小姐">
+                <label>聯絡方式</label>
+                <input type="text" placeholder="例如：WhatsApp / 電話">
+                <label>問題摘要</label>
+                <textarea rows="4" placeholder="例如：想了解今年事業運勢..."></textarea>
+                <button class="submit-btn">整理內容並送到 WhatsApp</button>
             </div>
         </section>
 
     </main>
 
-    <script>
-        (function() {
-            const contactSubmit = document.getElementById("contact-submit");
-            const contactStatus = document.getElementById("contact-status");
-            const form = document.getElementById("consultForm");
-
-            function buildWhatsappMessage() {
-                const formData = new FormData(form);
-                const name = String(formData.get("name") || "").trim();
-                const contact = String(formData.get("contact") || "").trim();
-                const birth = String(formData.get("birth") || "").trim();
-                const message = String(formData.get("message") || "").trim();
-
-                let lines = ["您好，我想預約權智匯的命理諮詢。"];
-                if (name) lines.push(`稱呼：${name}`);
-                if (contact) lines.push(`聯絡方式：${contact}`);
-                if (birth) lines.push(`出生資料：${birth}`);
-                if (message) lines.push(`問題摘要：${message}`);
-
-                if (lines.length === 1) lines.push("我想先了解諮詢項目與預約方式。");
-                return lines.join("\n");
-            }
-
-            if (contactSubmit) {
-                contactSubmit.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    const text = buildWhatsappMessage();
-                    // 請在這裡修改為你的真實號碼
-                    const waNumber = "85267113958"; 
-                    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`, '_blank');
-                    if (contactStatus) contactStatus.textContent = "已為您跳轉至 WhatsApp。";
-                });
-            }
-        })();
-    </script>
 </body>
 </html>
