@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>權智匯｜CHANEL Style Minimalism</title>
+    <title>權智匯｜極簡時尚命理諮詢</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --white: #ffffff;
             --light-grey: #f9f9f9;
             --mid-grey: #eeeeee;
-            --deep-grey: #333333;
             --black: #1a1a1a;
             --text-color: #1a1a1a;
-            --spacing-unit: 100px;
+            --spacing-unit: 140px; /* 增加留白，更顯奢華 */
         }
 
         * { box-sizing: border-box; }
@@ -23,133 +22,164 @@
             background-color: var(--white);
             color: var(--text-color);
             font-family: "Noto Serif TC", serif;
-            line-height: 1.6;
+            line-height: 1.8;
             -webkit-font-smoothing: antialiased;
         }
 
         /* --- Header / Navigation --- */
         nav {
-            position: fixed; top: 0; width: 100%; height: 70px;
-            background: var(--white); z-index: 1000;
+            position: fixed; top: 0; width: 100%; height: 80px;
+            background: rgba(255, 255, 255, 0.95); z-index: 1000;
             display: flex; align-items: center; justify-content: center;
             border-bottom: 0.5px solid #e5e5e5;
-            text-transform: uppercase; letter-spacing: 0.3rem; font-size: 0.8rem;
+            letter-spacing: 0.4rem; font-size: 1rem; font-weight: 400;
+        }
+
+        /* --- 極簡品牌標誌 (Logo) --- */
+        .logo-wrap {
+            display: flex; flex-direction: column; align-items: center; margin-bottom: 50px;
+        }
+        .qzh-logo {
+            width: 60px; height: 60px;
+            position: relative; margin-bottom: 20px;
+        }
+        /* Logo 幾何線條：智窗/玄門概念 */
+        .logo-line { position: absolute; background: var(--black); }
+        .line-top { top: 0; left: 10px; width: 40px; height: 1.5px; }
+        .line-bottom { bottom: 0; left: 10px; width: 40px; height: 1.5px; }
+        .line-left { top: 10px; left: 0; width: 1.5px; height: 40px; }
+        .line-right { top: 10px; right: 0; width: 1.5px; height: 40px; }
+        /* Logo 核心：關鍵智慧之點 */
+        .logo-dot {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px; height: 12px;
+            background: var(--black); border-radius: 50%;
         }
 
         /* --- Hero Section --- */
         .hero {
-            height: 80vh;
+            height: 85vh;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            text-align: center; padding-top: 70px;
+            text-align: center; padding-top: 80px;
             background-color: var(--white);
         }
 
         .hero-title {
-            font-size: clamp(3rem, 10vw, 5rem);
-            font-weight: 900; letter-spacing: 1.2rem;
-            margin: 0; text-indent: 1.2rem; /* 抵消最後一個字的字距 */
+            font-size: clamp(3.5rem, 12vw, 6.5rem);
+            font-weight: 900; letter-spacing: 1.5rem;
+            margin: 0; text-indent: 1.5rem;
         }
 
         .hero-divider {
-            width: 40px; height: 1.5px;
-            background: var(--black); margin: 40px 0;
+            width: 60px; height: 1.5px;
+            background: var(--black); margin: 60px 0;
         }
 
         .hero-subtitle {
-            font-size: 1rem; font-weight: 400;
-            letter-spacing: 0.5rem; color: #666;
+            font-size: 1.2rem; font-weight: 400;
+            letter-spacing: 0.8rem; color: #333; text-indent: 0.8rem;
         }
 
-        /* --- Brand Philosophy --- */
+        /* --- 品牌理念 --- */
         .philosophy {
             padding: var(--spacing-unit) 20px;
-            max-width: 800px; margin: 0 auto;
+            max-width: 900px; margin: 0 auto;
             text-align: center;
         }
 
         .philosophy h2 {
-            font-size: 0.9rem; letter-spacing: 0.4rem;
-            text-transform: uppercase; margin-bottom: 50px;
+            font-size: 1.1rem; letter-spacing: 0.6rem;
+            text-transform: uppercase; margin-bottom: 70px; font-weight: 400;
         }
 
         .philosophy p {
-            font-size: 1.2rem; font-weight: 400;
-            line-height: 2.2; color: #333;
+            font-size: 1.4rem; font-weight: 400;
+            line-height: 2.5; color: #222;
         }
 
-        /* --- Service Blocks (模仿上傳圖片的階梯式設計) --- */
+        /* --- 服務項目：階梯式塊狀設計 --- */
         .service-container { width: 100%; }
 
         .service-block {
-            width: 100%; padding: 80px 10%;
+            width: 100%; padding: 120px 10%;
             display: flex; flex-direction: column;
             transition: background 0.4s ease;
         }
 
         /* 不同灰度的背景 */
-        .block-1 { background-color: #fcfcfc; } /* 八字大批 */
-        .block-2 { background-color: #f5f5f5; } /* 流年月批 */
-        .block-3 { background-color: #ededed; } /* 占卜問事 */
-        .block-4 { background-color: #e2e2e2; } /* 特別項目 */
+        .block-1 { background-color: #fcfcfc; }
+        .block-2 { background-color: #f5f5f5; }
+        .block-3 { background-color: #ededed; }
+        .block-4 { background-color: #e2e2e2; }
 
         .service-block .category-name {
-            font-size: 2rem; font-weight: 900;
-            margin-bottom: 40px; letter-spacing: 0.2rem;
+            font-size: 2.8rem; font-weight: 900;
+            margin-bottom: 80px; letter-spacing: 0.4rem;
         }
 
         .service-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
         }
 
-        .item { border-top: 0.5px solid #ccc; padding-top: 20px; }
-        .item-header { display: flex; justify-content: space-between; align-items: baseline; }
-        .item-title { font-size: 1.1rem; font-weight: 700; }
-        .item-price { font-size: 1.1rem; font-weight: 400; font-family: sans-serif; }
-        .item-desc { font-size: 0.85rem; color: #666; margin-top: 10px; display: block; }
+        .item { border-top: 0.5px solid #bbb; padding-top: 30px; }
+        
+        /* 放大：流月簡算與價格部分 */
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px;}
+        .item-title { font-size: 1.6rem; font-weight: 900; letter-spacing: 0.1rem; }
+        .item-price { font-size: 1.8rem; font-weight: 200; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 0.1rem; }
+        
+        /* 放大：描述部分 */
+        .item-desc { font-size: 1.05rem; color: #444; display: block; line-height: 1.8; }
 
-        /* --- Booking Form --- */
+        /* --- 預約諮詢 --- */
         .booking {
             padding: var(--spacing-unit) 10%;
             background-color: var(--black); color: var(--white);
         }
 
         .booking h2 {
-            font-size: 2rem; letter-spacing: 0.5rem; text-align: center; margin-bottom: 60px;
+            font-size: 2.5rem; letter-spacing: 0.8rem; text-align: center; margin-bottom: 90px; font-weight: 900;
         }
 
         .form-grid {
-            max-width: 700px; margin: 0 auto;
+            max-width: 800px; margin: 0 auto;
         }
 
-        .input-group { margin-bottom: 30px; border-bottom: 0.5px solid #555; }
-        .input-group label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2rem; color: #999; }
+        .input-group { margin-bottom: 40px; border-bottom: 0.5px solid #444; }
+        .input-group label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.3rem; color: #aaa; font-weight: 400; }
         .input-group input, .input-group textarea {
             width: 100%; background: transparent; border: none;
-            color: var(--white); padding: 15px 0; font-size: 1.1rem; outline: none;
-            font-family: inherit;
+            color: var(--white); padding: 20px 0; font-size: 1.2rem; outline: none;
+            font-family: inherit; font-weight: 200;
         }
 
         .btn-submit {
-            display: block; width: 100%; padding: 25px;
+            display: block; width: 100%; padding: 30px;
             background: var(--white); color: var(--black);
             text-align: center; text-decoration: none; font-weight: 900;
-            letter-spacing: 0.5rem; text-transform: uppercase;
-            margin-top: 50px; transition: 0.3s;
+            letter-spacing: 0.8rem; text-transform: uppercase;
+            margin-top: 70px; transition: 0.3s; font-size: 1.2rem;
         }
         .btn-submit:hover { background: #ddd; }
 
-        /* --- Footer --- */
+        /* --- 頁尾 --- */
         footer {
-            padding: 50px; text-align: center; font-size: 0.7rem;
-            letter-spacing: 0.2rem; color: #999; border-top: 0.5px solid #eee;
+            padding: 60px; text-align: center; font-size: 0.8rem;
+            letter-spacing: 0.3rem; color: #888; border-top: 0.5px solid #eee;
+            text-transform: uppercase;
         }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 3rem; }
-            .service-block { padding: 60px 20px; }
+            :root { --spacing-unit: 80px; }
+            .hero-title { font-size: 3.2rem; letter-spacing: 1rem; text-indent: 1rem;}
+            .service-block { padding: 80px 20px; }
+            .service-block .category-name { font-size: 2.2rem; margin-bottom: 50px; }
+            .item-title { font-size: 1.4rem; }
+            .item-price { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -158,13 +188,22 @@
     <nav>運籌當下，明辨天時，擇優而行</nav>
 
     <header class="hero">
+        <div class="logo-wrap">
+            <div class="qzh-logo">
+                <div class="logo-line line-top"></div>
+                <div class="logo-line line-bottom"></div>
+                <div class="logo-line line-left"></div>
+                <div class="logo-line line-right"></div>
+                <div class="logo-dot"></div>
+            </div>
+            <p class="hero-subtitle">專業命理諮詢</p>
+        </div>
         <h1 class="hero-title">權智匯</h1>
         <div class="hero-divider"></div>
-        <p class="hero-subtitle">PROFESSIONAL METAPHYSICS</p>
     </header>
 
     <section class="philosophy">
-        <h2>Brand Philosophy</h2>
+        <h2>品牌理念</h2>
         <p>
             本小組由兩位深研中華傳統文化的伙伴共同創立，結合所長，為有緣人提供專業諮詢。
             真正的命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。
@@ -246,37 +285,37 @@
     </div>
 
     <section class="booking">
-        <h2>APPOINTMENT</h2>
+        <h2>預約諮詢</h2>
         <form class="form-grid" id="contactForm">
             <div class="input-group">
-                <label>Name / 稱呼</label>
+                <label>您的稱呼</label>
                 <input type="text" name="name" required>
             </div>
             <div class="input-group">
-                <label>Contact / WhatsApp</label>
+                <label>聯絡方式 (WHATSAPP)</label>
                 <input type="text" name="contact" required>
             </div>
             <div class="input-group">
-                <label>Information / 出生年月日時</label>
-                <input type="text" name="info" placeholder="YYYY/MM/DD HH:MM">
+                <label>出生資料 (西元年月日時)</label>
+                <input type="text" name="info" placeholder="1993/08/15 14:30">
             </div>
             <div class="input-group">
-                <label>Message / 諮詢問題</label>
+                <label>諮詢問題摘要</label>
                 <textarea name="message" rows="3"></textarea>
             </div>
-            <a href="#" class="btn-submit" id="submitBtn">Send Request</a>
+            <a href="#" class="btn-submit" id="submitBtn">提交預約請求</a>
         </form>
     </section>
 
     <footer>
-        &copy; 2024 QUAN ZHI HUI. ALL RIGHTS RESERVED.
+        &copy; 2026 KEUN CHI WUI. 版權所有.
     </footer>
 
     <script>
         document.getElementById('submitBtn').addEventListener('click', function(e) {
             e.preventDefault();
             const f = new FormData(document.getElementById('contactForm'));
-            const text = `您好，我想諮詢預約：\n稱呼：${f.get('name')}\nWhatsApp：${f.get('contact')}\n資料：${f.get('info')}\n問題：${f.get('message')}`;
+            const text = `您好，我想諮詢預約：\n稱呼：${f.get('name')}\n聯絡：${f.get('contact')}\n資料：${f.get('info')}\n問題：${f.get('message')}`;
             window.open(`https://wa.me/85267113958?text=${encodeURIComponent(text)}`, '_blank');
         });
     </script>
