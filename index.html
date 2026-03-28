@@ -3,255 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>權智匯｜專業命理諮詢</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+    <title>權智匯｜CHANEL Style Minimalism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-red: #4a0000;
-            --bg-deep: #1a0202;
-            --gold: #f8e6ae;
-            --gold-bright: #fff1c7;
-            --gold-soft: #d8ac4f;
-            --text-main: rgba(248, 230, 174, 0.94);
-            --panel: rgba(34, 8, 8, 0.6);
-            --panel-border: rgba(248, 230, 174, 0.2);
+            --white: #ffffff;
+            --light-grey: #f9f9f9;
+            --mid-grey: #eeeeee;
+            --deep-grey: #333333;
+            --black: #1a1a1a;
+            --text-color: #1a1a1a;
+            --spacing-unit: 100px;
         }
 
-        /* --- 背景強化：解決空洞感 --- */
-        html, body {
+        * { box-sizing: border-box; }
+
+        body {
             margin: 0; padding: 0;
-            min-height: 100vh;
-            background: radial-gradient(circle at center, var(--bg-red) 0%, var(--bg-deep) 70%, #000 100%);
-            color: var(--gold);
+            background-color: var(--white);
+            color: var(--text-color);
             font-family: "Noto Serif TC", serif;
-            scroll-behavior: smooth;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* 全域星塵與紙質質感 */
-        body::before {
-            content: "";
-            position: fixed; inset: 0;
-            background-image: 
-                radial-gradient(1.2px 1.2px at 15% 25%, rgba(255, 255, 255, 0.4), transparent),
-                radial-gradient(1.8px 1.8px at 80% 15%, rgba(255, 255, 255, 0.3), transparent),
-                url('https://www.transparenttextures.com/patterns/natural-paper.png'); /* 增加質感 */
-            background-size: 250px 250px, 250px 250px, auto;
-            opacity: 0.4;
-            z-index: 1;
-            pointer-events: none;
+        /* --- Header / Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; height: 70px;
+            background: var(--white); z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
+            border-bottom: 0.5px solid #e5e5e5;
+            text-transform: uppercase; letter-spacing: 0.3rem; font-size: 0.8rem;
         }
 
-        .navbar {
-            position: fixed; top: 0; width: 100%; padding: 18px 0;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--panel-border); z-index: 1000;
-            text-align: center;
+        /* --- Hero Section --- */
+        .hero {
+            height: 80vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; padding-top: 70px;
+            background-color: var(--white);
         }
-        .nav-logo { color: var(--gold); text-decoration: none; font-weight: 700; letter-spacing: 0.15rem; font-size: 1.1rem; }
 
-        /* --- 標題區視覺 --- */
-        .hero-section {
-            position: relative;
-            padding: 160px 20px 60px;
-            text-align: center;
-            z-index: 10;
-        }
-        .hero-glow {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: min(90vw, 500px); height: min(90vw, 500px);
-            background: radial-gradient(circle, rgba(216, 172, 79, 0.25) 0%, transparent 70%);
-            filter: blur(40px); z-index: -1;
-        }
         .hero-title {
-            font-size: clamp(3.8rem, 12vw, 7rem);
-            margin: 0; color: var(--gold-bright); font-weight: 900;
-            letter-spacing: 0.6rem;
-            text-shadow: 0 0 25px rgba(216, 172, 79, 0.5);
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 900; letter-spacing: 1.2rem;
+            margin: 0; text-indent: 1.2rem; /* 抵消最後一個字的字距 */
         }
+
         .hero-divider {
-            width: 100px; height: 1.5px;
-            background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
-            margin: 25px auto;
+            width: 40px; height: 1.5px;
+            background: var(--black); margin: 40px 0;
         }
 
-        /* --- 內容容器 --- */
-        .main-container {
-            width: min(1120px, calc(100% - 40px));
-            margin: 0 auto 100px;
-            display: grid; gap: 28px;
-            z-index: 20; position: relative;
+        .hero-subtitle {
+            font-size: 1rem; font-weight: 400;
+            letter-spacing: 0.5rem; color: #666;
         }
-        .block {
-            background: var(--panel);
-            border: 1px solid var(--panel-border);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            backdrop-filter: blur(5px);
-        }
-        .section-title {
-            text-align: center; color: var(--gold-bright); font-size: 2.2rem; margin-bottom: 35px;
-            display: flex; align-items: center; gap: 15px; justify-content: center;
-        }
-        .section-title::before, .section-title::after { content: ""; flex: 1; max-width: 60px; height: 1px; background: var(--gold-soft); opacity: 0.5; }
 
-        /* --- 服務項目：完整保留內容 --- */
-        .services-layout {
+        /* --- Brand Philosophy --- */
+        .philosophy {
+            padding: var(--spacing-unit) 20px;
+            max-width: 800px; margin: 0 auto;
+            text-align: center;
+        }
+
+        .philosophy h2 {
+            font-size: 0.9rem; letter-spacing: 0.4rem;
+            text-transform: uppercase; margin-bottom: 50px;
+        }
+
+        .philosophy p {
+            font-size: 1.2rem; font-weight: 400;
+            line-height: 2.2; color: #333;
+        }
+
+        /* --- Service Blocks (模仿上傳圖片的階梯式設計) --- */
+        .service-container { width: 100%; }
+
+        .service-block {
+            width: 100%; padding: 80px 10%;
+            display: flex; flex-direction: column;
+            transition: background 0.4s ease;
+        }
+
+        /* 不同灰度的背景 */
+        .block-1 { background-color: #fcfcfc; } /* 八字大批 */
+        .block-2 { background-color: #f5f5f5; } /* 流年月批 */
+        .block-3 { background-color: #ededed; } /* 占卜問事 */
+        .block-4 { background-color: #e2e2e2; } /* 特別項目 */
+
+        .service-block .category-name {
+            font-size: 2rem; font-weight: 900;
+            margin-bottom: 40px; letter-spacing: 0.2rem;
+        }
+
+        .service-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-        .service-group {
-            border-radius: 20px; border: 1px solid rgba(248, 230, 174, 0.15);
-            background: rgba(0, 0, 0, 0.25); padding: 24px;
-        }
-        .group-title { text-align: center; color: var(--gold-bright); margin-bottom: 20px; font-size: 1.4rem; letter-spacing: 0.1rem; }
-        
-        .service-card {
-            border-radius: 16px; border: 1px solid rgba(248, 230, 174, 0.15);
-            background: rgba(0, 0, 0, 0.4); padding: 18px;
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
-        }
-        .service-name { font-size: 1.1rem; color: var(--gold); margin: 0; font-weight: 700; }
-        .service-price { font-weight: 900; color: var(--gold-bright); font-size: 1.15rem; }
-        .service-detail { font-size: 0.85rem; color: rgba(248, 230, 174, 0.6); display: block; margin-top: 4px; }
-
-        /* --- 表單 --- */
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; margin-bottom: 8px; color: var(--gold-soft); font-weight: 700; }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 14px; border-radius: 12px; box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.5); border: 1px solid var(--panel-border); color: #fff; font-size: 1rem;
-        }
-        .submit-btn {
-            display: block; width: 100%; padding: 18px; text-align: center;
-            background: linear-gradient(150deg, #fff7db, #f5d685, #e0af40);
-            color: #4a1407; font-weight: 900; text-decoration: none; border-radius: 50px;
-            font-size: 1.1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.4); margin-top: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
         }
 
-        .wa-float {
-            position: fixed; right: 22px; bottom: 22px; z-index: 1000;
-            background: linear-gradient(150deg, #fff7db, #f5d685, #e0af40);
-            padding: 14px 24px; border-radius: 50px; color: #4a1407;
-            text-decoration: none; font-weight: 900; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        .item { border-top: 0.5px solid #ccc; padding-top: 20px; }
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; }
+        .item-title { font-size: 1.1rem; font-weight: 700; }
+        .item-price { font-size: 1.1rem; font-weight: 400; font-family: sans-serif; }
+        .item-desc { font-size: 0.85rem; color: #666; margin-top: 10px; display: block; }
+
+        /* --- Booking Form --- */
+        .booking {
+            padding: var(--spacing-unit) 10%;
+            background-color: var(--black); color: var(--white);
+        }
+
+        .booking h2 {
+            font-size: 2rem; letter-spacing: 0.5rem; text-align: center; margin-bottom: 60px;
+        }
+
+        .form-grid {
+            max-width: 700px; margin: 0 auto;
+        }
+
+        .input-group { margin-bottom: 30px; border-bottom: 0.5px solid #555; }
+        .input-group label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2rem; color: #999; }
+        .input-group input, .input-group textarea {
+            width: 100%; background: transparent; border: none;
+            color: var(--white); padding: 15px 0; font-size: 1.1rem; outline: none;
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            display: block; width: 100%; padding: 25px;
+            background: var(--white); color: var(--black);
+            text-align: center; text-decoration: none; font-weight: 900;
+            letter-spacing: 0.5rem; text-transform: uppercase;
+            margin-top: 50px; transition: 0.3s;
+        }
+        .btn-submit:hover { background: #ddd; }
+
+        /* --- Footer --- */
+        footer {
+            padding: 50px; text-align: center; font-size: 0.7rem;
+            letter-spacing: 0.2rem; color: #999; border-top: 0.5px solid #eee;
         }
 
         @media (max-width: 768px) {
-            .block { padding: 30px 20px; }
-            .section-title { font-size: 1.8rem; }
+            .hero-title { font-size: 3rem; }
+            .service-block { padding: 60px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar"><a href="#" class="nav-logo">運籌當下，明辨天時，擇優而行</a></nav>
+    <nav>運籌當下，明辨天時，擇優而行</nav>
 
-    <header class="hero-section">
-        <div class="hero-glow"></div>
+    <header class="hero">
         <h1 class="hero-title">權智匯</h1>
         <div class="hero-divider"></div>
-        <p style="font-size: 1.3rem; opacity: 0.9;">專業命理諮詢：八字、紫微、占卜</p>
+        <p class="hero-subtitle">PROFESSIONAL METAPHYSICS</p>
     </header>
 
-    <main class="main-container">
-        <section class="block">
-            <h2 class="section-title">品牌理念</h2>
-            <div style="text-align: center; line-height: 2.1; max-width: 800px; margin: 0 auto;">
-                <p>本小組由兩位深研中華傳統文化的伙伴共同創立，結合所長，為有緣人提供專業諮詢。</p>
-                <p>真正的命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。</p>
-            </div>
-        </section>
+    <section class="philosophy">
+        <h2>Brand Philosophy</h2>
+        <p>
+            本小組由兩位深研中華傳統文化的伙伴共同創立，結合所長，為有緣人提供專業諮詢。
+            真正的命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。
+        </p>
+    </section>
 
-        <section class="block">
-            <h2 class="section-title">服務及收費</h2>
-            <div class="services-layout">
-                <div class="service-group">
-                    <h3 class="group-title">八字類別</h3>
-                    <div class="service-card">
-                        <div><p class="service-name">八字排盤</p><span class="service-detail">性格批註</span></div>
-                        <span class="service-price">$88</span>
-                    </div>
-                    <div class="service-card">
-                        <div><p class="service-name">八字小批</p><span class="service-detail">命格專業分析</span></div>
-                        <span class="service-price">$388</span>
-                    </div>
-                    <div class="service-card">
-                        <div><p class="service-name">八字大批</p><span class="service-detail">詳細命格+半年大運</span></div>
-                        <span class="service-price">$2888</span>
-                    </div>
+    <div class="service-container">
+        <section class="service-block block-1">
+            <div class="category-name">八字類別</div>
+            <div class="service-list">
+                <div class="item">
+                    <div class="item-header"><span class="item-title">八字排盤</span><span class="item-price">$88</span></div>
+                    <span class="item-desc">性格批註與基本格局</span>
                 </div>
-
-                <div class="service-group">
-                    <h3 class="group-title">流年月批</h3>
-                    <div class="service-card">
-                        <div><p class="service-name">流月簡算</p><span class="service-detail">當月運程</span></div>
-                        <span class="service-price">$688</span>
-                    </div>
-                    <div class="service-card">
-                        <div><p class="service-name">流月詳算</p><span class="service-detail">當月運程詳批</span></div>
-                        <span class="service-price">$1288</span>
-                    </div>
-                    <div class="service-card">
-                        <div><p class="service-name">流年簡批</p><span class="service-detail">當年運程</span></div>
-                        <span class="service-price">$688</span>
-                    </div>
-                    <div class="service-card">
-                        <div><p class="service-name">流年詳批</p><span class="service-detail">當年運程詳批</span></div>
-                        <span class="service-price">$1288</span>
-                    </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">八字小批</span><span class="item-price">$388</span></div>
+                    <span class="item-desc">命格深度分析、強弱、喜用神</span>
                 </div>
-
-                <div class="service-group">
-                    <h3 class="group-title">占卜問事</h3>
-                    <div class="service-card">
-                        <div><p class="service-name">尋龍尺問事</p><span class="service-detail">單次收費</span></div>
-                        <span class="service-price">$88</span>
-                    </div>
-                    <div class="service-card">
-                        <div><p class="service-name">八字占卜</p><span class="service-detail">單次收費</span></div>
-                        <span class="service-price">$238</span>
-                    </div>
-                </div>
-
-                <div class="service-group">
-                    <h3 class="group-title">特別項目</h3>
-                    <div class="service-card">
-                        <div><p class="service-name">合婚</p><span class="service-detail">雙方命盤契合度分析</span></div>
-                        <span class="service-price">$1338</span>
-                    </div>
-                    <div class="service-card">
-                        <div><p class="service-name">寶寶出生擇日</p><span class="service-detail">提供3個優選時段</span></div>
-                        <span class="service-price">$1888</span>
-                    </div>
-                    <div class="service-card">
-                        <div><p class="service-name">起名 / 改名</p><span class="service-detail">提供3個建議名額</span></div>
-                        <span class="service-price">$688</span>
-                    </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">八字大批</span><span class="item-price">$2888</span></div>
+                    <span class="item-desc">包含命格詳解、各項指標批註及半年大運詳批</span>
                 </div>
             </div>
         </section>
 
-        <section class="block">
-            <h2 class="section-title">預約諮詢</h2>
-            <form id="consultForm">
-                <div class="form-group"><label>您的稱呼</label><input type="text" name="name" placeholder="例如：陳小姐"></div>
-                <div class="form-group"><label>出生資料</label><input type="text" name="birth" placeholder="例如：1993/08/15 申時，女"></div>
-                <div class="form-group"><label>預約項目</label><input type="text" name="service" placeholder="例如：八字大批"></div>
-                <div class="form-group"><label>問題摘要</label><textarea name="msg" rows="3" placeholder="請簡述您的情況"></textarea></div>
-                <a href="#" id="submitBtn" class="submit-btn">整理內容並送到 WhatsApp</a>
-            </form>
+        <section class="service-block block-2">
+            <div class="category-name">流年月批</div>
+            <div class="service-list">
+                <div class="item">
+                    <div class="item-header"><span class="item-title">流月簡算</span><span class="item-price">$688</span></div>
+                    <span class="item-desc">針對單月運程之重點提示</span>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">流月詳算</span><span class="item-price">$1288</span></div>
+                    <span class="item-desc">當月運程全盤詳析（包括感情、財運、事業）</span>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">流年簡批</span><span class="item-price">$688</span></div>
+                    <span class="item-desc">當年運勢概況與重要月份提醒</span>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">流年詳批</span><span class="item-price">$1288</span></div>
+                    <span class="item-desc">整年運勢各面向詳細深度報告</span>
+                </div>
+            </div>
         </section>
-    </main>
 
-    <a href="https://wa.me/85267113958" class="wa-float" target="_blank">WhatsApp 快速諮詢</a>
+        <section class="service-block block-3">
+            <div class="category-name">占卜問事</div>
+            <div class="service-list">
+                <div class="item">
+                    <div class="item-header"><span class="item-title">尋龍尺問事</span><span class="item-price">$88</span></div>
+                    <span class="item-desc">針對單一是非問題進行探測</span>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">八字占卜</span><span class="item-price">$238</span></div>
+                    <span class="item-desc">結合個人命盤針對特定事件起卦</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-block block-4">
+            <div class="category-name">特別項目</div>
+            <div class="service-list">
+                <div class="item">
+                    <div class="item-header"><span class="item-title">合婚</span><span class="item-price">$1338</span></div>
+                    <span class="item-desc">雙方命盤契合度分析、相處之道</span>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">寶寶出生擇日</span><span class="item-price">$1888</span></div>
+                    <span class="item-desc">根據八字擇優，提供3個優選時段選擇</span>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">起名 / 改名</span><span class="item-price">$688</span></div>
+                    <span class="item-desc">五行分析，提供3個符合命格的建議名額</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="booking">
+        <h2>APPOINTMENT</h2>
+        <form class="form-grid" id="contactForm">
+            <div class="input-group">
+                <label>Name / 稱呼</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="input-group">
+                <label>Contact / WhatsApp</label>
+                <input type="text" name="contact" required>
+            </div>
+            <div class="input-group">
+                <label>Information / 出生年月日時</label>
+                <input type="text" name="info" placeholder="YYYY/MM/DD HH:MM">
+            </div>
+            <div class="input-group">
+                <label>Message / 諮詢問題</label>
+                <textarea name="message" rows="3"></textarea>
+            </div>
+            <a href="#" class="btn-submit" id="submitBtn">Send Request</a>
+        </form>
+    </section>
+
+    <footer>
+        &copy; 2024 QUAN ZHI HUI. ALL RIGHTS RESERVED.
+    </footer>
 
     <script>
         document.getElementById('submitBtn').addEventListener('click', function(e) {
             e.preventDefault();
-            const f = new FormData(document.getElementById('consultForm'));
-            const text = `您好，我想諮詢預約：\n稱呼：${f.get('name')}\n出生資料：${f.get('birth')}\n項目：${f.get('service')}\n問題：${f.get('msg')}`;
+            const f = new FormData(document.getElementById('contactForm'));
+            const text = `您好，我想諮詢預約：\n稱呼：${f.get('name')}\nWhatsApp：${f.get('contact')}\n資料：${f.get('info')}\n問題：${f.get('message')}`;
             window.open(`https://wa.me/85267113958?text=${encodeURIComponent(text)}`, '_blank');
         });
     </script>
