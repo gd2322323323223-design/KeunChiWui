@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>權智匯｜專業命理諮詢</title>
+    <meta name="description" content="權智匯提供八字、紫微斗數與占卜命理諮詢，助你明辨天時，為事業、感情與人生規劃。">
+    <title>權智匯｜運籌當下，明辨天時</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        /* ── 核心樣式設定 (不影響內容) ── */
         :root {
             --bg-red: #8b0000; --bg-deep: #300000; --bg-night: #160203;
             --gold: #f8e6ae; --gold-bright: #fff1c7; --gold-soft: #d8ac4f;
             --text-main: rgba(248, 230, 174, 0.94);
-            --panel: rgba(34, 8, 8, 0.42);
-            --panel-border: rgba(248, 230, 174, 0.16);
+            --panel: rgba(34, 8, 8, 0.45);
+            --panel-border: rgba(248, 230, 174, 0.18);
         }
 
         html, body {
@@ -22,152 +22,192 @@
             scroll-behavior: smooth;
         }
 
+        /* 導覽列 */
         .navbar {
-            position: fixed; top: 0; width: 100%; padding: 20px 0;
-            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px);
+            position: fixed; top: 0; width: 100%; padding: 18px 0;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--panel-border); z-index: 100; text-align: center;
         }
+        .nav-logo { color: var(--gold); text-decoration: none; font-weight: 700; letter-spacing: 0.2rem; font-size: 1.05rem; }
 
-        .nav-logo { color: var(--gold); text-decoration: none; font-weight: 700; letter-spacing: 0.15rem; font-size: 1.1rem; }
+        /* --- 標題區裝飾 (視覺圖效果) --- */
+        .hero-section { 
+            padding: clamp(140px, 20vh, 200px) 20px 60px; 
+            text-align: center; 
+            position: relative;
+            overflow: hidden;
+        }
 
-        .hero-section { padding: 180px 20px 60px; text-align: center; }
-        .hero-title { font-size: clamp(3.5rem, 12vw, 7rem); margin: 0; color: var(--gold-bright); }
-        .hero-divider { width: 80px; height: 2px; background: var(--gold-soft); margin: 30px auto; }
+        /* 背景淡淡的星盤圖騰 */
+        .hero-bg-symbol {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 500px; height: 500px;
+            background: url('https://www.transparenttextures.com/patterns/sacred-geometry.png'); /* 淡淡的幾何紋理 */
+            opacity: 0.05; pointer-events: none; z-index: 0;
+        }
 
-        .onepage-sections { width: min(1120px, calc(100% - 40px)); margin: 0 auto 100px; display: grid; gap: 26px; }
+        .hero-title-wrap { position: relative; z-index: 1; display: inline-block; }
         
-        /* 大區塊方框 */
+        .hero-title { 
+            font-size: clamp(3.8rem, 12vw, 7.5rem); 
+            margin: 0; color: var(--gold-bright); 
+            font-weight: 900; letter-spacing: 0.6rem;
+            text-shadow: 0 0 20px rgba(216, 172, 79, 0.4);
+        }
+
+        /* 標題下方的 ✦ 裝飾線 */
+        .hero-decoration {
+            display: flex; align-items: center; justify-content: center; margin: 25px auto;
+        }
+        .line-gold { width: 50px; height: 1px; background: linear-gradient(to var(--dir, right), transparent, var(--gold-soft)); }
+        .star-gold { margin: 0 15px; color: var(--gold-soft); font-size: 0.9rem; opacity: 0.8; }
+
+        .hero-description { font-size: 1.25rem; line-height: 2; color: var(--text-main); font-weight: 400; }
+
+        /* 主容器 */
+        .onepage-sections { width: min(1120px, calc(100% - 40px)); margin: 0 auto 100px; display: grid; gap: 30px; }
+        
         .onepage-block {
-            border-radius: 24px;
-            border: 1px solid var(--panel-border);
-            background: var(--panel);
-            padding: 40px;
+            border-radius: 24px; border: 1px solid var(--panel-border);
+            background: var(--panel); padding: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
         .section-title {
             text-align: center; font-size: 2.2rem; color: var(--gold-bright); margin-bottom: 30px;
             display: flex; align-items: center; gap: 15px; justify-content: center;
         }
-        .section-title::before, .section-title::after { content: ""; flex: 1; max-width: 60px; height: 1px; background: var(--gold-soft); opacity: 0.5; }
+        .section-title::before, .section-title::after { content: ""; flex: 1; max-width: 60px; height: 1px; background: var(--gold-soft); opacity: 0.4; }
 
-        /* ── 服務項目方格修復 (重點) ── */
-        .services-layout {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 電腦版兩欄排列 */
-            gap: 20px;
-            margin-top: 24px;
+        /* 服務項目方格排列 */
+        .services-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+        .service-group { 
+            border-radius: 20px; border: 1px solid rgba(248, 230, 174, 0.12);
+            background: rgba(0, 0, 0, 0.25); padding: 22px; 
         }
+        .group-title { text-align: center; color: var(--gold-bright); margin-bottom: 20px; font-size: 1.4rem; letter-spacing: 0.1rem; }
 
-        .service-group {
-            border-radius: 20px;
-            border: 1px solid rgba(248, 230, 174, 0.16);
-            background: rgba(0, 0, 0, 0.2);
-            padding: 20px;
-        }
-
-        .group-title { text-align: center; color: var(--gold-bright); margin-bottom: 15px; font-size: 1.3rem; letter-spacing: 0.1rem; }
-
-        .service-cards { display: grid; gap: 12px; }
-
-        /* 這是你要求的小方格視覺 */
+        /* 金色小方格 */
         .service-card {
-            border-radius: 16px;
-            border: 1.5px solid rgba(248, 230, 174, 0.25) !important; /* 強制顯眼邊框 */
-            background: rgba(0, 0, 0, 0.4) !important; /* 加深底色 */
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
+            border-radius: 16px; border: 1.5px solid rgba(248, 230, 174, 0.28) !important;
+            background: rgba(0, 0, 0, 0.45) !important; padding: 18px;
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
         }
+        .service-name { font-size: 1.08rem; color: var(--gold); margin: 0; font-weight: 700; }
+        .service-price { font-weight: 900; color: var(--gold-bright); font-size: 1.15rem; }
+        .service-detail { font-size: 0.88rem; color: rgba(248, 230, 174, 0.65); display: block; margin-top: 2px; }
 
-        .service-name { font-size: 1.05rem; color: var(--gold); margin: 0; }
-        .service-meta { text-align: right; }
-        .service-price { font-weight: 700; color: var(--gold-bright); font-size: 1.1rem; margin-bottom: 2px; }
-        .service-detail { font-size: 0.85rem; color: rgba(248, 230, 174, 0.7); }
-
-        /* 諮詢表單小方格 */
-        .contact-form-grid label { display: block; margin-top: 15px; color: var(--gold-bright); font-size: 0.95rem; }
+        /* 表單設計 */
+        .contact-form-grid label { display: block; margin-top: 18px; color: var(--gold-soft); font-weight: 700; }
         .contact-form-grid input, .contact-form-grid textarea {
-            width: 100%; padding: 12px; margin-top: 8px;
-            border-radius: 12px; border: 1px solid rgba(248, 230, 174, 0.2);
-            background: rgba(0, 0, 0, 0.5); color: white; box-sizing: border-box;
+            width: 100%; padding: 14px; margin-top: 8px; border-radius: 12px;
+            border: 1px solid rgba(248, 230, 174, 0.2); background: rgba(0, 0, 0, 0.5);
+            color: white; font-size: 1rem; box-sizing: border-box;
         }
-
         .contact-form-wa {
-            display: block; width: 100%; padding: 16px; margin-top: 25px; text-align: center;
+            display: block; width: 100%; padding: 18px; margin-top: 30px; text-align: center;
             border-radius: 50px; background: linear-gradient(150deg, #fff7db, #f5d685, #e0af40);
-            color: #4a1407; font-weight: 900; text-decoration: none; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            color: #4a1407; font-weight: 900; text-decoration: none; font-size: 1.15rem;
         }
 
         @media (max-width: 768px) {
-            .services-layout { grid-template-columns: 1fr; } /* 手機改為一欄 */
+            .hero-section { padding-top: 130px; }
             .onepage-block { padding: 25px 20px; }
-            .section-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.85rem; }
+            .service-card { padding: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar"><a href="#" class="nav-logo">專業批算，深度解讀</a></nav>
+    <nav class="navbar"><a href="#" class="nav-logo">運籌當下，明辨天時，擇優而行</a></nav>
 
     <header class="hero-section">
-        <h1 class="hero-title">權智匯</h1>
-        <div class="hero-divider"></div>
+        <div class="hero-bg-symbol"></div>
+        <div class="hero-title-wrap">
+            <h1 class="hero-title">權智匯</h1>
+            <div class="hero-decoration">
+                <div class="line-gold" style="--dir: right"></div>
+                <div class="star-gold">✦</div>
+                <div class="line-gold" style="--dir: left"></div>
+            </div>
+        </div>
+        <p class="hero-description">專業命理諮詢：八字、紫微、占卜</p>
     </header>
 
     <main class="onepage-sections">
         
         <section class="onepage-block">
             <h2 class="section-title">品牌理念</h2>
-            <div style="margin-top:28px;">
-                <p style="text-indent:2em;line-height:2.1;margin-bottom:18px;">
-                  本小組由兩位深研中華傳統文化的伙伴共同創立，結合所長，為有緣人提供專業、真誠的命理諮詢服務。
-                </p>
-                <p style="text-indent:2em;line-height:2.1;">
-                  真正的命理服務，不是宿命的斷言，而是幫助您看清天時、地利、人和，為人生作出更明智的選擇。
-                </p>
+            <div style="margin-top:20px; text-align: center; line-height: 2.2;">
+                <p>本小組由兩位深研中華傳統文化的伙伴共同創立，結合所長，為有緣人提供專業諮詢。</p>
+                <p>真正的命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。</p>
             </div>
         </section>
 
         <section class="onepage-block">
             <h2 class="section-title">服務及收費</h2>
-            <p style="text-align:center; color:rgba(248, 230, 174, 0.8); margin-bottom:30px;">根據你的需求，提供不同深度的命理分析與問事方案，所有收費公開透明。</p>
-            
             <div class="services-layout">
                 <div class="service-group">
                     <h3 class="group-title">八字類別</h3>
-                    <div class="service-cards">
-                        <div class="service-card"><p class="service-name">八字排盤</p><div class="service-meta"><div class="service-price">$88</div><div class="service-detail">性格批註</div></div></div>
-                        <div class="service-card"><p class="service-name">八字小批</p><div class="service-meta"><div class="service-price">$388</div><div class="service-detail">命格專業分析</div></div></div>
-                        <div class="service-card"><p class="service-name">八字大批</p><div class="service-meta"><div class="service-price">$2888</div><div class="service-detail">詳細命格+半年大運</div></div></div>
+                    <div class="service-card">
+                        <p class="service-name">八字排盤<span class="service-detail">性格批註</span></p>
+                        <span class="service-price">$88</span>
+                    </div>
+                    <div class="service-card">
+                        <p class="service-name">八字小批<span class="service-detail">命格專業分析</span></p>
+                        <span class="service-price">$388</span>
+                    </div>
+                    <div class="service-card">
+                        <p class="service-name">八字大批<span class="service-detail">詳細命格+半年大運</span></p>
+                        <span class="service-price">$2888</span>
                     </div>
                 </div>
 
                 <div class="service-group">
                     <h3 class="group-title">流年月批</h3>
-                    <div class="service-cards">
-                        <div class="service-card"><p class="service-name">流月簡算</p><div class="service-meta"><div class="service-price">$688</div><div class="service-detail">當月運程</div></div></div>
-                        <div class="service-card"><p class="service-name">流月詳算</p><div class="service-meta"><div class="service-price">$1288</div><div class="service-detail">當月運程詳批</div></div></div>
-                        <div class="service-card"><p class="service-name">流年簡批</p><div class="service-meta"><div class="service-price">$688</div><div class="service-detail">當年運程</div></div></div>
-                        <div class="service-card"><p class="service-name">流年詳批</p><div class="service-meta"><div class="service-price">$1288</div><div class="service-detail">當年運程詳批</div></div></div>
+                    <div class="service-card">
+                        <p class="service-name">流月簡算<span class="service-detail">當月運程</span></p>
+                        <span class="service-price">$688</span>
+                    </div>
+                    <div class="service-card">
+                        <p class="service-name">流月詳算<span class="service-detail">當月運程詳批</span></p>
+                        <span class="service-price">$1288</span>
+                    </div>
+                    <div class="service-card">
+                        <p class="service-name">流年簡批<span class="service-detail">當年運程</span></p>
+                        <span class="service-price">$688</span>
+                    </div>
+                    <div class="service-card">
+                        <p class="service-name">流年詳批<span class="service-detail">當年運程詳批</span></p>
+                        <span class="service-price">$1288</span>
                     </div>
                 </div>
 
                 <div class="service-group">
                     <h3 class="group-title">占卜問事</h3>
-                    <div class="service-cards">
-                        <div class="service-card"><p class="service-name">尋龍尺問事</p><div class="service-meta"><div class="service-price">$88</div><div class="service-detail">單次收費</div></div></div>
-                        <div class="service-card"><p class="service-name">八字占卜</p><div class="service-meta"><div class="service-price">$238</div><div class="service-detail">單次收費</div></div></div>
+                    <div class="service-card">
+                        <p class="service-name">尋龍尺問事<span class="service-detail">單次收費</span></p>
+                        <span class="service-price">$88</span>
+                    </div>
+                    <div class="service-card">
+                        <p class="service-name">八字占卜<span class="service-detail">單次收費</span></p>
+                        <span class="service-price">$238</span>
                     </div>
                 </div>
 
                 <div class="service-group">
                     <h3 class="group-title">特別項目</h3>
-                    <div class="service-cards">
-                        <div class="service-card"><p class="service-name">合婚</p><div class="service-meta"><div class="service-price">$1338</div><div class="service-detail">單次收費</div></div></div>
-                        <div class="service-card"><p class="service-name">寶寶出生擇日</p><div class="service-meta"><div class="service-price">$1888</div><div class="service-detail">3個選擇</div></div></div>
-                        <div class="service-card"><p class="service-name">起名 / 改名</p><div class="service-meta"><div class="service-price">$688</div><div class="service-detail">3個選擇</div></div></div>
+                    <div class="service-card">
+                        <p class="service-name">合婚<span class="service-detail">雙方命盤契合度</span></p>
+                        <span class="service-price">$1338</span>
+                    </div>
+                    <div class="service-card">
+                        <p class="service-name">寶寶出生擇日<span class="service-detail">3個優選時段</span></p>
+                        <span class="service-price">$1888</span>
+                    </div>
+                    <div class="service-card">
+                        <p class="service-name">起名 / 改名<span class="service-detail">提供3個建議</span></p>
+                        <span class="service-price">$688</span>
                     </div>
                 </div>
             </div>
@@ -175,36 +215,24 @@
 
         <section class="onepage-block">
             <h2 class="section-title">預約諮詢</h2>
-            <div class="contact-form-wrap">
-                <form id="contact-form" class="contact-form-grid">
-                    <label>稱呼<input type="text" name="name" placeholder="例如：陳小姐"></label>
-                    <label>聯絡方式<input type="text" name="contact" placeholder="例如：WhatsApp / 電話"></label>
-                    <label>出生資料<input type="text" name="birth" placeholder="例如：1993/08/15 申時，女"></label>
-                    <label>想了解的服務<input type="text" name="service" placeholder="例如：八字大批、流年詳批"></label>
-                    <label>問題摘要<textarea name="message" placeholder="例如：想看今年轉工時機..."></textarea></label>
-                    <a href="#" id="contact-form-submit" class="contact-form-wa">整理內容並送到 WhatsApp</a>
-                </form>
-            </div>
+            <form id="contactForm" class="contact-form-grid">
+                <label>稱呼<input type="text" name="name" placeholder="例如：陳小姐"></label>
+                <label>聯絡方式<input type="text" name="contact" placeholder="例如：WhatsApp"></label>
+                <label>想了解的服務<input type="text" name="service" placeholder="例如：八字大批"></label>
+                <label>問題摘要<textarea name="message" rows="4" placeholder="請描述您的問題..."></textarea></label>
+                <a href="#" id="submitBtn" class="contact-form-wa">整理內容並送到 WhatsApp</a>
+            </form>
         </section>
 
     </main>
 
     <script>
-        (function () {
-            const form = document.getElementById("contact-form");
-            const submit = document.getElementById("contact-form-submit");
-
-            submit.addEventListener("click", (e) => {
-                e.preventDefault();
-                const formData = new FormData(form);
-                const name = formData.get("name") || "";
-                const service = formData.get("service") || "";
-                const message = formData.get("message") || "";
-                
-                const text = `您好，我想預約命理諮詢。\n稱呼：${name}\n服務項目：${service}\n問題摘要：${message}`;
-                window.open(`https://wa.me/85267113958?text=${encodeURIComponent(text)}`, '_blank');
-            });
-        })();
+        document.getElementById("submitBtn").addEventListener("click", function(e) {
+            e.preventDefault();
+            const f = new FormData(document.getElementById("contactForm"));
+            const text = `您好，我想諮詢預約。\n稱呼：${f.get('name')}\n服務：${f.get('service')}\n摘要：${f.get('message')}`;
+            window.open(`https://wa.me/85267113958?text=${encodeURIComponent(text)}`, '_blank');
+        });
     </script>
 </body>
 </html>
