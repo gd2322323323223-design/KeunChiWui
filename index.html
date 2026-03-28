@@ -24,7 +24,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- 導覽列優化：精簡為黑色粗體關鍵字 --- */
+        /* --- 導覽列：黑色粗體關鍵字與 WhatsApp 按鈕 --- */
         nav {
             position: fixed; top: 0; width: 100%; height: 80px;
             background: rgba(255, 255, 255, 0.98); z-index: 1000;
@@ -84,26 +84,31 @@
             white-space: nowrap;
         }
 
-        /* --- 服務項目與理念 --- */
+        /* --- 品牌理念 --- */
         .philosophy { padding: var(--spacing-unit) 20px; max-width: 900px; margin: 0 auto; text-align: center; }
         .philosophy h2 { font-size: 1.1rem; letter-spacing: 0.6rem; margin-bottom: 60px; font-weight: 400; }
         .philosophy p { font-size: 1.4rem; line-height: 2.5; }
 
+        /* --- 服務項目佈局 (內容 + 圖片) --- */
         .service-container { width: 100%; }
         .service-block { width: 100%; padding: 120px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        
         .block-1 { background-color: #fcfcfc; }
         .block-2 { background-color: #f5f5f5; }
         .block-3 { background-color: #ededed; }
         .block-4 { background-color: #e2e2e2; }
+
+        /* 圖片位置交錯 */
         .block-1 .block-image, .block-3 .block-image { grid-column: 2; }
         .block-1 .block-content, .block-3 .block-content { grid-column: 1; grid-row: 1; }
-        .block-image svg { width: 70%; height: 70%; opacity: 0.8; }
+        .block-image svg { width: 60%; height: 60%; opacity: 0.8; }
         
         .category-name { font-size: 2.8rem; font-weight: 900; margin-bottom: 60px; letter-spacing: 0.4rem; }
-        .item { border-top: 1px solid #ccc; padding-top: 30px; margin-bottom: 40px; }
+        .item { border-top: 1px solid #ccc; padding-top: 25px; margin-bottom: 35px; }
         .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;}
         .item-title { font-size: 1.6rem; font-weight: 900; }
         .item-price { font-size: 1.8rem; font-weight: 200; font-family: sans-serif; }
+        .item-desc { font-size: 1rem; color: #444; }
 
         /* --- 預約表單 --- */
         .booking { padding: var(--spacing-unit) 10%; background-color: var(--black); color: var(--white); }
@@ -111,23 +116,19 @@
         .form-grid { max-width: 800px; margin: 0 auto; }
         .input-group { margin-bottom: 40px; border-bottom: 0.5px solid #444; }
         .input-group label { font-size: 0.8rem; letter-spacing: 0.2rem; color: #aaa; }
-        .input-group input { width: 100%; background: transparent; border: none; color: var(--white); padding: 15px 0; font-size: 1.2rem; outline: none; }
+        .input-group input, .input-group textarea { width: 100%; background: transparent; border: none; color: var(--white); padding: 15px 0; font-size: 1.2rem; outline: none; font-family: inherit; }
         .btn-submit { display: block; width: 100%; padding: 25px; background: var(--white); color: var(--black); text-align: center; text-decoration: none; font-weight: 900; letter-spacing: 0.8rem; margin-top: 50px; }
 
         footer { padding: 40px; text-align: center; font-size: 0.8rem; letter-spacing: 0.3rem; color: #888; }
 
-        /* --- 手機版響應式修正 --- */
         @media (max-width: 768px) {
             nav { height: 70px; padding: 0 15px; }
-            /* 手機版字體微調，確保不換行 */
-            .nav-left { font-size: 0.95rem; letter-spacing: 0.1rem; }
-            .nav-right a { font-size: 0.75rem; padding: 8px 12px; letter-spacing: 0.1rem; }
-            
-            .hero-subtitle { font-size: 0.9rem; letter-spacing: 0.2rem; text-indent: 0.2rem; }
-            .hero-title { font-size: 3.2rem; letter-spacing: 0.8rem; text-indent: 0.8rem; }
-            
+            .nav-left { font-size: 1rem; letter-spacing: 0.1rem; }
+            .nav-right a { font-size: 0.75rem; padding: 8px 12px; }
+            .hero-subtitle { font-size: 0.9rem; letter-spacing: 0.2rem; white-space: normal; text-align: center; }
             .service-block { padding: 60px 20px; grid-template-columns: 1fr; gap: 40px; }
-            .service-block .block-image { grid-column: 1; grid-row: 1; height: 200px; }
+            .service-block .block-image { grid-column: 1; grid-row: 1; height: 180px; display: flex; justify-content: center; }
+            .category-name { font-size: 2.2rem; margin-bottom: 30px; }
         }
     </style>
 </head>
@@ -143,10 +144,8 @@
     <header class="hero">
         <div class="logo-wrap">
             <div class="qzh-logo">
-                <div class="logo-line line-top"></div>
-                <div class="logo-line line-bottom"></div>
-                <div class="logo-line line-left"></div>
-                <div class="logo-line line-right"></div>
+                <div class="logo-line line-top"></div><div class="logo-line line-bottom"></div>
+                <div class="logo-line line-left"></div><div class="logo-line line-right"></div>
                 <div class="logo-dot"></div>
             </div>
             <p class="hero-subtitle">運籌當下，明辨天時，擇優而行</p>
@@ -161,6 +160,7 @@
     </section>
 
     <div class="service-container">
+        
         <section class="service-block block-1">
             <div class="block-image">
                 <svg viewBox="0 0 100 100"><rect x="30" y="30" width="40" height="40" fill="none" stroke="#d8ac4f" stroke-width="1.5"/><line x1="20" y1="20" x2="80" y2="80" stroke="#1a1a1a" stroke-width="0.5"/></svg>
@@ -169,11 +169,70 @@
                 <div class="category-name">八字類別</div>
                 <div class="item">
                     <div class="item-header"><span class="item-title">八字排盤</span><span class="item-price">$88</span></div>
-                    <span class="item-desc">性格批註與基本格局</span>
+                    <div class="item-desc">性格批註與基本格局</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">八字小批</span><span class="item-price">$388</span></div>
+                    <div class="item-desc">命格深度分析、強弱、喜用神</div>
                 </div>
                 <div class="item">
                     <div class="item-header"><span class="item-title">八字大批</span><span class="item-price">$2888</span></div>
-                    <span class="item-desc">包含命格詳解及半年大運詳批</span>
+                    <div class="item-desc">包含命格詳解、指標批註及半年大運詳批</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-block block-2">
+            <div class="block-image">
+                <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#d8ac4f" stroke-width="1"/><circle cx="50" cy="20" r="4" fill="#d8ac4f"/></svg>
+            </div>
+            <div class="block-content">
+                <div class="category-name">流年月批</div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">流月簡算 / 詳算</span><span class="item-price">$688 / $1288</span></div>
+                    <div class="item-desc">單月運程重點提示或全盤詳析</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">流年簡批 / 詳批</span><span class="item-price">$688 / $1288</span></div>
+                    <div class="item-desc">當年運勢概況或整年各面向深度報告</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-block block-3">
+            <div class="block-image">
+                <svg viewBox="0 0 100 100"><polygon points="50,15 80,40 70,75 30,75 20,40" fill="none" stroke="#d8ac4f" stroke-width="1"/></svg>
+            </div>
+            <div class="block-content">
+                <div class="category-name">占卜問事</div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">尋龍尺問事</span><span class="item-price">$88</span></div>
+                    <div class="item-desc">針對單一是非問題進行能量探測</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">八字占卜</span><span class="item-price">$238</span></div>
+                    <div class="item-desc">結合個人命盤針對特定事件起卦</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="service-block block-4">
+            <div class="block-image">
+                <svg viewBox="0 0 100 100"><circle cx="40" cy="50" r="20" fill="none" stroke="#d8ac4f" stroke-width="1.5"/><circle cx="60" cy="50" r="20" fill="none" stroke="#d8ac4f" stroke-width="1.5"/></svg>
+            </div>
+            <div class="block-content">
+                <div class="category-name">特別項目</div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">合婚</span><span class="item-price">$1338</span></div>
+                    <div class="item-desc">雙方命盤契合度與相處之道分析</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">寶寶出生擇日</span><span class="item-price">$1888</span></div>
+                    <div class="item-desc">提供3個優選出生時段建議</div>
+                </div>
+                <div class="item">
+                    <div class="item-header"><span class="item-title">起名 / 改名</span><span class="item-price">$688</span></div>
+                    <div class="item-desc">五行分析並提供3個符合命格的姓名建議</div>
                 </div>
             </div>
         </section>
@@ -190,6 +249,10 @@
                 <label>聯絡方式 (WHATSAPP)</label>
                 <input type="text" name="contact" required>
             </div>
+            <div class="input-group">
+                <label>諮詢問題摘要</label>
+                <textarea name="message" rows="3"></textarea>
+            </div>
             <a href="#" class="btn-submit" id="submitBtn">提交預約請求</a>
         </form>
     </section>
@@ -200,7 +263,7 @@
         document.getElementById('submitBtn').addEventListener('click', function(e) {
             e.preventDefault();
             const f = new FormData(document.getElementById('contactForm'));
-            const text = `您好，我想諮詢預約：\n稱呼：${f.get('name')}\n聯絡：${f.get('contact')}`;
+            const text = `您好，我想諮詢預約：\n稱呼：${f.get('name')}\n聯絡：${f.get('contact')}\n內容：${f.get('message')}`;
             window.open(`https://wa.me/85267113958?text=${encodeURIComponent(text)}`, '_blank');
         });
     </script>
