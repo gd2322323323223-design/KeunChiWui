@@ -7,16 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-red: #4a0000;    /* 調亮一點的深紅 */
+            --bg-red: #4a0000;
             --bg-deep: #1a0202;
             --gold: #f8e6ae;
             --gold-bright: #fff1c7;
             --gold-soft: #d8ac4f;
-            --panel: rgba(34, 8, 8, 0.7); /* 提高板塊對比度 */
+            --text-main: rgba(248, 230, 174, 0.94);
+            --panel: rgba(34, 8, 8, 0.6);
             --panel-border: rgba(248, 230, 174, 0.2);
         }
 
-        /* --- 背景修正：確保看得到東西 --- */
+        /* --- 背景強化：解決空洞感 --- */
         html, body {
             margin: 0; padding: 0;
             min-height: 100vh;
@@ -26,165 +27,233 @@
             scroll-behavior: smooth;
         }
 
-        /* 加入星塵背景細節 */
+        /* 全域星塵與紙質質感 */
         body::before {
             content: "";
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0;
             background-image: 
-                radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.4), transparent),
-                radial-gradient(1.5px 1.5px at 70% 10%, rgba(255, 255, 255, 0.3), transparent),
-                radial-gradient(1px 1px at 50% 80%, rgba(255, 255, 255, 0.2), transparent);
-            background-size: 200px 200px;
-            opacity: 0.5;
+                radial-gradient(1.2px 1.2px at 15% 25%, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(1.8px 1.8px at 80% 15%, rgba(255, 255, 255, 0.3), transparent),
+                url('https://www.transparenttextures.com/patterns/natural-paper.png'); /* 增加質感 */
+            background-size: 250px 250px, 250px 250px, auto;
+            opacity: 0.4;
             z-index: 1;
+            pointer-events: none;
         }
 
         .navbar {
-            position: fixed; top: 0; width: 100%; padding: 15px 0;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
+            position: fixed; top: 0; width: 100%; padding: 18px 0;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--panel-border); z-index: 1000;
             text-align: center;
         }
-        .nav-logo { color: var(--gold); text-decoration: none; font-weight: 700; letter-spacing: 0.1rem; }
+        .nav-logo { color: var(--gold); text-decoration: none; font-weight: 700; letter-spacing: 0.15rem; font-size: 1.1rem; }
 
-        /* --- 標題區：強化權智匯視覺 --- */
+        /* --- 標題區視覺 --- */
         .hero-section {
             position: relative;
             padding: 160px 20px 60px;
             text-align: center;
             z-index: 10;
         }
-
-        /* 核心光暈 */
         .hero-glow {
-            position: absolute;
-            top: 50%; left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(216, 172, 79, 0.2) 0%, transparent 70%);
+            width: min(90vw, 500px); height: min(90vw, 500px);
+            background: radial-gradient(circle, rgba(216, 172, 79, 0.25) 0%, transparent 70%);
             filter: blur(40px); z-index: -1;
         }
-
         .hero-title {
-            font-size: clamp(3.5rem, 12vw, 6rem);
+            font-size: clamp(3.8rem, 12vw, 7rem);
             margin: 0; color: var(--gold-bright); font-weight: 900;
-            letter-spacing: 0.5rem;
-            text-shadow: 0 0 20px rgba(216, 172, 79, 0.5);
+            letter-spacing: 0.6rem;
+            text-shadow: 0 0 25px rgba(216, 172, 79, 0.5);
         }
-
         .hero-divider {
             width: 100px; height: 1.5px;
             background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
-            margin: 20px auto;
+            margin: 25px auto;
         }
 
-        /* --- 內容區塊佈局 --- */
+        /* --- 內容容器 --- */
         .main-container {
-            width: min(1000px, calc(100% - 40px));
+            width: min(1120px, calc(100% - 40px));
             margin: 0 auto 100px;
-            display: grid; gap: 30px;
+            display: grid; gap: 28px;
             z-index: 20; position: relative;
         }
-
         .block {
             background: var(--panel);
             border: 1px solid var(--panel-border);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
         }
-
         .section-title {
-            text-align: center; color: var(--gold-bright);
-            font-size: 1.8rem; margin-bottom: 25px;
+            text-align: center; color: var(--gold-bright); font-size: 2.2rem; margin-bottom: 35px;
+            display: flex; align-items: center; gap: 15px; justify-content: center;
         }
+        .section-title::before, .section-title::after { content: ""; flex: 1; max-width: 60px; height: 1px; background: var(--gold-soft); opacity: 0.5; }
 
-        /* 服務項目卡片 */
-        .service-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+        /* --- 服務項目：完整保留內容 --- */
+        .services-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
+        .service-group {
+            border-radius: 20px; border: 1px solid rgba(248, 230, 174, 0.15);
+            background: rgba(0, 0, 0, 0.25); padding: 24px;
+        }
+        .group-title { text-align: center; color: var(--gold-bright); margin-bottom: 20px; font-size: 1.4rem; letter-spacing: 0.1rem; }
+        
         .service-card {
-            background: rgba(0,0,0,0.3); border: 1px solid rgba(248, 230, 174, 0.1);
-            padding: 20px; border-radius: 15px; display: flex; justify-content: space-between;
+            border-radius: 16px; border: 1px solid rgba(248, 230, 174, 0.15);
+            background: rgba(0, 0, 0, 0.4); padding: 18px;
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
         }
-        .price { color: var(--gold-bright); font-weight: 900; }
+        .service-name { font-size: 1.1rem; color: var(--gold); margin: 0; font-weight: 700; }
+        .service-price { font-weight: 900; color: var(--gold-bright); font-size: 1.15rem; }
+        .service-detail { font-size: 0.85rem; color: rgba(248, 230, 174, 0.6); display: block; margin-top: 4px; }
 
-        /* 表單樣式 */
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; color: var(--gold-soft); font-size: 0.9rem; }
+        /* --- 表單 --- */
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--gold-soft); font-weight: 700; }
         .form-group input, .form-group textarea {
-            width: 100%; padding: 12px; border-radius: 10px; box-sizing: border-box;
-            background: rgba(0,0,0,0.4); border: 1px solid var(--panel-border); color: #fff;
+            width: 100%; padding: 14px; border-radius: 12px; box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.5); border: 1px solid var(--panel-border); color: #fff; font-size: 1rem;
         }
         .submit-btn {
-            display: block; width: 100%; padding: 15px; text-align: center;
+            display: block; width: 100%; padding: 18px; text-align: center;
             background: linear-gradient(150deg, #fff7db, #f5d685, #e0af40);
             color: #4a1407; font-weight: 900; text-decoration: none; border-radius: 50px;
-            margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-size: 1.1rem; box-shadow: 0 10px 20px rgba(0,0,0,0.4); margin-top: 25px;
         }
 
-        /* 懸浮 WhatsApp */
         .wa-float {
-            position: fixed; right: 20px; bottom: 20px; z-index: 1000;
+            position: fixed; right: 22px; bottom: 22px; z-index: 1000;
             background: linear-gradient(150deg, #fff7db, #f5d685, #e0af40);
-            padding: 12px 20px; border-radius: 50px; color: #4a1407;
-            text-decoration: none; font-weight: 900; font-size: 0.9rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            padding: 14px 24px; border-radius: 50px; color: #4a1407;
+            text-decoration: none; font-weight: 900; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .block { padding: 30px 20px; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-<nav class="navbar"><a href="#" class="nav-logo">運籌當下，明辨天時，擇優而行</a></nav>
+    <nav class="navbar"><a href="#" class="nav-logo">運籌當下，明辨天時，擇優而行</a></nav>
 
-<header class="hero-section">
-    <div class="hero-glow"></div>
-    <h1 class="hero-title">權智匯</h1>
-    <div class="hero-divider"></div>
-    <p style="opacity: 0.8;">專業命理諮詢：八字、紫微、占卜</p>
-</header>
+    <header class="hero-section">
+        <div class="hero-glow"></div>
+        <h1 class="hero-title">權智匯</h1>
+        <div class="hero-divider"></div>
+        <p style="font-size: 1.3rem; opacity: 0.9;">專業命理諮詢：八字、紫微、占卜</p>
+    </header>
 
-<main class="main-container">
-    <section class="block">
-        <h2 class="section-title">品牌理念</h2>
-        <p style="line-height: 1.8; text-align: center;">
-            本小組由兩位深研中華傳統文化的伙伴共同創立，<br>
-            真正的命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。
-        </p>
-    </section>
+    <main class="main-container">
+        <section class="block">
+            <h2 class="section-title">品牌理念</h2>
+            <div style="text-align: center; line-height: 2.1; max-width: 800px; margin: 0 auto;">
+                <p>本小組由兩位深研中華傳統文化的伙伴共同創立，結合所長，為有緣人提供專業諮詢。</p>
+                <p>真正的命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。</p>
+            </div>
+        </section>
 
-    <section class="block">
-        <h2 class="section-title">服務項目</h2>
-        <div class="service-grid">
-            <div class="service-card"><span>八字大批</span><span class="price">$2888</span></div>
-            <div class="service-card"><span>流年詳批</span><span class="price">$1288</span></div>
-            <div class="service-card"><span>八字占卜</span><span class="price">$238</span></div>
-            <div class="service-card"><span>起名改名</span><span class="price">$688</span></div>
-        </div>
-    </section>
+        <section class="block">
+            <h2 class="section-title">服務及收費</h2>
+            <div class="services-layout">
+                <div class="service-group">
+                    <h3 class="group-title">八字類別</h3>
+                    <div class="service-card">
+                        <div><p class="service-name">八字排盤</p><span class="service-detail">性格批註</span></div>
+                        <span class="service-price">$88</span>
+                    </div>
+                    <div class="service-card">
+                        <div><p class="service-name">八字小批</p><span class="service-detail">命格專業分析</span></div>
+                        <span class="service-price">$388</span>
+                    </div>
+                    <div class="service-card">
+                        <div><p class="service-name">八字大批</p><span class="service-detail">詳細命格+半年大運</span></div>
+                        <span class="service-price">$2888</span>
+                    </div>
+                </div>
 
-    <section class="block">
-        <h2 class="section-title">預約諮詢</h2>
-        <form id="orderForm">
-            <div class="form-group"><label>稱呼</label><input type="text" name="name" placeholder="例如：陳小姐"></div>
-            <div class="form-group"><label>出生資料</label><input type="text" name="birth" placeholder="例如：1993/08/15 申時"></div>
-            <div class="form-group"><label>想問的問題</label><textarea name="msg" rows="3" placeholder="請簡述您的情況"></textarea></div>
-            <a href="#" id="sendWa" class="submit-btn">整理內容並送到 WhatsApp</a>
-        </form>
-    </section>
-</main>
+                <div class="service-group">
+                    <h3 class="group-title">流年月批</h3>
+                    <div class="service-card">
+                        <div><p class="service-name">流月簡算</p><span class="service-detail">當月運程</span></div>
+                        <span class="service-price">$688</span>
+                    </div>
+                    <div class="service-card">
+                        <div><p class="service-name">流月詳算</p><span class="service-detail">當月運程詳批</span></div>
+                        <span class="service-price">$1288</span>
+                    </div>
+                    <div class="service-card">
+                        <div><p class="service-name">流年簡批</p><span class="service-detail">當年運程</span></div>
+                        <span class="service-price">$688</span>
+                    </div>
+                    <div class="service-card">
+                        <div><p class="service-name">流年詳批</p><span class="service-detail">當年運程詳批</span></div>
+                        <span class="service-price">$1288</span>
+                    </div>
+                </div>
 
-<a href="https://wa.me/85267113958" class="wa-float" target="_blank">WhatsApp 快速諮詢</a>
+                <div class="service-group">
+                    <h3 class="group-title">占卜問事</h3>
+                    <div class="service-card">
+                        <div><p class="service-name">尋龍尺問事</p><span class="service-detail">單次收費</span></div>
+                        <span class="service-price">$88</span>
+                    </div>
+                    <div class="service-card">
+                        <div><p class="service-name">八字占卜</p><span class="service-detail">單次收費</span></div>
+                        <span class="service-price">$238</span>
+                    </div>
+                </div>
 
-<script>
-    document.getElementById('sendWa').addEventListener('click', function(e) {
-        e.preventDefault();
-        const f = new FormData(document.getElementById('orderForm'));
-        const text = `您好，我想預約諮詢：\n稱呼：${f.get('name')}\n出生資料：${f.get('birth')}\n問題：${f.get('msg')}`;
-        window.open(`https://wa.me/85267113958?text=${encodeURIComponent(text)}`, '_blank');
-    });
-</script>
+                <div class="service-group">
+                    <h3 class="group-title">特別項目</h3>
+                    <div class="service-card">
+                        <div><p class="service-name">合婚</p><span class="service-detail">雙方命盤契合度分析</span></div>
+                        <span class="service-price">$1338</span>
+                    </div>
+                    <div class="service-card">
+                        <div><p class="service-name">寶寶出生擇日</p><span class="service-detail">提供3個優選時段</span></div>
+                        <span class="service-price">$1888</span>
+                    </div>
+                    <div class="service-card">
+                        <div><p class="service-name">起名 / 改名</p><span class="service-detail">提供3個建議名額</span></div>
+                        <span class="service-price">$688</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="block">
+            <h2 class="section-title">預約諮詢</h2>
+            <form id="consultForm">
+                <div class="form-group"><label>您的稱呼</label><input type="text" name="name" placeholder="例如：陳小姐"></div>
+                <div class="form-group"><label>出生資料</label><input type="text" name="birth" placeholder="例如：1993/08/15 申時，女"></div>
+                <div class="form-group"><label>預約項目</label><input type="text" name="service" placeholder="例如：八字大批"></div>
+                <div class="form-group"><label>問題摘要</label><textarea name="msg" rows="3" placeholder="請簡述您的情況"></textarea></div>
+                <a href="#" id="submitBtn" class="submit-btn">整理內容並送到 WhatsApp</a>
+            </form>
+        </section>
+    </main>
+
+    <a href="https://wa.me/85267113958" class="wa-float" target="_blank">WhatsApp 快速諮詢</a>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const f = new FormData(document.getElementById('consultForm'));
+            const text = `您好，我想諮詢預約：\n稱呼：${f.get('name')}\n出生資料：${f.get('birth')}\n項目：${f.get('service')}\n問題：${f.get('msg')}`;
+            window.open(`https://wa.me/85267113958?text=${encodeURIComponent(text)}`, '_blank');
+        });
+    </script>
 </body>
 </html>
