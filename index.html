@@ -149,14 +149,46 @@
         /* --- Footer --- */
         footer { padding: 60px; text-align: center; font-size: 0.8rem; letter-spacing: 0.3rem; color: #888; border-top: 0.5px solid #eee; }
 
-        @media (max-width: 768px) {
-            .nav-placeholder { display: none; }
-            .hero-title { font-size: 3.2rem; letter-spacing: 1rem; text-indent: 1rem;}
-            .service-block { padding: 80px 20px; grid-template-columns: 1fr; gap: 40px;}
-            .service-block .category-name { font-size: 2.2rem; margin-bottom: 40px; }
-            .service-block .block-image { grid-column: 1; grid-row: 1; aspect-ratio: 16 / 9;}
-            .service-block .block-content { grid-column: 1; grid-row: 2; }
-        }
+       @media (max-width: 768px) {
+    /* 1. 調整導覽列高度與間距 */
+    nav { 
+        height: 70px; 
+        padding: 0 15px; 
+        justify-content: space-between; 
+    }
+
+    /* 2. 縮小標語字體，避免擠壓按鈕 */
+    .nav-left { 
+        font-size: 0.85rem; 
+        letter-spacing: 0.1rem; 
+        max-width: 60%; /* 限制標語寬度 */
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; /* 文字過長時顯示省略號 */
+    }
+
+    /* 3. 簡化手機版按鈕樣式 */
+    .nav-right a { 
+        font-size: 0.75rem; 
+        padding: 6px 12px; 
+        letter-spacing: 0.1rem;
+        white-space: nowrap;
+    }
+
+    /* 4. 調整主標題縮排 */
+    .hero-title { 
+        font-size: 3rem; 
+        letter-spacing: 0.8rem; 
+        text-indent: 0.8rem; 
+    }
+
+    /* 5. 讓服務項目在手機上單欄顯示 */
+    .service-block { 
+        padding: 60px 20px; 
+        grid-template-columns: 1fr; 
+        gap: 30px; 
+    }
+}
     </style>
 </head>
 <body>
