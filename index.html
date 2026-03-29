@@ -1,345 +1,268 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>權智匯｜占卜八字紫薇命理</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;900&display=swap" rel="stylesheet">
-    
-    <style>
-        :root { --white: #ffffff; --black: #1a1a1a; --gold: #d8ac4f; --gray: #888888; }
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { margin: 0; padding: 0; background-color: var(--white); color: var(--black); font-family: "Noto Serif TC", serif; line-height: 1.8; overflow-x: hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>權智匯｜占卜八字紫薇命理</title>
 
-        /* 滾動動畫 */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.2, 0.6, 0.2, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;900&display=swap" rel="stylesheet">
 
-        /* 修正 1：導覽列（防止手機端文字重疊） */
-        nav { 
-            position: fixed; top: 0; width: 100%; height: 85px; 
-            background: rgba(255, 255, 255, 0.98); z-index: 1000; 
-            display: flex; align-items: center; justify-content: space-between; 
-            padding: 0 5%; border-bottom: 0.5px solid #e5e5e5; 
-        }
-        .nav-left { letter-spacing: 0.15rem; font-size: clamp(0.9rem, 3vw, 1.1rem); font-weight: 900; white-space: nowrap; }
-        .nav-right a { 
-            text-decoration: none; color: var(--black); font-size: 0.8rem; 
-            letter-spacing: 0.1rem; border: 1px solid var(--black); 
-            padding: 8px 15px; font-weight: 900; white-space: nowrap;
-        }
+<style>
+:root { --white: #ffffff; --black: #1a1a1a; --gold: #d8ac4f; --gray: #888888; }
+* { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+body { margin: 0; padding: 0; background-color: var(--white); color: var(--black); font-family: "Noto Serif TC", serif; line-height: 1.8; overflow-x: hidden; }
 
-        /* Hero 區域：修正比例與標誌 */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; }
-        .brand-logo { width: 150px; height: 100px; margin-bottom: 40px; }
-        .hero-subtitle { font-size: 1.2rem; letter-spacing: 0.5rem; margin-bottom: 25px; color: #333; }
-        .hero-title { font-size: clamp(3rem, 12vw, 6.5rem); font-weight: 900; letter-spacing: 1.5rem; text-indent: 1.5rem; margin: 0; }
+/* 滾動動畫 */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.2, 0.6, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* 服務理念 */
-        .philosophy { padding: 140px 10%; text-align: center; max-width: 1000px; margin: 0 auto; }
-        .philosophy h2 { font-size: 1.2rem; letter-spacing: 0.8rem; margin-bottom: 60px; font-weight: 900; }
-        .philosophy p { font-size: 1.4rem; line-height: 2.8; margin-bottom: 40px; }
-        .highlight { font-weight: 900; letter-spacing: 0.2rem; display: block; margin: 50px 0; font-size: 1.6rem; }
-
-        /* 服務清單佈局 */
-        .service-container { background-color: #fafafa; padding: 100px 0; }
-        .service-block { max-width: 1100px; margin: 0 auto 140px auto; padding: 0 5%; }
-        .service-logo { width: 90px; height: 90px; margin-bottom: 30px; }
-        .category-name { font-size: 2.8rem; font-weight: 900; margin-bottom: 60px; letter-spacing: 0.4rem; }
-        
-        .item { padding: 45px 0; border-top: 1px solid #eee; }
-        .item-header { display: flex; justify-content: space-between; align-items: baseline; }
-        .item-title { font-size: 1.8rem; font-weight: 900; }
-        .item-price { font-size: 2.2rem; font-weight: 200; font-family: sans-serif; }
-        .item-desc { font-size: 1.1rem; color: #444; margin-top: 15px; }
-
-        /* 特別項目：分行排版 */
-        .multi-row { display: flex; flex-direction: column; width: 100%; }
-        .sub-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
-
-        /* 價格總表 */
-        /* 修改後的價格總表容器 */
-        .price-summary { 
-            background-color: var(--black); 
-            color: var(--white); 
-            adding: 100px 5%; /* 稍微減少上下 padding，讓九宮格更緊湊 */
-            text-align: center;
-        }
-
-       /* 標題保留，增加一點現代感 */
-       .summary-title { 
-           font-size: 2.2rem; 
-           letter-spacing: 0.8rem; 
-           margin-bottom: 60px; 
-           font-weight: 900; 
-       }
-
-       /* 修改九宮格容器 */
-       .service-grid {
-           display: grid;
-           grid-template-columns: repeat(3, 1fr);
-           max-width: 800px;      /* 🔑 關鍵：從 1100px 縮小到 800px，視覺更集中 */
-           margin: 60px auto;     /* 增加上下間距，讓它不擁擠 */
-           border: 0.3px solid rgba(176, 196, 222, 0.15); /* 線條再細一點 * 
-           }
-
-        /* 縮小每個方塊的高度 */
-        .service-item {
-            padding: 30px 15px;    /* 🔑 關鍵：減少 padding，方塊就不會那麼巨大 */
-            border: 0.3px solid rgba(176, 196, 222, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-       .service-item h3 {
-           font-size: 1rem;       /* 字體稍微調小 */
-           letter-spacing: 0.1rem;
-           margin-bottom: 12px;
-       }
-
-      .service-item .price {
-          font-size: 0.85rem;
-          color: #b0c4de;
-          opacity: 0.8;
-      }
-
-.footer, .copyright-text { 
-    text-align: left;       /* 保持您截圖中的靠左對齊 */
-    font-size: 0.7rem;      /* 縮小字體 */
-    letter-spacing: 0.1rem;
-    color: #666;            /* 調暗顏色，不要搶戲 */
-    padding: 40px 5%;       /* 🔑 關鍵：增加內邊距，遠離上方內容 */
-    border-top: 0.5px solid rgba(255, 255, 255, 0.1); /* 加入一條極細的灰線分隔 */
+/* 修正 1：導覽列（防止手機端文字重疊） */
+nav { 
+position: fixed; top: 0; width: 100%; height: 85px; 
+background: rgba(255, 255, 255, 0.98); z-index: 1000; 
+display: flex; align-items: center; justify-content: space-between; 
+padding: 0 5%; border-bottom: 0.5px solid #e5e5e5; 
 }
-   .contact-hint {
-    text-align: center;
-    width: 100%;
-    color: #b0c4de;
-    font-size: 0.8rem;      /* 調小一點，更有禪意 */
-    margin-top: 80px;       /* 🔑 關鍵：與表格拉開 80px 的距離 */
-    margin-bottom: 100px;    /* 與底部版權拉開距離 */
-    letter-spacing: 0.4rem;  /* 增加字距，找回原本的儀式感 */
-    opacity: 0.6;
-   }
+.nav-left { letter-spacing: 0.15rem; font-size: clamp(0.9rem, 3vw, 1.1rem); font-weight: 900; white-space: nowrap; }
+.nav-right a { 
+text-decoration: none; color: var(--black); font-size: 0.8rem; 
+letter-spacing: 0.1rem; border: 1px solid var(--black); 
+padding: 8px 15px; font-weight: 900; white-space: nowrap;
+}
 
-        @media (max-width: 768px) {
-            .category-name { font-size: 2.2rem; }
-            .item-title { font-size: 1.5rem; }
-            .item-price { font-size: 1.8rem; }
-            .philosophy p { font-size: 1.1rem; }
-        }
-    </style>
+/* Hero 區域：修正比例與標誌 */
+.hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; }
+.brand-logo { width: 150px; height: 100px; margin-bottom: 40px; }
+.hero-subtitle { font-size: 1.2rem; letter-spacing: 0.5rem; margin-bottom: 25px; color: #333; }
+.hero-title { font-size: clamp(3rem, 12vw, 6.5rem); font-weight: 900; letter-spacing: 1.5rem; text-indent: 1.5rem; margin: 0; }
+
+/* 服務理念 */
+.philosophy { padding: 140px 10%; text-align: center; max-width: 1000px; margin: 0 auto; }
+.philosophy h2 { font-size: 1.2rem; letter-spacing: 0.8rem; margin-bottom: 60px; font-weight: 900; }
+.philosophy p { font-size: 1.4rem; line-height: 2.8; margin-bottom: 40px; }
+.highlight { font-weight: 900; letter-spacing: 0.2rem; display: block; margin: 50px 0; font-size: 1.6rem; }
+
+/* 服務清單佈局 */
+.service-container { background-color: #fafafa; padding: 100px 0; }
+.service-block { max-width: 1100px; margin: 0 auto 140px auto; padding: 0 5%; }
+.service-logo { width: 90px; height: 90px; margin-bottom: 30px; }
+.category-name { font-size: 2.8rem; font-weight: 900; margin-bottom: 60px; letter-spacing: 0.4rem; }
+
+.item { padding: 45px 0; border-top: 1px solid #eee; }
+.item-header { display: flex; justify-content: space-between; align-items: baseline; }
+.item-title { font-size: 1.8rem; font-weight: 900; }
+.item-price { font-size: 2.2rem; font-weight: 200; font-family: sans-serif; }
+.item-desc { font-size: 1.1rem; color: #444; margin-top: 15px; }
+
+/* 特別項目：分行排版 */
+.multi-row { display: flex; flex-direction: column; width: 100%; }
+.sub-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+
+/* 價格總表 */
+.price-summary { background-color: var(--black); color: var(--white); padding: 140px 10%; text-align: center; }
+.summary-title { font-size: 2.2rem; letter-spacing: 1rem; margin-bottom: 80px; font-weight: 900; }
+.summary-table { max-width: 900px; margin: 0 auto; width: 100%; border-collapse: collapse; }
+.summary-table td { padding: 25px 20px; border-bottom: 0.5px solid #333; text-align: left; font-size: 1.3rem; }
+.summary-table td:last-child { text-align: right; font-weight: 200; font-family: sans-serif; }
+
+footer { padding: 80px; text-align: center; font-size: 0.85rem; color: var(--gray); letter-spacing: 0.3rem; }
+.contact-hint {
+text-align: centre;      /* 將對齊改為置中 */
+width: 100%;              
+padding-right: 10%;      /* 讓它不要貼死邊緣，保持高級感的呼吸空間 */
+color: #b0c4de;          /* 使用我們剛才調好的藍銀色，呼應主題 */
+font-size: 0.95rem;      /* 稍微縮小，顯得精緻 */
+margin-top: 60px;        /* 與上方價目表拉開適當距離 */
+letter-spacing: 0.3rem;  /* 大字距：營造出一種「玄學、專業」的氣氛 */
+font-weight: 300;        /* 極細體 */
+opacity: 0.7;            /* 半透明，讓它看起來像低調的註解 */
+}
+
+@media (max-width: 768px) {
+.category-name { font-size: 2.2rem; }
+.item-title { font-size: 1.5rem; }
+.item-price { font-size: 1.8rem; }
+.philosophy p { font-size: 1.1rem; }
+}
+</style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-left">八字 · 紫微 · 占卜</div>
-        <div class="nav-right"><a href="https://wa.me/85267113958" target="_blank">WHATSAPP 諮詢</a></div>
-    </nav>
+<nav>
+<div class="nav-left">八字 · 紫微 · 占卜</div>
+<div class="nav-right"><a href="https://wa.me/85267113958" target="_blank">WHATSAPP 諮詢</a></div>
+</nav>
 
-    <header class="hero">
-        <div class="brand-logo">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-               <g stroke="black" stroke-width="0.5" fill="none" opacity="0.8">
-               <path d="M15 45 Q 40 10 85 40" />
-               <path d="M10 60 Q 50 95 90 55" />
-               <path d="M30 20 Q 5 50 40 85" />
-           </g>
-    
-           <g stroke="black" stroke-width="0.8" fill="none">
-              <path d="M45 25 C 65 30 75 50 60 75" />
-              <path d="M35 70 C 20 50 40 20 70 35" />
-              <line x1="45" y1="25" x2="70" y2="35" stroke-width="0.4" />
-              <line x1="60" y1="75" x2="35" y2="70" stroke-width="0.4" />
-           </g>
+<header class="hero">
+<div class="brand-logo">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<g stroke="black" stroke-width="0.5" fill="none" opacity="0.8">
+<path d="M15 45 Q 40 10 85 40" />
+<path d="M10 60 Q 50 95 90 55" />
+<path d="M30 20 Q 5 50 40 85" />
+</g>
 
-           <g fill="black">
-              <circle cx="50" cy="50" r="3.5"/> <circle cx="45" cy="25" r="1.8"/>
-              <circle cx="70" cy="35" r="2.2"/>
-              <circle cx="60" cy="75" r="1.5"/>
-              <circle cx="35" cy="70" r="2"/>
-              <circle cx="85" cy="40" r="1.2"/>
-              <circle cx="15" cy="45" r="1.2"/>
-              <circle cx="40" cy="85" r="1.5"/>
-           </g>
-        </svg>
-        </div>
-        <p class="hero-subtitle">運籌當下，明辨天時，擇優而行</p>
-        <h1 class="hero-title">權智匯</h1>
-    </header>
+<g stroke="black" stroke-width="0.8" fill="none">
+<path d="M45 25 C 65 30 75 50 60 75" />
+<path d="M35 70 C 20 50 40 20 70 35" />
+<line x1="45" y1="25" x2="70" y2="35" stroke-width="0.4" />
+<line x1="60" y1="75" x2="35" y2="70" stroke-width="0.4" />
+</g>
 
-    <section class="philosophy reveal">
-        <h2>服務理念</h2>
-        <p>命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。</p>
-        <span class="highlight">「權衡天命，智慧匯聚。」</span>
-        <p>由兩位深研中華傳統文化的伙伴共同創立，為有緣人提供專業諮詢。</p>
-    </section>
-
-    <div class="service-container">
-        <section class="service-block reveal">
-            <div class="service-logo">
-                <svg viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15,42 Q32,32 50,42 T85,42" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
-                    <path d="M15,50 Q32,40 50,50 T85,50" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
-                    <circle cx="32" cy="14" r="3.5" fill="#d8ac4f"/><line x1="32" y1="18" x2="32" y2="28" stroke="#d8ac4f" stroke-width="2"/>
-                    <circle cx="50" cy="6" r="3.5" fill="#d8ac4f"/><line x1="50" y1="10" x2="50" y2="22" stroke="#d8ac4f" stroke-width="2"/>
-                    <circle cx="68" cy="14" r="3.5" fill="#d8ac4f"/><line x1="68" y1="18" x2="68" y2="28" stroke="#d8ac4f" stroke-width="2"/>
-                    <circle cx="32" cy="78" r="3.5" fill="#d8ac4f"/><line x1="32" y1="64" x2="32" y2="74" stroke="#d8ac4f" stroke-width="2"/>
-                    <circle cx="50" cy="84" r="3.5" fill="#d8ac4f"/><line x1="50" y1="68" x2="50" y2="80" stroke="#d8ac4f" stroke-width="2"/>
-                    <circle cx="68" cy="78" r="3.5" fill="#d8ac4f"/><line x1="68" y1="64" x2="68" y2="74" stroke="#d8ac4f" stroke-width="2"/>
-                </svg>
-            </div>
-            <div class="category-name">八字類別</div>
-            <div class="item">
-                <div class="item-header"><span class="item-title">八字排盤</span><span class="item-price">$88</span></div>
-                <div class="item-desc">性格批註與基本格局，初步了解個人天賦。</div>
-            </div>
-            <div class="item">
-                <div class="item-header"><span class="item-title">八字小批</span><span class="item-price">$388</span></div>
-                <div class="item-desc">命格深度分析、強弱、喜用神建議。</div>
-            </div>
-            <div class="item">
-                <div class="item-header"><span class="item-title">八字大批</span><span class="item-price">$2888</span></div>
-                <div class="item-desc">包含命格詳解、大運走勢及半年內重要事項詳批。</div>
-            </div>
-        </section>
-
-        <section class="service-block reveal">
-            <div class="service-logo">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50,15 L85,40 L72,80 L28,80 L15,40 Z" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
-                    <line x1="50" y1="15" x2="72" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
-                    <line x1="50" y1="15" x2="28" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
-                    <line x1="85" y1="40" x2="28" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
-                    <circle cx="50" cy="15" r="2.5" fill="#d8ac4f"/>
-                    <circle cx="85" cy="40" r="2.5" fill="#d8ac4f"/>
-                    <circle cx="72" cy="80" r="2.5" fill="#d8ac4f"/>
-                    <circle cx="28" cy="80" r="2.5" fill="#d8ac4f"/>
-                    <circle cx="15" cy="40" r="2.5" fill="#d8ac4f"/>
-                </svg>
-            </div>
-            <div class="category-name">流年月批</div>
-            <div class="item">
-                <div class="item-header"><span class="item-title">流月簡算 / 詳算</span><span class="item-price">$688 / $1288</span></div>
-                <div class="item-desc">單月運程重點提示，或全盤詳析。</div>
-            </div>
-            <div class="item">
-                <div class="item-header"><span class="item-title">流年簡批 / 詳批</span><span class="item-price">$688 / $1288</span></div>
-                <div class="item-desc">當年運勢概況提醒，或整年深度發展報告。</div>
-            </div>
-        </section>
-
-        <section class="service-block reveal">
-            <div class="service-logo">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="35" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
-                    <circle cx="50" cy="50" r="12" stroke="#d8ac4f" stroke-width="1.5" fill="none"/>
-                    <line x1="50" y1="5" x2="50" y2="95" stroke="#d8ac4f" stroke-width="2"/>
-                    <line x1="5" y1="50" x2="95" y2="50" stroke="#d8ac4f" stroke-width="2"/>
-                    <line x1="20" y1="20" x2="80" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
-                    <line x1="80" y1="20" x2="20" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
-               </svg>
-            </div>
-            <div class="category-name">占卜問事</div>
-            <div class="item">
-                <div class="item-header"><span class="item-title">尋龍尺問事</span><span class="item-price">$88</span></div>
-                <div class="item-desc">針對單一問題進行能量探測。</div>
-            </div>
-            <div class="item">
-                <div class="item-header"><span class="item-title">八字占卜</span><span class="item-price">$238</span></div>
-                <div class="item-desc">結合個人命盤，針對特定待辦事件進行起卦預測。</div>
-            </div>
-        </section>
-
-        <section class="service-block reveal">
-            <div class="service-logo">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="25" y="25" width="50" height="50" stroke="#d8ac4f" stroke-width="2.5" fill="none" transform="rotate(45 50 50)"/>
-                    <rect x="25" y="25" width="50" height="50" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
-                    <circle cx="50" cy="50" r="5" fill="#d8ac4f"/>
-                </svg>
-            </div>
-            <div class="category-name">特別項目</div>
-            <div class="item">
-                <div class="multi-row">
-                    <div class="sub-row"><span class="item-title">合婚</span><span class="item-price">$1338</span></div>
-                </div>
-                <div class="item-desc">雙方命盤契合度分析。</div>
-                 </div>
-            <div class="item">
-                <div class="sub-row"><span class="item-title">寶寶出生擇日</span><span class="item-price">$1888</span></div>
-                <div class="item-desc">優選出生時段建議。</div>
-            </div>
-            <div class="item">
-                <div class="item-header"><span class="item-title">起名 / 改名</span><span class="item-price">$688</span></div>
-                <div class="item-desc">五行分析並提供專業姓名建議。</div>
-            </div>
-        </section>
-    </div>
-
-  <div class="price-summary">
-    <h2 class="summary-title">服務摘要</h2>
-    
-    <div class="service-grid">
-        <div class="service-item">
-            <h3>八字排盤</h3>
-            <span class="price">$88</span>
-        </div>
-
-        <div class="service-item">
-            <h3>八字小批</h3>
-            <span class="price">$388</span>
-        </div>
-
-        <div class="service-item">
-            <h3>八字大批</h3>
-            <span class="price">$2888</span>
-        </div>
-
-        <div class="service-item">
-            <h3>流年簡批<br>流月簡批</h3>
-            <span class="price">$688</span>
-        </div>
-
-        <div class="service-item">
-            <h3>流年詳批<br>流月詳批</h3>
-            <span class="price">$1288</span>
-        </div>
-
-        <div class="service-item">
-            <h3>尋龍尺問事 /<br>八字占卜</h3>
-            <span class="price">從 $88 起</span>
-        </div>
-
-        <div class="service-item">
-            <h3>合婚</h3>
-            <span class="price">$1338</span>
-        </div>
-
-        <div class="service-item">
-            <h3>起名/改名</h3>
-            <span class="price">$688</span>
-        </div>
-
-        <div class="service-item">
-            <h3>寶寶出生擇日</h3>
-            <span class="price">$1888</span>
-        </div>
-    </div> <div class="contact-hint">敬請聯絡我們，為您提供專業的命理服務。</div>
+<g fill="black">
+<circle cx="50" cy="50" r="3.5"/> <circle cx="45" cy="25" r="1.8"/>
+<circle cx="70" cy="35" r="2.2"/>
+<circle cx="60" cy="75" r="1.5"/>
+<circle cx="35" cy="70" r="2"/>
+<circle cx="85" cy="40" r="1.2"/>
+<circle cx="15" cy="45" r="1.2"/>
+<circle cx="40" cy="85" r="1.5"/>
+</g>
+</svg>
 </div>
-        
-    </section>
+<p class="hero-subtitle">運籌當下，明辨天時，擇優而行</p>
+<h1 class="hero-title">權智匯</h1>
+</header>
 
-    <footer>&copy; 2026 KEUN CHI WUI. ALL RIGHTS RESERVED.</footer>
+<section class="philosophy reveal">
+<h2>服務理念</h2>
+<p>命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。</p>
+<span class="highlight">「權衡天命，智慧匯聚。」</span>
+<p>由兩位深研中華傳統文化的伙伴共同創立，為有緣人提供專業諮詢。</p>
+</section>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+<div class="service-container">
+<section class="service-block reveal">
+<div class="service-logo">
+<svg viewBox="0 0 100 85" xmlns="http://www.w3.org/2000/svg">
+<path d="M15,42 Q32,32 50,42 T85,42" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
+<path d="M15,50 Q32,40 50,50 T85,50" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
+<circle cx="32" cy="14" r="3.5" fill="#d8ac4f"/><line x1="32" y1="18" x2="32" y2="28" stroke="#d8ac4f" stroke-width="2"/>
+<circle cx="50" cy="6" r="3.5" fill="#d8ac4f"/><line x1="50" y1="10" x2="50" y2="22" stroke="#d8ac4f" stroke-width="2"/>
+<circle cx="68" cy="14" r="3.5" fill="#d8ac4f"/><line x1="68" y1="18" x2="68" y2="28" stroke="#d8ac4f" stroke-width="2"/>
+<circle cx="32" cy="78" r="3.5" fill="#d8ac4f"/><line x1="32" y1="64" x2="32" y2="74" stroke="#d8ac4f" stroke-width="2"/>
+<circle cx="50" cy="84" r="3.5" fill="#d8ac4f"/><line x1="50" y1="68" x2="50" y2="80" stroke="#d8ac4f" stroke-width="2"/>
+<circle cx="68" cy="78" r="3.5" fill="#d8ac4f"/><line x1="68" y1="64" x2="68" y2="74" stroke="#d8ac4f" stroke-width="2"/>
+</svg>
+</div>
+<div class="category-name">八字類別</div>
+<div class="item">
+<div class="item-header"><span class="item-title">八字排盤</span><span class="item-price">$88</span></div>
+<div class="item-desc">性格批註與基本格局，初步了解個人天賦。</div>
+</div>
+<div class="item">
+<div class="item-header"><span class="item-title">八字小批</span><span class="item-price">$388</span></div>
+<div class="item-desc">命格深度分析、強弱、喜用神建議。</div>
+</div>
+<div class="item">
+<div class="item-header"><span class="item-title">八字大批</span><span class="item-price">$2888</span></div>
+<div class="item-desc">包含命格詳解、大運走勢及半年內重要事項詳批。</div>
+</div>
+</section>
+
+<section class="service-block reveal">
+<div class="service-logo">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M50,15 L85,40 L72,80 L28,80 L15,40 Z" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
+<line x1="50" y1="15" x2="72" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
+<line x1="50" y1="15" x2="28" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
+<line x1="85" y1="40" x2="28" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
+<circle cx="50" cy="15" r="2.5" fill="#d8ac4f"/>
+<circle cx="85" cy="40" r="2.5" fill="#d8ac4f"/>
+<circle cx="72" cy="80" r="2.5" fill="#d8ac4f"/>
+<circle cx="28" cy="80" r="2.5" fill="#d8ac4f"/>
+<circle cx="15" cy="40" r="2.5" fill="#d8ac4f"/>
+</svg>
+</div>
+<div class="category-name">流年月批</div>
+<div class="item">
+<div class="item-header"><span class="item-title">流月簡算 / 詳算</span><span class="item-price">$688 / $1288</span></div>
+<div class="item-desc">單月運程重點提示，或全盤詳析。</div>
+</div>
+<div class="item">
+<div class="item-header"><span class="item-title">流年簡批 / 詳批</span><span class="item-price">$688 / $1288</span></div>
+<div class="item-desc">當年運勢概況提醒，或整年深度發展報告。</div>
+</div>
+</section>
+
+<section class="service-block reveal">
+<div class="service-logo">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50" cy="50" r="35" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
+<circle cx="50" cy="50" r="12" stroke="#d8ac4f" stroke-width="1.5" fill="none"/>
+<line x1="50" y1="5" x2="50" y2="95" stroke="#d8ac4f" stroke-width="2"/>
+<line x1="5" y1="50" x2="95" y2="50" stroke="#d8ac4f" stroke-width="2"/>
+<line x1="20" y1="20" x2="80" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
+<line x1="80" y1="20" x2="20" y2="80" stroke="#d8ac4f" stroke-width="1.2"/>
+</svg>
+</div>
+<div class="category-name">占卜問事</div>
+<div class="item">
+<div class="item-header"><span class="item-title">尋龍尺問事</span><span class="item-price">$88</span></div>
+<div class="item-desc">針對單一問題進行能量探測。</div>
+</div>
+<div class="item">
+<div class="item-header"><span class="item-title">八字占卜</span><span class="item-price">$238</span></div>
+<div class="item-desc">結合個人命盤，針對特定待辦事件進行起卦預測。</div>
+</div>
+</section>
+
+<section class="service-block reveal">
+<div class="service-logo">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<rect x="25" y="25" width="50" height="50" stroke="#d8ac4f" stroke-width="2.5" fill="none" transform="rotate(45 50 50)"/>
+<rect x="25" y="25" width="50" height="50" stroke="#d8ac4f" stroke-width="2.5" fill="none"/>
+<circle cx="50" cy="50" r="5" fill="#d8ac4f"/>
+</svg>
+</div>
+<div class="category-name">特別項目</div>
+<div class="item">
+<div class="multi-row">
+<div class="sub-row"><span class="item-title">合婚</span><span class="item-price">$1338</span></div>
+</div>
+<div class="item-desc">雙方命盤契合度分析。</div>
+</div>
+<div class="item">
+<div class="sub-row"><span class="item-title">寶寶出生擇日</span><span class="item-price">$1888</span></div>
+<div class="item-desc">優選出生時段建議。</div>
+</div>
+<div class="item">
+<div class="item-header"><span class="item-title">起名 / 改名</span><span class="item-price">$688</span></div>
+<div class="item-desc">五行分析並提供專業姓名建議。</div>
+</div>
+</section>
+</div>
+
+<section class="price-summary reveal">
+<h2 class="summary-title">服務摘要</h2>
+<table class="summary-table">
+            <tr><td>八字排盤 / 小批</td><td>$88 / $388</td></tr>
+            <tr><td>八字排盤</td><td>$88</td></tr>
+            <tr><td>八字小批</td><td>$388</td></tr>
+<tr><td>八字大批</td><td>$2888</td></tr>
+            <tr><td>流年 / 流月詳批</td><td>從 $688 起</td></tr>
+            <tr><td>流年簡批  <br>流月簡批</td><td>$688</td></tr>
+            <tr><td>流年詳批  <br>流月詳批</td><td>$1288</td></tr>
+<tr><td>尋龍尺問事  <br>八字占卜</td><td>從 $88 起</td></tr>
+            <tr><td>合婚 / 起名改名</td><td>$1338 / $688</td></tr>
+            <tr><td>合婚</td><td>$1338</td></tr>
+            <tr><td>起名/改名</td><td>$688</td></tr>
+<tr><td>寶寶出生擇日</td><td>$1888</td></tr>
+</table>
+<div class="contact-hint">
+敬請聯絡我們，為您提供專業的命理服務。
+</a>
+</div>
+
+</section>
+
+<footer>&copy; 2026 KEUN CHI WUI. ALL RIGHTS RESERVED.</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
