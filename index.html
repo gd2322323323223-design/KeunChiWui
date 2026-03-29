@@ -59,11 +59,49 @@
         .sub-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
 
         /* 價格總表 */
-        .price-summary { background-color: var(--black); color: var(--white); padding: 140px 10%; text-align: center; }
-        .summary-title { font-size: 2.2rem; letter-spacing: 1rem; margin-bottom: 80px; font-weight: 900; }
-        .summary-table { max-width: 900px; margin: 0 auto; width: 100%; border-collapse: collapse; }
-        .summary-table td { padding: 25px 20px; border-bottom: 0.5px solid #333; text-align: left; font-size: 1.3rem; }
-        .summary-table td:last-child { text-align: right; font-weight: 200; font-family: sans-serif; }
+        /* 修改後的價格總表容器 */
+        .price-summary { 
+            background-color: var(--black); 
+            color: var(--white); 
+            adding: 100px 5%; /* 稍微減少上下 padding，讓九宮格更緊湊 */
+            text-align: center;
+        }
+
+       /* 標題保留，增加一點現代感 */
+       .summary-title { 
+           font-size: 2.2rem; 
+           letter-spacing: 0.8rem; 
+           margin-bottom: 60px; 
+           font-weight: 900; 
+       }
+
+       /* ✅ 新的九宮格容器 (取代原本的 .summary-table) */
+       .service-grid {
+           display: grid;
+           grid-template-columns: repeat(3, 1fr); /* 核心：強制 3 欄 */
+           max-width: 1100px;
+           margin: 0 auto;
+           border: 0.5px solid rgba(176, 196, 222, 0.3); /* 藍銀色外框 */
+       }
+
+       /* ✅ 每個格子的樣式 */
+       .service-item {
+           padding: 50px 20px;
+           border: 0.5px solid rgba(176, 196, 222, 0.2); /* 格子間的細線 */
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           transition: background 0.3s;
+       }
+
+       .service-item:hover {
+           background: rgba(176, 196, 222, 0.05); /* 滑過時有淡淡的藍銀光 */
+       }
+
+       /* 格子內的文字與價格 */
+        .service-item h3 { font-size: 1.2rem; margin-bottom: 15px; font-weight: 400;  
+        .service-item .price { color: #b0c4de; font-family: sans-serif; font-weight: 200; }
 
         footer { padding: 80px; text-align: center; font-size: 0.85rem; color: var(--gray); letter-spacing: 0.3rem; }
    .contact-hint {
@@ -233,22 +271,55 @@
         </section>
     </div>
 
-    <section class="price-summary reveal">
-        <h2 class="summary-title">服務摘要</h2>
-        <table class="summary-table">
-            <tr><td>八字排盤</td><td>$88</td></tr>
-            <tr><td>八字小批</td><td>$388</td></tr>
-            <tr><td>八字大批</td><td>$2888</td></tr>
-            <tr><td>流年簡批  <br>流月簡批</td><td>$688</td></tr>
-            <tr><td>流年詳批  <br>流月詳批</td><td>$1288</td></tr>
-            <tr><td>尋龍尺問事  <br>八字占卜</td><td>從 $88 起</td></tr>
-            <tr><td>合婚</td><td>$1338</td></tr>
-            <tr><td>起名/改名</td><td>$688</td></tr>
-            <tr><td>寶寶出生擇日</td><td>$1888</td></tr>
-        </table>
-        <div class="contact-hint">
-        敬請聯絡我們，為您提供專業的命理服務。
-    </a>
+  <div class="price-summary">
+    <h2 class="summary-title">服務摘要</h2>
+    
+    <div class="service-grid">
+        <div class="service-item">
+            <h3>八字排盤</h3>
+            <span class="price">$88</span>
+        </div>
+
+        <div class="service-item">
+            <h3>八字小批</h3>
+            <span class="price">$388</span>
+        </div>
+
+        <div class="service-item">
+            <h3>八字大批</h3>
+            <span class="price">$2888</span>
+        </div>
+
+        <div class="service-item">
+            <h3>流年簡批<br>流月簡批</h3>
+            <span class="price">$688</span>
+        </div>
+
+        <div class="service-item">
+            <h3>流年詳批<br>流月詳批</h3>
+            <span class="price">$1288</span>
+        </div>
+
+        <div class="service-item">
+            <h3>尋龍尺問事 /<br>八字占卜</h3>
+            <span class="price">從 $88 起</span>
+        </div>
+
+        <div class="service-item">
+            <h3>合婚</h3>
+            <span class="price">$1338</span>
+        </div>
+
+        <div class="service-item">
+            <h3>起名/改名</h3>
+            <span class="price">$688</span>
+        </div>
+
+        <div class="service-item">
+            <h3>寶寶出生擇日</h3>
+            <span class="price">$1888</span>
+        </div>
+    </div> <div class="contact-hint">敬請聯絡我們，為您提供專業的命理服務。</div>
 </div>
         
     </section>
