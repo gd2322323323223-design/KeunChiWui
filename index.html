@@ -66,14 +66,15 @@
         .summary-table td:last-child { text-align: right; font-weight: 200; font-family: sans-serif; }
 
         footer { padding: 80px; text-align: center; font-size: 0.85rem; color: var(--gray); letter-spacing: 0.3rem; }
-        .contact-hint {
-    text-align: center;      /* 文字居中 */
-    color: #888888;          /* 使用中灰色，增加層次感 */
-    font-size: 0.9rem;       /* 字體稍微縮小 */
-    margin-top: 40px;        /* 與上方價目表保持距離 */
-    letter-spacing: 0.2rem;  /* 增加字距，延續玄學設計感 */
-    font-weight: 300;        /* 使用細體字 */
-    padding-bottom: 60px;    /* 底部留白，讓視覺更開闊 */
+   .contact-hint {
+    text-align: right;       /* 改為靠右對齊，視覺上指向右上角的按鈕 */
+    padding-right: 10%;      /* 讓它不要貼死邊緣，保持高級感的呼吸空間 */
+    color: #b0c4de;          /* 使用我們剛才調好的藍銀色，呼應主題 */
+    font-size: 0.85rem;      /* 稍微縮小，顯得精緻 */
+    margin-top: 50px;        /* 與上方價目表拉開適當距離 */
+    letter-spacing: 0.3rem;  /* 大字距：營造出一種「玄學、專業」的氣氛 */
+    font-weight: 300;        /* 極細體 */
+    opacity: 0.7;            /* 半透明，讓它看起來像低調的註解 */
 }
 
         @media (max-width: 768px) {
@@ -242,8 +243,7 @@
             <tr><td>寶寶出生擇日</td><td>$1888</td></tr>
         </table>
         <div class="contact-hint">
-    <a href="mailto:你的郵箱" style="color: inherit; text-decoration: none;">
-        敬請聯絡我們，以為您提供專業的服務。
+        敬請聯絡我們，為您提供專業的命理服務。
     </a>
 </div>
         
