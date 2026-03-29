@@ -64,7 +64,7 @@
             justify-content: center; align-items: center; text-align: center;
         }
         
-        /* 北斗七星：純黑、標準勺狀、嚴格斷點 (參考 image_17.png) */
+        /* Logo：純黑、標準勺狀、嚴格斷點 (參考 image_23.png) */
         .dipper-logo { width: 140px; height: 100px; margin-bottom: 40px; }
         .dipper-logo svg { width: 100%; height: 100%; }
 
@@ -81,13 +81,18 @@
         .service-container { background-color: #fafafa; padding: 100px 0; }
         .service-block { max-width: 1200px; margin: 0 auto 120px auto; padding: 0 5%; }
         
-        /* 服務項目 Logo 容器 (找回來的定案版 C) */
+        /* 服務項目 Logo 容器 */
         .service-logo { width: 70px; height: 70px; margin-bottom: 30px; }
         .service-logo svg { width: 100%; height: 100%; }
 
         .category-name { font-size: 3rem; font-weight: 900; margin-bottom: 60px; letter-spacing: 0.5rem; }
         .item { padding: 40px 0; border-top: 1px solid #eee; }
         .item-header { display: flex; justify-content: space-between; align-items: baseline; }
+        
+        /* 新增：處理寶寶擇日換行 */
+        .item-header.multi-line { display: block; }
+        .multi-line-row { display: flex; justify-content: space-between; align-items: baseline; width: 100%; margin-bottom: 10px; }
+
         .item-title { font-size: 1.8rem; font-weight: 900; }
         .item-price { font-size: 2.2rem; font-weight: 200; font-family: sans-serif; }
         .item-desc { font-size: 1.15rem; color: #444; margin-top: 15px; }
@@ -105,7 +110,11 @@
             .hero-subtitle { font-size: 1rem; letter-spacing: 0.4rem; }
             .hero-title { letter-spacing: 1rem; text-indent: 1rem; }
             .category-name { font-size: 2.2rem; }
+            .item-title { font-size: 1.5rem; }
+            .item-price { font-size: 1.8rem; }
             .philosophy p { font-size: 1.2rem; }
+            .multi-line-row { display: block; margin-bottom: 5px; }
+            .multi-line-row .item-price { text-align: left; }
         }
     </style>
 </head>
@@ -220,7 +229,16 @@
             </div>
             <div class="category-name">特別項目</div>
             <div class="item">
-                <div class="item-header"><span class="item-title">合婚 / 寶寶擇日</span><span class="item-price">$1338 / $1888</span></div>
+                <div class="item-header multi-line">
+                    <div class="multi-line-row">
+                        <span class="item-title">合婚</span>
+                        <span class="item-price">$1338</span>
+                    </div>
+                    <div class="multi-line-row">
+                        <span class="item-title">寶寶出生擇日</span>
+                        <span class="item-price">$1888</span>
+                    </div>
+                </div>
                 <div class="item-desc">命盤契合度分析或優選出生時段建議</div>
             </div>
             <div class="item">
