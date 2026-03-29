@@ -31,8 +31,15 @@
         }
 
         /* Hero 區域：修正比例與標誌 */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 5%; }
-        .brand-logo { width: 150px; height: 100px; margin-bottom: 40px; }
+        /* 替換原本的 .brand-logo 或相關標誌容器樣式 */
+          .brand-logo {width: 220px;       /* 增加純圖形標誌的視覺寬度 */
+             height: auto;        /* 高度自動適應內容 */
+             margin-bottom: 20px; /* 縮短與下方「運籌當下...」文案的距離 */
+             display: flex;
+             align-items: center;
+             justify-content: center;}
+
+           .brand-logo svg {width: 100%; height: 100%;}
         .hero-subtitle { font-size: 1.2rem; letter-spacing: 0.5rem; margin-bottom: 25px; color: #333; }
         .hero-title { font-size: clamp(3rem, 12vw, 6.5rem); font-weight: 900; letter-spacing: 1.5rem; text-indent: 1.5rem; margin: 0; }
 
@@ -84,9 +91,24 @@
 
     <header class="hero">
         <div class="brand-logo">
-            <svg viewBox="0 0 120 85" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="105" cy="15" r="3.5" fill="black"/> <circle cx="85" cy="40" r="3.5" fill="black"/>  <circle cx="65" cy="32" r="3.5" fill="black"/>  <circle cx="55" cy="52" r="3.5" fill="black"/>  <circle cx="40" cy="55" r="3.5" fill="black"/>  <circle cx="25" cy="62" r="3.5" fill="black"/>  <circle cx="10" cy="72" r="3.5" fill="black"/>  <path d="M85,40 L65,32 L55,52 L105,15" stroke="black" stroke-width="1.5" fill="none"/>
-                <path d="M55,52 L40,55 L25,62 L10,72" stroke="black" stroke-width="1.5" fill="none"/>
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="black" stroke-width="0.8" fill="none">
+                <path d="M50 15 Q 65 25 78 15" />
+                <path d="M85 30 L 70 45 L 80 70" />
+                <path d="M25 60 Q 35 70 50 60" />
+                <path d="M15 80 L 30 70" />
+                <circle cx="50" cy="15" r="1.5" fill="black"/>
+                <circle cx="78" cy="15" r="2" fill="black"/>
+                <circle cx="85" cy="30" r="1" fill="black"/>
+                <circle cx="70" cy="45" r="2.5" fill="black"/>
+                <circle cx="80" cy="70" r="1.5" fill="black"/>
+                <circle cx="25" cy="60" r="1.5" fill="black"/>
+                <circle cx="50" cy="60" r="1" fill="black"/>
+                <circle cx="15" cy="80" r="1.5" fill="black"/>
+                <circle cx="30" cy="70" r="1.5" fill="black"/>
+                <line x1="50" y1="15" x2="25" y2="60" stroke-width="0.6"/>
+                <line x1="85" y1="30" x2="30" y2="70" stroke-width="0.6"/>
+             </g>
             </svg>
         </div>
         <p class="hero-subtitle">運籌當下，明辨天時，擇優而行</p>
