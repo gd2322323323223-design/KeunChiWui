@@ -31,7 +31,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- 滾動動畫效果 --- */
+        /* --- 安全性增強：滾動動畫 CSS，不影響原本佈局 --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -64,7 +64,7 @@
             justify-content: center; align-items: center; text-align: center;
         }
         
-        /* Logo：純黑、標準勺狀、嚴格斷點 (參考 image_23.png) */
+        /* 修復與校對：嚴格遵循 image_17.png 的幾何勺狀結構，嚴格斷開連線 */
         .dipper-logo { width: 140px; height: 100px; margin-bottom: 40px; }
         .dipper-logo svg { width: 100%; height: 100%; }
 
@@ -77,22 +77,17 @@
         .philosophy p { font-size: 1.4rem; line-height: 2.8; margin-bottom: 40px; }
         .philosophy .highlight { font-weight: 900; letter-spacing: 0.2rem; display: block; margin: 50px 0; font-size: 1.6rem; }
 
-        /* --- 服務項目列表 (還原內容與 Logo) --- */
+        /* --- 服務項目列表 (修復並找回所有內容與 Logo) --- */
         .service-container { background-color: #fafafa; padding: 100px 0; }
         .service-block { max-width: 1200px; margin: 0 auto 120px auto; padding: 0 5%; }
         
-        /* 服務項目 Logo 容器 */
+        /* 修復與校對：項目 Logo 容器 */
         .service-logo { width: 70px; height: 70px; margin-bottom: 30px; }
         .service-logo svg { width: 100%; height: 100%; }
 
         .category-name { font-size: 3rem; font-weight: 900; margin-bottom: 60px; letter-spacing: 0.5rem; }
         .item { padding: 40px 0; border-top: 1px solid #eee; }
         .item-header { display: flex; justify-content: space-between; align-items: baseline; }
-        
-        /* 新增：處理寶寶擇日換行 */
-        .item-header.multi-line { display: block; }
-        .multi-line-row { display: flex; justify-content: space-between; align-items: baseline; width: 100%; margin-bottom: 10px; }
-
         .item-title { font-size: 1.8rem; font-weight: 900; }
         .item-price { font-size: 2.2rem; font-weight: 200; font-family: sans-serif; }
         .item-desc { font-size: 1.15rem; color: #444; margin-top: 15px; }
@@ -110,11 +105,7 @@
             .hero-subtitle { font-size: 1rem; letter-spacing: 0.4rem; }
             .hero-title { letter-spacing: 1rem; text-indent: 1rem; }
             .category-name { font-size: 2.2rem; }
-            .item-title { font-size: 1.5rem; }
-            .item-price { font-size: 1.8rem; }
             .philosophy p { font-size: 1.2rem; }
-            .multi-line-row { display: block; margin-bottom: 5px; }
-            .multi-line-row .item-price { text-align: left; }
         }
     </style>
 </head>
@@ -229,16 +220,7 @@
             </div>
             <div class="category-name">特別項目</div>
             <div class="item">
-                <div class="item-header multi-line">
-                    <div class="multi-line-row">
-                        <span class="item-title">合婚</span>
-                        <span class="item-price">$1338</span>
-                    </div>
-                    <div class="multi-line-row">
-                        <span class="item-title">寶寶出生擇日</span>
-                        <span class="item-price">$1888</span>
-                    </div>
-                </div>
+                <div class="item-header"><span class="item-title">合婚 / 寶寶擇日</span><span class="item-price">$1338 / $1888</span></div>
                 <div class="item-desc">命盤契合度分析或優選出生時段建議</div>
             </div>
             <div class="item">
@@ -264,7 +246,10 @@
 
     <script>
         // 滾動動畫腳本
-        const observerOptions = { threshold: 0.15 };
+        const observerOptions = {
+            threshold: 0.15 // 當 15% 進入視線時觸發
+        };
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -273,7 +258,9 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
