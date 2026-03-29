@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>權智匯｜占卜八字紫薇命理</title>
+    <meta name="description" content="運籌當下，明辨天時，擇優而行。由深研中華傳統文化的伙伴共同創立，提供專業八字、紫微與占卜諮詢。">
+
+    <meta property="og:title" content="權智匯｜占卜八字紫薇命理">
+    <meta property="og:description" content="運籌當下，明辨天時，擇優而行。提供八字排盤、流年詳批、尋龍尺問事等專業命理服務。">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="權智匯 KEUN CHI WUI">
+    <meta property="og:image" content=""> 
+
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;400;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --white: #ffffff;
@@ -23,14 +33,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- 滾動動畫核心 CSS --- */
+        /* --- 滾動動畫效果 --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: all 1.2s cubic-bezier(0.2, 0.6, 0.2, 1);
-            will-change: transform, opacity;
         }
-
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
@@ -57,28 +65,35 @@
             display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
         }
-        .dipper-logo { width: 140px; height: 100px; margin-bottom: 40px; }
-        .hero-subtitle { font-size: 1.25rem; letter-spacing: 0.6rem; margin-bottom: 25px; color: #333; font-weight: 400; }
-        .hero-title { font-size: clamp(3.5rem, 12vw, 6.5rem); font-weight: 900; letter-spacing: 1.5rem; text-indent: 1.5rem; margin: 0; }
+        
+        /* 定案 Logo C 改良版：北斗七星 + U形 + 星點 */
+        .logo-container {
+            width: 180px; height: 180px; margin-bottom: 30px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .logo-container svg { width: 100%; height: 100%; }
+
+        .hero-subtitle { font-size: 1.2rem; letter-spacing: 0.6rem; margin-bottom: 25px; color: #333; font-weight: 400; }
+        .hero-title { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; letter-spacing: 1.5rem; text-indent: 1.5rem; margin: 0; }
 
         /* --- 服務理念 --- */
-        .philosophy { padding: 160px 10%; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .philosophy { padding: 140px 10%; text-align: center; max-width: 1000px; margin: 0 auto; }
         .philosophy h2 { font-size: 1.2rem; letter-spacing: 0.8rem; margin-bottom: 60px; font-weight: 900; }
         .philosophy p { font-size: 1.4rem; line-height: 2.8; margin-bottom: 40px; }
         .philosophy .highlight { font-weight: 900; letter-spacing: 0.2rem; display: block; margin: 50px 0; font-size: 1.6rem; }
 
-        /* --- 服務項目列表 --- */
+        /* --- 服務項目內容 --- */
         .service-container { background-color: #fafafa; padding: 100px 0; }
         .service-block { max-width: 1200px; margin: 0 auto 120px auto; padding: 0 5%; }
         .category-name { font-size: 3rem; font-weight: 900; margin-bottom: 60px; letter-spacing: 0.5rem; }
-        .item { padding: 45px 0; border-top: 1px solid #eee; }
+        .item { padding: 40px 0; border-top: 1px solid #eee; }
         .item-header { display: flex; justify-content: space-between; align-items: baseline; }
         .item-title { font-size: 1.8rem; font-weight: 900; }
         .item-price { font-size: 2.2rem; font-weight: 200; font-family: sans-serif; }
         .item-desc { font-size: 1.15rem; color: #444; margin-top: 15px; }
 
         /* --- 服務總表 --- */
-        .price-summary { background-color: var(--black); color: var(--white); padding: 140px 10%; text-align: center; }
+        .price-summary { background-color: var(--black); color: var(--white); padding: 120px 10%; text-align: center; }
         .summary-title { font-size: 2.2rem; letter-spacing: 1rem; margin-bottom: 80px; font-weight: 900; }
         .summary-table { max-width: 900px; margin: 0 auto; width: 100%; border-collapse: collapse; }
         .summary-table td { padding: 25px 20px; border-bottom: 0.5px solid #333; text-align: left; font-size: 1.3rem; }
@@ -90,6 +105,7 @@
             .hero-subtitle { font-size: 1rem; letter-spacing: 0.4rem; }
             .hero-title { letter-spacing: 1rem; text-indent: 1rem; }
             .category-name { font-size: 2.2rem; }
+            .item-title { font-size: 1.5rem; }
             .philosophy p { font-size: 1.2rem; }
         }
     </style>
@@ -102,21 +118,18 @@
     </nav>
 
     <header class="hero">
-        <div class="dipper-logo">
-            <svg viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="85" cy="15" r="3" fill="#1a1a1a"/>
-                <circle cx="65" cy="35" r="3" fill="#1a1a1a"/>
-                <circle cx="50" cy="30" r="3" fill="#1a1a1a"/>
-                <circle cx="42" cy="45" r="3" fill="#1a1a1a"/>
-                <circle cx="30" cy="48" r="3" fill="#1a1a1a"/>
-                <circle cx="18" cy="55" r="3" fill="#1a1a1a"/>
-                <circle cx="8" cy="65" r="3" fill="#1a1a1a"/>
-                <line x1="65" y1="35" x2="50" y2="30" stroke="#1a1a1a" stroke-width="1"/>
-                <line x1="50" y1="30" x2="42" y2="45" stroke="#1a1a1a" stroke-width="1"/>
-                <line x1="42" y1="45" x2="85" y2="15" stroke="#1a1a1a" stroke-width="1"/>
-                <line x1="42" y1="45" x2="30" y2="48" stroke="#1a1a1a" stroke-width="1"/>
-                <line x1="30" y1="48" x2="18" y2="55" stroke="#1a1a1a" stroke-width="1"/>
-                <line x1="18" y1="55" x2="8" cy="65" x2="8" y2="65" stroke="#1a1a1a" stroke-width="1"/>
+        <div class="logo-container">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25,60 C25,80 75,80 75,60" stroke="#1a1a1a" stroke-width="1.2" fill="none" opacity="0.8"/>
+                
+                <circle cx="50" cy="15" r="1.5" fill="#1a1a1a"/>
+                <circle cx="35" cy="22" r="1" fill="#1a1a1a" opacity="0.6"/>
+                <circle cx="65" cy="22" r="1" fill="#1a1a1a" opacity="0.6"/>
+
+                <circle cx="78" cy="35" r="2.8" fill="#1a1a1a"/> <circle cx="62" cy="50" r="2.8" fill="#1a1a1a"/> <circle cx="48" cy="46" r="2.8" fill="#1a1a1a"/> <circle cx="42" cy="58" r="2.8" fill="#1a1a1a"/> <circle cx="32" cy="60" r="2.5" fill="#1a1a1a"/> <circle cx="22" cy="65" r="2.5" fill="#1a1a1a"/> <circle cx="12" cy="72" r="2.5" fill="#1a1a1a"/> <line x1="62" y1="50" x2="48" y2="46" stroke="#1a1a1a" stroke-width="0.8"/>
+                <line x1="48" y1="46" x2="42" y2="58" stroke="#1a1a1a" stroke-width="0.8"/>
+                <line x1="42" y1="58" x2="78" y2="35" stroke="#1a1a1a" stroke-width="0.8"/> <line x1="42" y1="58" x2="32" y2="60" stroke="#1a1a1a" stroke-width="0.8"/> <line x1="32" y1="60" x2="22" y2="65" stroke="#1a1a1a" stroke-width="0.8"/>
+                <line x1="22" y1="65" x2="12" y2="72" stroke="#1a1a1a" stroke-width="0.8"/>
             </svg>
         </div>
         <p class="hero-subtitle">運籌當下，明辨天時，擇優而行</p>
@@ -199,21 +212,16 @@
     <footer>&copy; 2026 KEUN CHI WUI</footer>
 
     <script>
-        const observerOptions = {
-            threshold: 0.15
-        };
-
+        // 滾動偵測與觸發動畫
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
