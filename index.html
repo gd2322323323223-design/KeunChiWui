@@ -23,6 +23,19 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* --- 滾動動畫核心 CSS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.2, 0.6, 0.2, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* --- 導覽列 --- */
         nav {
             position: fixed; top: 0; width: 100%; height: 85px;
@@ -38,38 +51,34 @@
             font-weight: 900;
         }
 
-        /* --- Hero Section: 滿版高度 --- */
+        /* --- Hero Section --- */
         .hero {
             height: 100vh; 
             display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
         }
-        
-        /* 方案 A 定案標誌 */
         .dipper-logo { width: 140px; height: 100px; margin-bottom: 40px; }
-        .dipper-logo svg { width: 100%; height: 100%; }
-
         .hero-subtitle { font-size: 1.25rem; letter-spacing: 0.6rem; margin-bottom: 25px; color: #333; font-weight: 400; }
         .hero-title { font-size: clamp(3.5rem, 12vw, 6.5rem); font-weight: 900; letter-spacing: 1.5rem; text-indent: 1.5rem; margin: 0; }
 
         /* --- 服務理念 --- */
-        .philosophy { padding: 140px 10%; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .philosophy { padding: 160px 10%; text-align: center; max-width: 1000px; margin: 0 auto; }
         .philosophy h2 { font-size: 1.2rem; letter-spacing: 0.8rem; margin-bottom: 60px; font-weight: 900; }
         .philosophy p { font-size: 1.4rem; line-height: 2.8; margin-bottom: 40px; }
         .philosophy .highlight { font-weight: 900; letter-spacing: 0.2rem; display: block; margin: 50px 0; font-size: 1.6rem; }
 
         /* --- 服務項目列表 --- */
         .service-container { background-color: #fafafa; padding: 100px 0; }
-        .service-block { max-width: 1200px; margin: 0 auto 100px auto; padding: 0 5%; }
+        .service-block { max-width: 1200px; margin: 0 auto 120px auto; padding: 0 5%; }
         .category-name { font-size: 3rem; font-weight: 900; margin-bottom: 60px; letter-spacing: 0.5rem; }
-        .item { padding: 40px 0; border-top: 1px solid #eee; }
+        .item { padding: 45px 0; border-top: 1px solid #eee; }
         .item-header { display: flex; justify-content: space-between; align-items: baseline; }
         .item-title { font-size: 1.8rem; font-weight: 900; }
         .item-price { font-size: 2.2rem; font-weight: 200; font-family: sans-serif; }
         .item-desc { font-size: 1.15rem; color: #444; margin-top: 15px; }
 
         /* --- 服務總表 --- */
-        .price-summary { background-color: var(--black); color: var(--white); padding: 120px 10%; text-align: center; }
+        .price-summary { background-color: var(--black); color: var(--white); padding: 140px 10%; text-align: center; }
         .summary-title { font-size: 2.2rem; letter-spacing: 1rem; margin-bottom: 80px; font-weight: 900; }
         .summary-table { max-width: 900px; margin: 0 auto; width: 100%; border-collapse: collapse; }
         .summary-table td { padding: 25px 20px; border-bottom: 0.5px solid #333; text-align: left; font-size: 1.3rem; }
@@ -81,8 +90,7 @@
             .hero-subtitle { font-size: 1rem; letter-spacing: 0.4rem; }
             .hero-title { letter-spacing: 1rem; text-indent: 1rem; }
             .category-name { font-size: 2.2rem; }
-            .item-title { font-size: 1.5rem; }
-            .item-price { font-size: 1.8rem; }
+            .philosophy p { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -96,19 +104,26 @@
     <header class="hero">
         <div class="dipper-logo">
             <svg viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="85" cy="15" r="3" fill="#1a1a1a"/> <circle cx="65" cy="35" r="3" fill="#1a1a1a"/> <circle cx="50" cy="30" r="3" fill="#1a1a1a"/> <circle cx="42" cy="45" r="3" fill="#1a1a1a"/> <circle cx="30" cy="48" r="3" fill="#1a1a1a"/> <circle cx="18" cy="55" r="3" fill="#1a1a1a"/> <circle cx="8" cy="65" r="3" fill="#1a1a1a"/>  <line x1="65" y1="35" x2="50" y2="30" stroke="#1a1a1a" stroke-width="1"/>
+                <circle cx="85" cy="15" r="3" fill="#1a1a1a"/>
+                <circle cx="65" cy="35" r="3" fill="#1a1a1a"/>
+                <circle cx="50" cy="30" r="3" fill="#1a1a1a"/>
+                <circle cx="42" cy="45" r="3" fill="#1a1a1a"/>
+                <circle cx="30" cy="48" r="3" fill="#1a1a1a"/>
+                <circle cx="18" cy="55" r="3" fill="#1a1a1a"/>
+                <circle cx="8" cy="65" r="3" fill="#1a1a1a"/>
+                <line x1="65" y1="35" x2="50" y2="30" stroke="#1a1a1a" stroke-width="1"/>
                 <line x1="50" y1="30" x2="42" y2="45" stroke="#1a1a1a" stroke-width="1"/>
                 <line x1="42" y1="45" x2="85" y2="15" stroke="#1a1a1a" stroke-width="1"/>
                 <line x1="42" y1="45" x2="30" y2="48" stroke="#1a1a1a" stroke-width="1"/>
                 <line x1="30" y1="48" x2="18" y2="55" stroke="#1a1a1a" stroke-width="1"/>
-                <line x1="18" y1="55" x2="8" y2="65" stroke="#1a1a1a" stroke-width="1"/>
+                <line x1="18" y1="55" x2="8" cy="65" x2="8" y2="65" stroke="#1a1a1a" stroke-width="1"/>
             </svg>
         </div>
         <p class="hero-subtitle">運籌當下，明辨天時，擇優而行</p>
         <h1 class="hero-title">權智匯</h1>
     </header>
 
-    <section class="philosophy">
+    <section class="philosophy reveal">
         <h2>服務理念</h2>
         <p>命理服務，不是宿命的斷言，而是幫助您看清局勢，作出明智選擇。</p>
         <span class="highlight">「運籌當下，明辨天時，擇優而行」</span>
@@ -116,7 +131,7 @@
     </section>
 
     <div class="service-container">
-        <section class="service-block">
+        <section class="service-block reveal">
             <div class="category-name">八字類別</div>
             <div class="item">
                 <div class="item-header"><span class="item-title">八字排盤</span><span class="item-price">$88</span></div>
@@ -132,7 +147,7 @@
             </div>
         </section>
 
-        <section class="service-block">
+        <section class="service-block reveal">
             <div class="category-name">流年月批</div>
             <div class="item">
                 <div class="item-header"><span class="item-title">流月簡算 / 詳算</span><span class="item-price">$688 / $1288</span></div>
@@ -144,7 +159,7 @@
             </div>
         </section>
 
-        <section class="service-block">
+        <section class="service-block reveal">
             <div class="category-name">占卜問事</div>
             <div class="item">
                 <div class="item-header"><span class="item-title">尋龍尺問事</span><span class="item-price">$88</span></div>
@@ -156,7 +171,7 @@
             </div>
         </section>
 
-        <section class="service-block">
+        <section class="service-block reveal">
             <div class="category-name">特別項目</div>
             <div class="item">
                 <div class="item-header"><span class="item-title">合婚 / 寶寶擇日</span><span class="item-price">$1338 / $1888</span></div>
@@ -169,7 +184,7 @@
         </section>
     </div>
 
-    <section class="price-summary">
+    <section class="price-summary reveal">
         <h2 class="summary-title">服務總表摘要</h2>
         <table class="summary-table">
             <tr><td>八字排盤 / 小批</td><td>$88 / $388</td></tr>
@@ -182,5 +197,23 @@
     </section>
 
     <footer>&copy; 2026 KEUN CHI WUI</footer>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
