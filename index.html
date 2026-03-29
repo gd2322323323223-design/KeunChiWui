@@ -75,46 +75,55 @@
            font-weight: 900; 
        }
 
-       /* ✅ 新的九宮格容器 (取代原本的 .summary-table) */
+       /* 修改九宮格容器 */
        .service-grid {
            display: grid;
-           grid-template-columns: repeat(3, 1fr); /* 核心：強制 3 欄 */
-           max-width: 1100px;
-           margin: 0 auto;
-           border: 0.5px solid rgba(176, 196, 222, 0.3); /* 藍銀色外框 */
+           grid-template-columns: repeat(3, 1fr);
+           max-width: 800px;      /* 🔑 關鍵：從 1100px 縮小到 800px，視覺更集中 */
+           margin: 60px auto;     /* 增加上下間距，讓它不擁擠 */
+           border: 0.3px solid rgba(176, 196, 222, 0.15); /* 線條再細一點 * 
+           }
+
+        /* 縮小每個方塊的高度 */
+        .service-item {
+            padding: 30px 15px;    /* 🔑 關鍵：減少 padding，方塊就不會那麼巨大 */
+            border: 0.3px solid rgba(176, 196, 222, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+       .service-item h3 {
+           font-size: 1rem;       /* 字體稍微調小 */
+           letter-spacing: 0.1rem;
+           margin-bottom: 12px;
        }
 
-       /* ✅ 每個格子的樣式 */
-       .service-item {
-           padding: 50px 20px;
-           border: 0.5px solid rgba(176, 196, 222, 0.2); /* 格子間的細線 */
-           display: flex;
-           flex-direction: column;
-           justify-content: center;
-           align-items: center;
-           transition: background 0.3s;
-       }
+      .service-item .price {
+          font-size: 0.85rem;
+          color: #b0c4de;
+          opacity: 0.8;
+      }
 
-       .service-item:hover {
-           background: rgba(176, 196, 222, 0.05); /* 滑過時有淡淡的藍銀光 */
-       }
-
-       /* 格子內的文字與價格 */
-        .service-item h3 { font-size: 1.2rem; margin-bottom: 15px; font-weight: 400;  
-        .service-item .price { color: #b0c4de; font-family: sans-serif; font-weight: 200; }
-
-        footer { padding: 80px; text-align: center; font-size: 0.85rem; color: var(--gray); letter-spacing: 0.3rem; }
-   .contact-hint {
-    text-align: centre;      /* 將對齊改為置中 */
-    width: 100%;              
-    padding-right: 10%;      /* 讓它不要貼死邊緣，保持高級感的呼吸空間 */
-    color: #b0c4de;          /* 使用我們剛才調好的藍銀色，呼應主題 */
-    font-size: 0.95rem;      /* 稍微縮小，顯得精緻 */
-    margin-top: 60px;        /* 與上方價目表拉開適當距離 */
-    letter-spacing: 0.3rem;  /* 大字距：營造出一種「玄學、專業」的氣氛 */
-    font-weight: 300;        /* 極細體 */
-    opacity: 0.7;            /* 半透明，讓它看起來像低調的註解 */
+.footer, .copyright-text { 
+    text-align: left;       /* 保持您截圖中的靠左對齊 */
+    font-size: 0.7rem;      /* 縮小字體 */
+    letter-spacing: 0.1rem;
+    color: #666;            /* 調暗顏色，不要搶戲 */
+    padding: 40px 5%;       /* 🔑 關鍵：增加內邊距，遠離上方內容 */
+    border-top: 0.5px solid rgba(255, 255, 255, 0.1); /* 加入一條極細的灰線分隔 */
 }
+   .contact-hint {
+    text-align: center;
+    width: 100%;
+    color: #b0c4de;
+    font-size: 0.8rem;      /* 調小一點，更有禪意 */
+    margin-top: 80px;       /* 🔑 關鍵：與表格拉開 80px 的距離 */
+    margin-bottom: 100px;    /* 與底部版權拉開距離 */
+    letter-spacing: 0.4rem;  /* 增加字距，找回原本的儀式感 */
+    opacity: 0.6;
+   }
 
         @media (max-width: 768px) {
             .category-name { font-size: 2.2rem; }
